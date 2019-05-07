@@ -6,6 +6,7 @@ import {
 
 import AdjBox from './AdjBox';
 import CdBox from './CdBox';
+import UltimateAdjBox from './UltimateAdjBox';
 
 const styles = StyleSheet.create({
   main: {
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 class AdjRow extends Component {
   render() {
     const adjBoxes = [];
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 3; i++) {
       adjBoxes.push(<AdjBox
         key = {i}
         col = {i}
@@ -33,6 +34,16 @@ class AdjRow extends Component {
     return (
       <View style={styles.main}>
         {adjBoxes}
+        <UltimateAdjBox
+          key = {i}
+          col = {3}
+          row = {this.props.row}
+          level = {this.props.spells.levels[3]}
+          spellLevelUp = {this.props.spellLevelUp}
+          spellLevelDown = {this.props.spellLevelDown}
+          spells = {this.props.spells}
+          ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
+        />
         <CdBox
           row = {this.props.row}
           cooldown = {this.props.spells.cooldown}

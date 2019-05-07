@@ -25,7 +25,6 @@ class App extends Component {
     super(props);
     const state = {};
     state.players = {};
-    // state.players is actually completely over written when game request data is done. It doesnt update
     for (let i = 0; i < 5; i++) {
       const playerSchema = this.generatePlayerSchema();
       state.players[i] = playerSchema;
@@ -126,6 +125,7 @@ class App extends Component {
       championId: null,
       spells: {
         cooldown: 0,
+        ultimateCooldown: 0,
         cooldownPerLevel: 0,
         levels: {
           '0': 1, '1': 1, '2': 1, '3': 1, '4': 1
@@ -224,7 +224,7 @@ class App extends Component {
             index++;
           }
         }
-        console.log(players);
+        console.log('players', players);
         Actions.tracker({
           players: players
         });
@@ -241,10 +241,9 @@ class App extends Component {
           <Scene
             key="inputSummoner"
             component={InputSummoner}
-            title="Summoner Name"
             requestPlayerGame={this.requestPlayerGame}
           />
-          <Scene key="tracker" component={Tracker} title="Cooldown" />
+          <Scene key="tracker" component={Tracker} />
         </Scene>
       </Router>
     );

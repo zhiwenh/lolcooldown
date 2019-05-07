@@ -14,6 +14,7 @@ class Tracker extends Component {
     this.spellLevelUp = this.spellLevelUp.bind(this);
     this.spellLevelDown = this.spellLevelDown.bind(this);
     this.cooldownAdjust = this.cooldownAdjust.bind(this);
+    this.ultimateCooldownAdjust = this.ultimateCooldownAdjust.bind(this);
   }
 
   spellLevelUp(row, col) {
@@ -45,10 +46,15 @@ class Tracker extends Component {
   }
 
   cooldownAdjust(row, change) {
-    console.log(typeof change);
     const state = JSON.parse(JSON.stringify(this.state));
     // const levelChange = state.players[row].spells.cooldownPerLevel * state.players[row].level;
     state.players[row].spells.cooldown += change;
+    this.setState(state);
+  }
+
+  ultimateCooldownAdjust(row, change) {
+    const state = JSON.parse(JSON.stringify(this.state));
+    state.players[row].spells.ultimateCooldown += change;
     this.setState(state);
   }
 
@@ -66,6 +72,7 @@ class Tracker extends Component {
           spellLevelUp = {this.spellLevelUp}
           spellLevelDown = {this.spellLevelDown}
           cooldownAdjust = {this.cooldownAdjust}
+          ultimateCooldownAdjust = {this.ultimateCooldownAdjust}
         />
       </Swiper>
     );

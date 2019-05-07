@@ -13,30 +13,28 @@ const styles = StyleSheet.create({
   }
 });
 
-class ButtonWrap extends Component {
+class UltimateButtonWrap extends Component {
   render() {
-    const summonerName = this.props.summonerSpell.name;
-    let summonerCd = this.props.summonerSpell.cooldown;
-
-    const cooldown = this.props.cooldown;
-    summonerCd = summonerCd - summonerCd * cooldown / 100;
-    summonerCd = summonerCd.toFixed(1);
+    var spellCd = this.props.spellCds[this.props.level - 1];
+    spellCd = spellCd - spellCd * this.props.cooldown/100;
+    spellCd = spellCd - spellCd * this.props.ultimateCooldown/100;
+    spellCd = spellCd.toFixed(1);
     return (
       <View style={styles.main}>
         <Info
           row = {this.props.row}
           col = {this.props.col}
-          summonerSpellName = {summonerName}
-          summonerSpellCooldown = {summonerCd}
+          spellCd = {spellCd}
+          spellName = {this.props.spellName}
         />
         <Button
           row = {this.props.row}
           col = {this.props.col}
-          summonerSpellCooldown = {summonerCd}
+          spellCd = {spellCd}
         />
       </View>
     );
   }
 }
 
-export default ButtonWrap;
+export default UltimateButtonWrap;

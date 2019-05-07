@@ -5,6 +5,7 @@ import {
   View
 } from 'react-native';
 import ButtonWrap from './ButtonWrap';
+import UltimateButtonWrap from './UltimateButtonWrap';
 
 const styles = StyleSheet.create({
   main: {
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
 class SpellRow extends Component {
   render() {
     const buttonWraps = [];
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 3; i++) {
       buttonWraps.push(<ButtonWrap
         key = {i}
         row = {this.props.row}
@@ -30,12 +31,23 @@ class SpellRow extends Component {
         spellName = {this.props.spellNames.data1[i]}
       />);
     }
+    const ultimateButtonWrap = <UltimateButtonWrap
+      key = {3}
+      row = {this.props.row}
+      col = {3}
+      spellCds = {this.props.spells.data1[3]}
+      level = {this.props.spells.levels[3]}
+      cooldown = {this.props.spells.cooldown}
+      ultimateCooldown = {this.props.spells.ultimateCooldown}
+      spellName = {this.props.spellNames.data1[3]}
+    />
     return (
       <View style={styles.main}>
         <View>
           <Text>{this.props.name}</Text>
         </View>
         {buttonWraps}
+        {ultimateButtonWrap}
       </View>
     );
   }

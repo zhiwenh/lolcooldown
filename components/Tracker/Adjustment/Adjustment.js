@@ -23,6 +23,7 @@ class Adjustment extends Component {
         spellLevelUp = {this.props.spellLevelUp}
         spellLevelDown = {this.props.spellLevelDown}
         cooldownAdjust = {this.props.cooldownAdjust}
+        ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
       />);
     }
     return (

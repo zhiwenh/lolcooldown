@@ -11,11 +11,14 @@ const styles = StyleSheet.create({
   }
 });
 
-class CdLevelUp extends React.Component {
+class CdLevelDown extends React.Component {
   onPress() {
-    if (this.props.cooldown + 5 <= 45) {
-      console.log(this.props.row);
-      this.props.cooldownAdjust(this.props.row, 5);
+    if (this.props.spells.ultimateCooldown - 5 >= 0) {
+      if (this.props.spells.ultimateCooldown === 5) {
+        this.props.ultimateCooldownAdjust(this.props.row, -5);
+      } else {
+        this.props.ultimateCooldownAdjust(this.props.row, -4);
+      }
     }
   }
   render() {
@@ -24,10 +27,10 @@ class CdLevelUp extends React.Component {
         onPress = {this.onPress.bind(this)}
         style = {styles.main}
       >
-        <Text>+ {this.props.cooldown}%</Text>
+        <Text>-</Text>
       </TouchableHighlight>
     );
   }
 }
 
-export default CdLevelUp;
+export default CdLevelDown;
