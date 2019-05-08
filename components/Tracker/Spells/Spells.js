@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native';
 import SpellRow from './SpellRow';
 
@@ -15,19 +16,30 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  championName: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 class Spells extends Component {
   render() {
     const spellRows = [];
     for (var i = 0; i < 5; i++) {
-      spellRows.push(<SpellRow
-        key = {i}
-        row = {i}
-        name = {this.props.userSummonerName} // I dont think this is being used
-        spells = {this.props.players[i].spells}
-        spellNames = {this.props.players[i].spellNames}
-      />);
+      spellRows.push(
+        <View style={styles.main}>
+          <View style={styles.championName}>
+            <Text>{this.props.players[i].championName}</Text>
+          </View>
+          <SpellRow
+            key = {i}
+            row = {i}
+            name = {this.props.userSummonerName} // I dont think this is being used
+            spells = {this.props.players[i].spells}
+            spellNames = {this.props.players[i].spellNames}
+          />
+        </View>
+      );
     }
     return (
       <View style={styles.main}>

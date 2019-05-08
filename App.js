@@ -42,6 +42,9 @@ class App extends Component {
     this.requestPlayerGame = this.requestPlayerGame.bind(this);
     this.getChampionStaticData();
     this.getSummonerStaticData();
+
+    this.loadingSummoner = true;
+    this.loadingChampion = true;
   }
 
   getSummonerStaticData() {
@@ -51,7 +54,6 @@ class App extends Component {
     fetch(summonerUrl, {method: 'GET'})
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         const summonerObj = {};
         for (let summoner in res.data) {
           summonerObj[res.data[summoner].key] = res.data[summoner];
@@ -59,6 +61,12 @@ class App extends Component {
 
         console.log(summonerObj);
         this.state.summonersData = summonerObj;
+
+        this.loadingSummoner = false;
+
+        if (this.loadingSummoner === false && this.loadingChampion === false) {
+          Actions.inputSummoner();
+        }
       })
       .catch(err => {
         console.log(err);
@@ -111,6 +119,12 @@ class App extends Component {
         });
 
         this.state.champsData = championDataObj;
+
+        this.loadingChampion = false;
+
+        if (this.loadingSummoner === false && this.loadingChampion === false) {
+          Actions.inputSummoner();
+        }
       })
       .catch(err => {
         console.log(err);
@@ -185,6 +199,7 @@ class App extends Component {
     fetch(idUrl, {method: 'GET'})
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         // const platformId = 'NA1';
         const summonerId = res.id;
         const currentGameUrl = 'https://na1.api.riotgames.com/lol/spectator/v4/' +
@@ -226,7 +241,8 @@ class App extends Component {
         }
         console.log('players', players);
         Actions.tracker({
-          players: players
+          players: players,
+          summonersData: summoners
         });
 
       }).catch((err) => {
@@ -238,12 +254,17 @@ class App extends Component {
     return (
       <Router>
         <Scene key="root">
+          <Scene key="loading" component={Loading} hideNavBar={true}/>
           <Scene
             key="inputSummoner"
             component={InputSummoner}
             requestPlayerGame={this.requestPlayerGame}
+            hideNavBar={true}
           />
-          <Scene key="tracker" component={Tracker} />
+          <Scene key="tracker"
+            component={Tracker}
+            headerMode={false}
+          />
         </Scene>
       </Router>
     );

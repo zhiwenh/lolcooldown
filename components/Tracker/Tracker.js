@@ -66,6 +66,7 @@ class Tracker extends Component {
         />
         <SummonerSpells
           players = {this.state.players}
+          summonersData = {this.props.summonersData}
         />
         <Adjustment
           players = {this.state.players}

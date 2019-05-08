@@ -26,6 +26,7 @@ class SummonerRow extends Component {
         row = {this.props.row}
         cooldown = {this.props.player.summonerSpells.cooldown}
         summonerSpell = {this.props.player.summonerSpells.summonerSpell1}
+        changeSummoners = {this.props.changeSummoners}
       />);
 
       buttonWrapBoxes.push(<ButtonWrap
@@ -34,6 +35,7 @@ class SummonerRow extends Component {
         row = {this.props.row}
         cooldown = {this.props.player.summonerSpells.cooldown}
         summonerSpell = {this.props.player.summonerSpells.summonerSpell2}
+        changeSummoners = {this.props.changeSummoners}
       />);
 
     return (
