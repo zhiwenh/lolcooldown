@@ -34,17 +34,24 @@ class App extends Component {
     state.champsData = null;
     state.runesData = null;
     state.summonersData = null;
+    state.region = 'NA1';
+    state.loading = true;
+    state.error;
 
     this.state = state;
 
     this.getChampionStaticData = this.getChampionStaticData.bind(this);
+    this.getSummonerStaticData = this.getSummonerStaticData.bind(this);
     this.generatePlayerSchema = this.generatePlayerSchema.bind(this);
     this.requestPlayerGame = this.requestPlayerGame.bind(this);
-    this.getChampionStaticData();
-    this.getSummonerStaticData();
 
     this.loadingSummoner = true;
     this.loadingChampion = true;
+  }
+
+  componentDidMount() {
+    this.getChampionStaticData();
+    this.getSummonerStaticData();
   }
 
   getSummonerStaticData() {
@@ -61,11 +68,12 @@ class App extends Component {
 
         console.log(summonerObj);
         this.state.summonersData = summonerObj;
-
         this.loadingSummoner = false;
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
-          Actions.inputSummoner();
+          const state = this.state;
+          state.loading = false;
+          this.setState(state);
         }
       })
       .catch(err => {
@@ -123,7 +131,11 @@ class App extends Component {
         this.loadingChampion = false;
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
-          Actions.inputSummoner();
+          console.log('here');
+          const state = this.state;
+          state.loading = false;
+          console.log(state);
+          this.setState(state);
         }
       })
       .catch(err => {
@@ -188,21 +200,27 @@ class App extends Component {
     return playerSchema;
   }
 
-  requestPlayerGame(summonerName) {
+  requestPlayerGame(summonerName, region) {
     summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
-    // const baseUrl = 'https://na.api.pvp.net';
     const key = '?api_key=' + API_KEY;
-    const region = 'NA';
-    const idUrl = 'https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' +
+    const idUrl = 'https://' + region +
+      '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' +
       summonerName + key;
     console.log(idUrl);
     fetch(idUrl, {method: 'GET'})
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        // const platformId = 'NA1';
+        if (res.id === undefined) {
+          this.setState({
+            error: 'Summoner not found',
+            region: region
+          });
+          return;
+        }
         const summonerId = res.id;
-        const currentGameUrl = 'https://na1.api.riotgames.com/lol/spectator/v4/' +
+        const currentGameUrl = 'https://' + region +
+          '.api.riotgames.com/lol/spectator/v4/' +
           'active-games/by-summoner/' + summonerId + key;
         console.log(currentGameUrl);
         return fetch(currentGameUrl);
@@ -213,7 +231,14 @@ class App extends Component {
         const summoners = this.state.summonersData;
         const players = {};
         console.log(res);
-        if (res.gameId === undefined) return;
+        if (res.gameId === undefined) {
+          this.setState({
+            error: 'Summoner not in game',
+            region: region
+          });
+          return;
+          return;
+        };
         let index = 0;
         for (let i = 0; i < res.participants.length; i++) {
           const participant = res.participants[i];
@@ -251,15 +276,25 @@ class App extends Component {
   }
 
   render() {
+
+    if (this.state.loading === true) {
+      return (
+        <View style={styles.container}>
+          <Text>Loading</Text>
+        </View>
+      )
+    }
+
     return (
       <Router>
         <Scene key="root">
-          <Scene key="loading" component={Loading} hideNavBar={true}/>
           <Scene
             key="inputSummoner"
             component={InputSummoner}
             requestPlayerGame={this.requestPlayerGame}
             hideNavBar={true}
+            error={this.state.error}
+            region={this.state.region}
           />
           <Scene key="tracker"
             component={Tracker}
@@ -288,9 +323,9 @@ const styles = StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
-  random: {
-    textAlign: 'center'
-  }
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
 });
 
 export default App;

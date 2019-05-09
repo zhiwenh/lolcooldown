@@ -18,7 +18,6 @@ class Info extends Component {
     return (
       <View style={styles.main}>
         <Text>{this.props.spellName}</Text>
-        <Text>{this.props.spellCd}</Text>
       </View>
     );
   }

@@ -54,9 +54,8 @@ class SummonerSpells extends Component {
   render() {
     const summonerRows = [];
     for (let i = 0; i < 5; i++) {
-
       summonerRows.push(
-        <View style={styles.main}>
+        <View style={styles.main} key={i}>
           <View style={styles.championName}>
             <Text>{this.props.players[i].championName}</Text>
           </View>

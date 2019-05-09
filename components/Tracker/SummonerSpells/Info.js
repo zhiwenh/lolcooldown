@@ -23,7 +23,6 @@ class Info extends Component {
         style={styles.main}
       >
         <Text>{this.props.summonerSpellName}</Text>
-        <Text>{this.props.summonerSpellCooldown}</Text>
       </View>
     );
   }

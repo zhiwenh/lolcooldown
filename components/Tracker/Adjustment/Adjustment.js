@@ -22,7 +22,7 @@ class Adjustment extends Component {
     const adjRows = [];
     for (var i = 0; i < 5; i++) {
       adjRows.push(
-        <View style={styles.main}>
+        <View style={styles.main} key={i}>
           <View style={styles.championName}>
             <Text>{this.props.players[i].championName}</Text>
           </View>

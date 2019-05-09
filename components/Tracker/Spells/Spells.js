@@ -27,7 +27,7 @@ class Spells extends Component {
     const spellRows = [];
     for (var i = 0; i < 5; i++) {
       spellRows.push(
-        <View style={styles.main}>
+        <View style={styles.main} key={i}>
           <View style={styles.championName}>
             <Text>{this.props.players[i].championName}</Text>
           </View>
