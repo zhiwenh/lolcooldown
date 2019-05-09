@@ -7,7 +7,8 @@ import {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+    borderBottomWidth: 0.5
   }
 });
 
@@ -27,7 +28,7 @@ class CdLevelDown extends React.Component {
         onPress = {this.onPress.bind(this)}
         style = {styles.main}
       >
-        <Text>+ {this.props.spells.ultimateCooldown}%</Text>
+        <Text> + {this.props.spells.ultimateCooldown}% CD</Text>
       </TouchableHighlight>
     );
   }

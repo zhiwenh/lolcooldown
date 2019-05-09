@@ -16,9 +16,19 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  championName: {
+  rowWrap: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  championNameWrap: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontWeight: 'bold',
+    borderLeftWidth: 1,
+    borderRightWidth: 1
+  },
+  championName: {
+    fontWeight: 'bold'
   }
 });
 
@@ -27,12 +37,13 @@ class Spells extends Component {
     const spellRows = [];
     for (var i = 0; i < 5; i++) {
       spellRows.push(
-        <View style={styles.main} key={i}>
-          <View style={styles.championName}>
-            <Text>{this.props.players[i].championName}</Text>
+        <View style={styles.rowWrap} key={i}>
+          <View style={styles.championNameWrap}>
+            <Text style={styles.championName}>
+              {this.props.players[i].championName}
+            </Text>
           </View>
           <SpellRow
-            key = {i}
             row = {i}
             name = {this.props.userSummonerName} // I dont think this is being used
             spells = {this.props.players[i].spells}

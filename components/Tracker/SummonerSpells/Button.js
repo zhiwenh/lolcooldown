@@ -6,11 +6,17 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-  main: {
+  notTicking: {
     flex: 1.5,
     backgroundColor: '#eee',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  isTicking: {
+    flex: 1.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'salmon'
   }
 });
 
@@ -80,7 +86,7 @@ class Button extends Component {
   render() {
     return (
       <TouchableHighlight
-        style = {styles.main}
+        style = {this.state.isTicking ? styles.isTicking : styles.notTicking}
         onPress = {this.onPress}
       >
         <Text>{this.state.current}</Text>

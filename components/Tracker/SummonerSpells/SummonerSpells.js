@@ -11,9 +11,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5FCFF'
   },
-  championName: {
+  rowWrap: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  championNameWrap: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    fontWeight: 'bold',
+    borderLeftWidth: 1,
+    borderRightWidth: 1
+  },
+  championName: {
+    fontWeight: 'bold'
   }
 });
 
@@ -55,12 +65,13 @@ class SummonerSpells extends Component {
     const summonerRows = [];
     for (let i = 0; i < 5; i++) {
       summonerRows.push(
-        <View style={styles.main} key={i}>
-          <View style={styles.championName}>
-            <Text>{this.props.players[i].championName}</Text>
+        <View style={styles.rowWrap} key={i}>
+          <View style={styles.championNameWrap}>
+            <Text style={styles.championName}>
+              {this.props.players[i].championName}
+            </Text>
           </View>
           <SummonerRow
-            key = {i}
             row = {i}
             player = {this.state.players[i]}
             summonersData = {this.props.summonersData}

@@ -7,7 +7,8 @@ import {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+    borderBottomWidth: 0.5
   }
 });
 
@@ -21,7 +22,7 @@ class LevelUp extends React.Component {
         style = {styles.main}
         onPress = {this.onPress.bind(this)}
       >
-        <Text>+ {this.props.level}</Text>
+        <Text> + {this.props.skill} Lvl {this.props.level}</Text>
       </TouchableHighlight>
     );
   }

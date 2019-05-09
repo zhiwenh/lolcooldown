@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomWidth: 0.5
+  },
+  spellName: {
+    textAlign: 'center'
   }
 });
 
@@ -17,7 +21,7 @@ class Info extends Component {
   render() {
     return (
       <View style={styles.main}>
-        <Text>{this.props.spellName}</Text>
+        <Text style={styles.spellName}>{this.props.spellName}</Text>
       </View>
     );
   }

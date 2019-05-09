@@ -21,8 +21,7 @@ class AdjBox extends React.Component {
         <LevelUp
           row = {this.props.row}
           col = {this.props.col}
-          // this is only to display the current level
-          // remove it later after you create a level box
+          skill = {this.props.skill}
           level = {this.props.level}
           spellLevelUp = {this.props.spellLevelUp}
         />

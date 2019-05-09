@@ -12,23 +12,20 @@ const styles = StyleSheet.create({
   }
 });
 
-class CdLevelUp extends React.Component {
+class UltimateLevelUp extends React.Component {
   onPress() {
-    if (this.props.cooldown + 5 <= 45) {
-      console.log(this.props.row);
-      this.props.cooldownAdjust(this.props.row, 5);
-    }
+    this.props.spellLevelUp(this.props.row, this.props.col);
   }
   render() {
     return (
       <TouchableHighlight
-        onPress = {this.onPress.bind(this)}
         style = {styles.main}
+        onPress = {this.onPress.bind(this)}
       >
-        <Text> + {this.props.cooldown}% CD</Text>
+        <Text> + {this.props.skill} Lvl {this.props.level}</Text>
       </TouchableHighlight>
     );
   }
 }
 
-export default CdLevelUp;
+export default UltimateLevelUp;

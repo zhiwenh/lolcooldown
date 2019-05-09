@@ -60,7 +60,7 @@ class Tracker extends Component {
 
   render() {
     return (
-      <Swiper>
+      <Swiper showsPagination={false}>
         <Spells
           players = {this.state.players}
         />

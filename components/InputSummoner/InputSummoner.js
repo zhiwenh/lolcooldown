@@ -25,7 +25,9 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width
   },
   topHolder: {
-    flex: 2
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bottomHolder: {
     flex: 1
@@ -36,6 +38,11 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red'
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    textAlign: 'center'
   }
 });
 
@@ -44,8 +51,6 @@ class InputSummoner extends Component {
     super(props);
     this.state = {};
     this.state.region = this.props.region;
-    // this.onSubmitEditing = this.onSubmitEditing.bind(this);
-    // this.valueChange = this.valueChange.bind(this):
   }
   onSubmitEditing(event) {
     this.props.requestPlayerGame(event.nativeEvent.text, this.state.region);
@@ -54,7 +59,11 @@ class InputSummoner extends Component {
   render() {
     return (
       <View style = {styles.container}>
-        <View style = {styles.topHolder} />
+        <View style = {styles.topHolder}>
+          <Text style={styles.title}>
+            League of Legends Cooldown Tracker
+          </Text>
+        </View>
         <TextInput
           style = {styles.input}
           placeholder = 'Input summoner currently in game'

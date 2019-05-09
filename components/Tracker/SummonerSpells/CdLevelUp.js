@@ -7,7 +7,8 @@ import {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+    borderBottomWidth: 0.5
   }
 });
 
@@ -24,7 +25,7 @@ class CdLevelUp extends React.Component {
         onPress = {this.onPress.bind(this)}
         style = {styles.main}
       >
-        <Text>+ {this.props.player.summonerSpells.cooldown}%</Text>
+        <Text> + {this.props.player.summonerSpells.cooldown}% CD</Text>
       </TouchableHighlight>
     );
   }

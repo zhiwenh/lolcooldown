@@ -24,7 +24,7 @@ class CdLevelDown extends React.Component {
         onPress = {this.onPress.bind(this)}
         style = {styles.main}
       >
-        <Text>-</Text>
+        <Text> -</Text>
       </TouchableHighlight>
     );
   }

@@ -280,7 +280,7 @@ class App extends Component {
     if (this.state.loading === true) {
       return (
         <View style={styles.container}>
-          <Text>Loading</Text>
+          <Text>Loading...</Text>
         </View>
       )
     }
@@ -298,6 +298,7 @@ class App extends Component {
           />
           <Scene key="tracker"
             component={Tracker}
+            hideNavBar={Platform.OS === 'ios' ? false : true}
             headerMode={false}
           />
         </Scene>

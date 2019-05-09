@@ -4,8 +4,8 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import LevelUp from './LevelUp';
-import LevelDown from './LevelDown';
+import UltimateLevelUp from './UltimateLevelUp';
+import UltimateLevelDown from './UltimateLevelDown';
 import UltimateCdUp from './UltimateCdUp';
 import UltimateCdDown from './UltimateCdDown';
 
@@ -28,13 +28,14 @@ class UltimateAdjBox extends React.Component {
     return (
       <View style={styles.main}>
         <View style={styles.levels}>
-          <LevelUp
+          <UltimateLevelUp
             row = {this.props.row}
             col = {this.props.col}
+            skill = {this.props.skill}
             level = {this.props.level}
             spellLevelUp = {this.props.spellLevelUp}
           />
-          <LevelDown
+          <UltimateLevelDown
             row = {this.props.row}
             col = {this.props.col}
             level = {this.props.level}

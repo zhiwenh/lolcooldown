@@ -22,14 +22,37 @@ class AdjRow extends Component {
   render() {
     const adjBoxes = [];
     for (var i = 0; i < 3; i++) {
-      adjBoxes.push(<AdjBox
-        key = {i}
-        col = {i}
-        row = {this.props.row}
-        level = {this.props.spells.levels[i]}
-        spellLevelUp = {this.props.spellLevelUp}
-        spellLevelDown = {this.props.spellLevelDown}
-      />);
+      if (i === 0) {
+        adjBoxes.push(<AdjBox
+          key = {i}
+          col = {i}
+          row = {this.props.row}
+          skill = 'Q'
+          level = {this.props.spells.levels[i]}
+          spellLevelUp = {this.props.spellLevelUp}
+          spellLevelDown = {this.props.spellLevelDown}
+        />);
+      } else if (i === 1) {
+        adjBoxes.push(<AdjBox
+          key = {i}
+          col = {i}
+          row = {this.props.row}
+          skill = 'W'
+          level = {this.props.spells.levels[i]}
+          spellLevelUp = {this.props.spellLevelUp}
+          spellLevelDown = {this.props.spellLevelDown}
+        />);
+      } else if (i === 2) {
+        adjBoxes.push(<AdjBox
+          key = {i}
+          col = {i}
+          row = {this.props.row}
+          skill = 'E'
+          level = {this.props.spells.levels[i]}
+          spellLevelUp = {this.props.spellLevelUp}
+          spellLevelDown = {this.props.spellLevelDown}
+        />);
+      }
     }
     return (
       <View style={styles.main}>
@@ -38,6 +61,7 @@ class AdjRow extends Component {
           key = {i}
           col = {3}
           row = {this.props.row}
+          skill = 'R'
           level = {this.props.spells.levels[3]}
           spellLevelUp = {this.props.spellLevelUp}
           spellLevelDown = {this.props.spellLevelDown}

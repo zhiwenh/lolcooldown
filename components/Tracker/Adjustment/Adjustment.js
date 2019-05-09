@@ -11,9 +11,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5FCFF'
   },
-  championName: {
+  rowWrap: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  championNameWrap: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderLeftWidth: 1,
+    borderRightWidth: 1
+  },
+  championName: {
+    fontWeight: 'bold'
   }
 });
 
@@ -22,12 +31,13 @@ class Adjustment extends Component {
     const adjRows = [];
     for (var i = 0; i < 5; i++) {
       adjRows.push(
-        <View style={styles.main} key={i}>
-          <View style={styles.championName}>
-            <Text>{this.props.players[i].championName}</Text>
+        <View style={styles.rowWrap} key={i}>
+          <View style={styles.championNameWrap}>
+            <Text style={styles.championName}>
+              {this.props.players[i].championName}
+            </Text>
           </View>
           <AdjRow
-            key = {i}
             row = {i}
             spells = {this.props.players[i].spells}
             spellLevelUp = {this.props.spellLevelUp}
