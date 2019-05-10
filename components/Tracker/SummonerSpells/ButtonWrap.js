@@ -28,6 +28,7 @@ class ButtonWrap extends Component {
           col = {this.props.col}
           summonerSpellName = {summonerName}
           summonerSpellCooldown = {summonerCd}
+          summonersData = {this.props.summonersData}
           changeSummoners = {this.props.changeSummoners}
         />
         <Button

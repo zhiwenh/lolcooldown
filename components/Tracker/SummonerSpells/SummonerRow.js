@@ -26,6 +26,7 @@ class SummonerRow extends Component {
         row = {this.props.row}
         cooldown = {this.props.player.summonerSpells.cooldown}
         summonerSpell = {this.props.player.summonerSpells.summonerSpell1}
+        summonersData = {this.props.summonersData}
         changeSummoners = {this.props.changeSummoners}
       />);
 
@@ -35,6 +36,7 @@ class SummonerRow extends Component {
         row = {this.props.row}
         cooldown = {this.props.player.summonerSpells.cooldown}
         summonerSpell = {this.props.player.summonerSpells.summonerSpell2}
+        summonersData = {this.props.summonersData}
         changeSummoners = {this.props.changeSummoners}
       />);
 

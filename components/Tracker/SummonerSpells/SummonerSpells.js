@@ -49,14 +49,14 @@ class SummonerSpells extends Component {
     const state = JSON.parse(JSON.stringify(this.state));
     if (col === 0) {
       state.players[row].summonerSpells.summonerSpell1.name =
-        this.props.summonerData[change].name;
+        this.props.summonersData[change].name;
       state.players[row].summonerSpells.summonerSpell1.cooldown =
-        this.props.summonerData[change].cooldown;
+        this.props.summonersData[change].cooldown;
     } else {
       state.players[row].summonerSpells.summonerSpell2.name =
-        this.props.summonerData[change].name;
+        this.props.summonersData[change].name;
       state.players[row].summonerSpells.summonerSpell2.cooldown =
-        this.props.summonerData[change].cooldown;
+        this.props.summonersData[change].cooldown;
     }
     this.setState(state);
   }
