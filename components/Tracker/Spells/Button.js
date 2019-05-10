@@ -4,6 +4,7 @@ import {
   Text,
   TouchableHighlight
 } from 'react-native';
+import BackgroundTimer from 'react-native-background-timer';
 
 const styles = StyleSheet.create({
   notTicking: {
@@ -57,9 +58,9 @@ class Button extends Component {
       this.setState({
         isTicking: true
       });
-      this.timer = setInterval(this.tick, 100);
+      this.timer = BackgroundTimer.setInterval(this.tick, 100);
     } else if (this.timer) {
-      clearInterval(this.timer);
+      BackgroundTimer.clearInterval(this.timer);
       this.setState({
         isTicking: false,
         current: this.state.initial
@@ -70,7 +71,7 @@ class Button extends Component {
   tick() {
     if (this.state.current <= 0) {
       this.state.isTicking = false;
-      clearInterval(this.timer);
+      BackgroundTimer.clearInterval(this.timer);
       this.setState({
         current: this.state.initial,
         isTicking: false

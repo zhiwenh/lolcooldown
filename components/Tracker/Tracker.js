@@ -24,7 +24,7 @@ class Tracker extends Component {
     const data = this.state.players[row].spells.data1[col];
     const level = this.state.players[row].spells.levels[col];
     if (level < data.length) {
-      const state = JSON.parse(JSON.stringify(this.state));
+      const state = this.state;
       state.players[row].spells.levels[col] = level + 1;
       state.players[row].level = state.players[row].level + 1;
       this.setState(state);
@@ -38,7 +38,7 @@ class Tracker extends Component {
     // const data = this.state.players[row].spells.data1[col];
     const level = this.state.players[row].spells.levels[col];
     if (level > 1) {
-      const state = JSON.parse(JSON.stringify(this.state));
+      const state = this.state;
       state.players[row].spells.levels[col] = level - 1;
       state.players[row].level = state.players[row].level - 1;
       this.setState(state);
@@ -46,14 +46,14 @@ class Tracker extends Component {
   }
 
   cooldownAdjust(row, change) {
-    const state = JSON.parse(JSON.stringify(this.state));
+    const state = this.state;
     // const levelChange = state.players[row].spells.cooldownPerLevel * state.players[row].level;
     state.players[row].spells.cooldown += change;
     this.setState(state);
   }
 
   ultimateCooldownAdjust(row, change) {
-    const state = JSON.parse(JSON.stringify(this.state));
+    const state = this.state;
     state.players[row].spells.ultimateCooldown += change;
     this.setState(state);
   }
