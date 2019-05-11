@@ -9,7 +9,6 @@ import BackgroundTimer from 'react-native-background-timer';
 const styles = StyleSheet.create({
   notTicking: {
     flex: 1.5,
-    backgroundColor: '#eee',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -17,7 +16,7 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'salmon'
+    backgroundColor: '#ffb3b3',
   }
 });
 
@@ -50,6 +49,12 @@ class Button extends Component {
       this.setState({
         initial: initial
       });
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timer) {
+      BackgroundTimer.clearInterval(this.timer);
     }
   }
 

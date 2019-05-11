@@ -9,7 +9,6 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Swiper from 'react-native-swiper';
-import promisify from 'es6-promisify';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
@@ -35,8 +34,10 @@ class App extends Component {
     state.runesData = null;
     state.summonersData = null;
     state.region = 'NA1';
-    state.loading = true;
     state.error;
+    state.loadingSummoner = true;
+    state.loadingChampion = true;
+    state.spinner = true;
 
     this.state = state;
 
@@ -45,8 +46,6 @@ class App extends Component {
     this.generatePlayerSchema = this.generatePlayerSchema.bind(this);
     this.requestPlayerGame = this.requestPlayerGame.bind(this);
 
-    this.loadingSummoner = true;
-    this.loadingChampion = true;
   }
 
   componentDidMount() {
@@ -66,14 +65,13 @@ class App extends Component {
           summonerObj[res.data[summoner].key] = res.data[summoner];
         }
 
-        console.log(summonerObj);
         this.state.summonersData = summonerObj;
-        this.loadingSummoner = false;
+        this.state.loadingSummoner = false;
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
-          const state = this.state;
-          state.loading = false;
-          this.setState(state);
+          this.setState({
+            spinner: false
+          });
         }
       })
       .catch(err => {
@@ -127,15 +125,12 @@ class App extends Component {
         });
 
         this.state.champsData = championDataObj;
+        this.state.loadingChampion = false;
 
-        this.loadingChampion = false;
-
-        if (this.loadingSummoner === false && this.loadingChampion === false) {
-          console.log('here');
-          const state = this.state;
-          state.loading = false;
-          console.log(state);
-          this.setState(state);
+        if (this.state.loadingSummoner === false && this.state.loadingChampion === false) {
+          this.setState({
+            spinner: false
+          });
         }
       })
       .catch(err => {
@@ -201,6 +196,9 @@ class App extends Component {
   }
 
   requestPlayerGame(summonerName, region) {
+    this.setState({
+      spinner: true
+    });
     summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
     const key = '?api_key=' + API_KEY;
     const idUrl = 'https://' + region +
@@ -214,7 +212,8 @@ class App extends Component {
         if (res.id === undefined) {
           this.setState({
             error: 'Summoner not found',
-            region: region
+            region: region,
+            spinner: false
           });
           return;
         }
@@ -234,9 +233,9 @@ class App extends Component {
         if (res.gameId === undefined) {
           this.setState({
             error: 'Summoner not in game',
-            region: region
+            region: region,
+            spinner: false
           });
-          return;
           return;
         };
         let index = 0;
@@ -265,6 +264,10 @@ class App extends Component {
           }
         }
         console.log('players', players);
+        this.setState({
+          spinner: false
+        });
+
         Actions.tracker({
           players: players,
           summonersData: summoners
@@ -276,15 +279,6 @@ class App extends Component {
   }
 
   render() {
-
-    if (this.state.loading === true) {
-      return (
-        <View style={styles.container}>
-          <Text>Loading...</Text>
-        </View>
-      )
-    }
-
     return (
       <Router>
         <Scene key="root">
@@ -295,11 +289,13 @@ class App extends Component {
             hideNavBar={true}
             error={this.state.error}
             region={this.state.region}
+            spinner={this.state.spinner}
           />
           <Scene key="tracker"
             component={Tracker}
             hideNavBar={Platform.OS === 'ios' ? false : true}
             headerMode={false}
+            style={styles.tracker}
           />
         </Scene>
       </Router>
@@ -308,25 +304,18 @@ class App extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  tracker: {
+    fontFamily: 'Arial',
+    fontSize: 14
+  },
+  loading: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-  spinnerTextStyle: {
-    color: '#FFF'
-  },
+    fontFamily: 'Arial',
+    fontSize: 14
+  }
 });
 
 export default App;

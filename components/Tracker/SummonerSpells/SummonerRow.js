@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'powderblue',
     alignItems: 'center',
     justifyContent: 'space-between',
   }

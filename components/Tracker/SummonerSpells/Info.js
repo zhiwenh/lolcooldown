@@ -5,7 +5,7 @@ import {
   View,
   Picker
 } from 'react-native';
-import PickerSelect from 'react-native-picker-select';
+import ModalSelector from 'react-native-modal-selector';
 
 const styles = StyleSheet.create({
   main: {
@@ -13,12 +13,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderBottomWidth: 0.5
+    borderBottomWidth: 0.5,
+    backgroundColor: 'powderblue'
   },
   picker: {
-    color: 'black',
     alignItems:'center',
     justifyContent: 'center',
+    fontSize: 14,
+    fontFamily: 'Arial'
   }
 });
 
@@ -34,6 +36,7 @@ class Info extends Component {
   }
 
   onValueChange(value) {
+    value = value.value;
     if (value !== this.state.summonerSpellName) {
       const summonersData = this.props.summonersData;
       let summonerKey;
@@ -63,15 +66,13 @@ class Info extends Component {
     return (
       <View style={styles.main}>
         <View />
-        <View
-        >
-          <PickerSelect
-            placeholder={{}}
-            onValueChange={this.onValueChange.bind(this)}
-            items={summonerSpellNames}
-            style={styles.picker}
-            value={this.state.summonerSpellName}
-            useNativeAndroidPickerStyle={false}
+        <View>
+          <ModalSelector
+            onChange={this.onValueChange.bind(this)}
+            data={summonerSpellNames}
+            selectStyle={{borderWidth: 0}}
+            selectTextStyle={styles.picker}
+            initValue={this.state.summonerSpellName}
           />
         </View>
       </View>

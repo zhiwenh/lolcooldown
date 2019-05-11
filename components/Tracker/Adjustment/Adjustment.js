@@ -9,7 +9,6 @@ import AdjRow from './AdjRow';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
   },
   rowWrap: {
     flex: 1,
@@ -19,7 +18,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderLeftWidth: 1,
-    borderRightWidth: 1
+    borderRightWidth: 1,
+    backgroundColor: '#eee',
   },
   championName: {
     fontWeight: 'bold'

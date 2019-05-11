@@ -18,9 +18,6 @@ class Tracker extends Component {
   }
 
   spellLevelUp(row, col) {
-    console.log('spellLeveUp');
-    console.log('row: ' + row + ' col: ' + col);
-    // use this to get the max level possible
     const data = this.state.players[row].spells.data1[col];
     const level = this.state.players[row].spells.levels[col];
     if (level < data.length) {
@@ -32,10 +29,6 @@ class Tracker extends Component {
   }
 
   spellLevelDown(row, col) {
-    console.log('spellLeveDown');
-    console.log('row: ' + row + ' col: ' + col);
-    // use data to get the max level possible
-    // const data = this.state.players[row].spells.data1[col];
     const level = this.state.players[row].spells.levels[col];
     if (level > 1) {
       const state = this.state;
@@ -47,7 +40,6 @@ class Tracker extends Component {
 
   cooldownAdjust(row, change) {
     const state = this.state;
-    // const levelChange = state.players[row].spells.cooldownPerLevel * state.players[row].level;
     state.players[row].spells.cooldown += change;
     this.setState(state);
   }
@@ -60,20 +52,24 @@ class Tracker extends Component {
 
   render() {
     return (
-      <Swiper showsPagination={false} showsButtons={true}>
-        <Spells
-          players = {this.state.players}
-        />
-        <SummonerSpells
-          players = {this.state.players}
-          summonersData = {this.props.summonersData}
-        />
+      <Swiper
+        autoplay={false}
+        loop={false}
+        index={1}
+      >
         <Adjustment
           players = {this.state.players}
           spellLevelUp = {this.spellLevelUp}
           spellLevelDown = {this.spellLevelDown}
           cooldownAdjust = {this.cooldownAdjust}
           ultimateCooldownAdjust = {this.ultimateCooldownAdjust}
+        />
+        <Spells
+          players = {this.state.players}
+        />
+        <SummonerSpells
+          players = {this.state.players}
+          summonersData = {this.props.summonersData}
         />
       </Swiper>
     );

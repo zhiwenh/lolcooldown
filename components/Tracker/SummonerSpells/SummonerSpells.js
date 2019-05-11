@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontWeight: 'bold',
     borderLeftWidth: 1,
-    borderRightWidth: 1
+    borderRightWidth: 1,
+    backgroundColor: '#eee',
   },
   championName: {
     fontWeight: 'bold'
@@ -40,13 +41,13 @@ class SummonerSpells extends Component {
   }
 
   cooldownAdjust(row, change) {
-    const state = JSON.parse(JSON.stringify(this.state));
+    const state = this.state;
     state.players[row].summonerSpells.cooldown += change;
     this.setState(state);
   }
 
   changeSummoners(row, col, change) {
-    const state = JSON.parse(JSON.stringify(this.state));
+    const state = this.state;
     if (col === 0) {
       state.players[row].summonerSpells.summonerSpell1.name =
         this.props.summonersData[change].name;
