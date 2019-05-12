@@ -5,11 +5,11 @@ import {
   View
 } from 'react-native';
 import SummonerRow from './SummonerRow';
+import SortableList from 'react-native-sortable-list';
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1,
-    backgroundColor: '#F5FCFF'
+    flex: 1
   },
   rowWrap: {
     flex: 1,
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#b3daff',
   },
   championName: {
     fontWeight: 'bold'
@@ -74,7 +74,7 @@ class SummonerSpells extends Component {
           </View>
           <SummonerRow
             row = {i}
-            player = {this.state.players[i]}
+            player = {this.props.players[i]}
             summonersData = {this.props.summonersData}
             cooldownAdjust = {this.cooldownAdjust}
             changeSummoners = {this.changeSummoners}

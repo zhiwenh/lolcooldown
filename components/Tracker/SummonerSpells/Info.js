@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 0.5,
-    backgroundColor: 'powderblue'
+    backgroundColor: '#e6f2ff'
   },
   picker: {
     alignItems:'center',
@@ -25,19 +25,9 @@ const styles = StyleSheet.create({
 });
 
 class Info extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.state.summonerSpellName = this.props.summonerSpellName;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({summonerSpellName: nextProps.summonerSpellName})
-  }
-
   onValueChange(value) {
     value = value.value;
-    if (value !== this.state.summonerSpellName) {
+    if (value !== this.props.summonerSpellName) {
       const summonersData = this.props.summonersData;
       let summonerKey;
       for (let key in summonersData) {
@@ -72,7 +62,7 @@ class Info extends Component {
             data={summonerSpellNames}
             selectStyle={{borderWidth: 0}}
             selectTextStyle={styles.picker}
-            initValue={this.state.summonerSpellName}
+            initValue={this.props.summonerSpellName}
           />
         </View>
       </View>

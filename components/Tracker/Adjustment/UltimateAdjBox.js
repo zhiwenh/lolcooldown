@@ -13,14 +13,15 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     borderWidth: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: 'white'
   },
   levels: {
     flex: 1
   },
   cooldown: {
     flex: 1
-  }
+  },
 });
 
 class UltimateAdjBox extends React.Component {

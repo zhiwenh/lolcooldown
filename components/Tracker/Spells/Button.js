@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white'
   },
   isTicking: {
     flex: 1.5,

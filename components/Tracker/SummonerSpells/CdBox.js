@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     borderWidth: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#eef2f7',
   }
 });
 

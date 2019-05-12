@@ -4,17 +4,28 @@ import Swiper from 'react-native-swiper';
 import Adjustment from  './Adjustment/Adjustment.js';
 import Spells from './Spells/Spells.js';
 import SummonerSpells from './SummonerSpells/SummonerSpells.js';
+import Options from './Options/Options.js';
 
 class Tracker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: this.props.players
+      players: this.props.players,
+      options: true
     };
+
     this.spellLevelUp = this.spellLevelUp.bind(this);
     this.spellLevelDown = this.spellLevelDown.bind(this);
     this.cooldownAdjust = this.cooldownAdjust.bind(this);
     this.ultimateCooldownAdjust = this.ultimateCooldownAdjust.bind(this);
+    this.finishOptions = this.finishOptions.bind(this);
+    this.changeRows = this.changeRows.bind(this);
+  }
+
+  finishOptions() {
+    this.setState({
+      options: false
+    })
   }
 
   spellLevelUp(row, col) {
@@ -50,12 +61,31 @@ class Tracker extends Component {
     this.setState(state);
   }
 
+  changeRows(players) {
+    console.log('old players', this.state.players);
+    console.log('new players', players);
+    const state = this.state;
+    state.players = players;
+    this.setState(state);
+  }
+
   render() {
+    if (this.state.options === true) {
+      return (
+        <Options
+          finishOptions = {this.finishOptions}
+          players = {this.state.players}
+          changeRows = {this.changeRows}
+        />
+      )
+    }
+
     return (
       <Swiper
         autoplay={false}
         loop={false}
         index={1}
+        activeDotColor='red'
       >
         <Adjustment
           players = {this.state.players}

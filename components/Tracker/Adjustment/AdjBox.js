@@ -10,7 +10,8 @@ import LevelDown from './LevelDown';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    borderWidth: 1
+    borderWidth: 1,
+    backgroundColor: '#F5FCFF'
   }
 });
 

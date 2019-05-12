@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#b3daff',
   },
   championName: {
     fontWeight: 'bold'

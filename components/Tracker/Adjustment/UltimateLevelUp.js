@@ -8,7 +8,8 @@ import {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    borderBottomWidth: 0.5
+    borderBottomWidth: 0.5,
+    backgroundColor: 'white'
   }
 });
 

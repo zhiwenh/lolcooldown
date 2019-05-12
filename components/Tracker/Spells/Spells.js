@@ -12,9 +12,6 @@ import SpellRow from './SpellRow';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   rowWrap: {
     flex: 1,
@@ -26,7 +23,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#eee',
+    backgroundColor: '#b3daff',
   },
   championName: {
     fontWeight: 'bold'
