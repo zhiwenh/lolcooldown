@@ -30,7 +30,7 @@ class InputSummoner extends Component {
   }
 
   render() {
-    let regions = ['NA1', 'un-', 'EUN1', 'BR1',
+    let regions = ['NA1', 'EUW1', 'EUN1', 'BR1',
       'JP1', 'KR', 'LA1', 'LA2', 'RU', 'TR1', 'OC1'];
 
     regions = regions.map((region, index) => {
