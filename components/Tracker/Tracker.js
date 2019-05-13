@@ -4,27 +4,27 @@ import Swiper from 'react-native-swiper';
 import Adjustment from  './Adjustment/Adjustment.js';
 import Spells from './Spells/Spells.js';
 import SummonerSpells from './SummonerSpells/SummonerSpells.js';
-import Options from './Options/Options.js';
+import Sort from './Sort/Sort.js';
 
 class Tracker extends Component {
   constructor(props) {
     super(props);
     this.state = {
       players: this.props.players,
-      options: true
+      sort: true
     };
 
     this.spellLevelUp = this.spellLevelUp.bind(this);
     this.spellLevelDown = this.spellLevelDown.bind(this);
     this.cooldownAdjust = this.cooldownAdjust.bind(this);
     this.ultimateCooldownAdjust = this.ultimateCooldownAdjust.bind(this);
-    this.finishOptions = this.finishOptions.bind(this);
+    this.finishSort = this.finishSort.bind(this);
     this.changeRows = this.changeRows.bind(this);
   }
 
-  finishOptions() {
+  finishSort() {
     this.setState({
-      options: false
+      sort: false
     })
   }
 
@@ -70,10 +70,10 @@ class Tracker extends Component {
   }
 
   render() {
-    if (this.state.options === true) {
+    if (this.state.sort === true) {
       return (
-        <Options
-          finishOptions = {this.finishOptions}
+        <Sort
+          finishSort = {this.finishSort}
           players = {this.state.players}
           changeRows = {this.changeRows}
         />
