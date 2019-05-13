@@ -213,7 +213,8 @@ class App extends Component {
           this.setState({
             error: 'Summoner not found',
             region: region,
-            spinner: false
+            spinner: false,
+            userSummonerName: summonerName
           });
           return;
         }
@@ -234,7 +235,8 @@ class App extends Component {
           this.setState({
             error: 'Summoner not in game',
             region: region,
-            spinner: false
+            spinner: false,
+            userSummonerName: summonerName
           });
           return;
         };
@@ -290,6 +292,7 @@ class App extends Component {
             error={this.state.error}
             region={this.state.region}
             spinner={this.state.spinner}
+            userSummonerName={this.state.userSummonerName}
           />
           <Scene key="tracker"
             component={Tracker}

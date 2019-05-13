@@ -30,7 +30,7 @@ class InputSummoner extends Component {
   }
 
   render() {
-    let regions = ['NA1', 'EUW1', 'EUN1', 'BR1',
+    let regions = ['NA1', 'un-', 'EUN1', 'BR1',
       'JP1', 'KR', 'LA1', 'LA2', 'RU', 'TR1', 'OC1'];
 
     regions = regions.map((region, index) => {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   input: {
     textAlign: 'center',
     height: 40,
-    borderColor: '#000000',
+    borderColor: '#b3b3b3',
     borderWidth: 1,
     borderStyle: 'solid',
     width: Dimensions.get('window').width - 15
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     height: 30
   },
   title: {
-    fontSize: 33,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center'
   },

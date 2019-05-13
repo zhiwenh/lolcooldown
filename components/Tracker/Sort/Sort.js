@@ -14,7 +14,7 @@ class Row extends Component {
       <TouchableHighlight
         underlayColor={'#eee'}
         style={{
-          padding: 20,
+          padding: 18,
           backgroundColor: '#F8F8F8',
           borderBottomWidth: 1,
           borderColor: '#eee',
@@ -54,11 +54,11 @@ class Sort extends Component {
   render() {
     return (
       <View style={styles.main}>
-        <View style={{height: 10}}/>
+        <View style={{height: 13}}/>
         <View>
-          <Text style={styles.sortableListTitle}>Sort</Text>
+          <Text style={styles.sortableListTitle}>Sort Opponents</Text>
         </View>
-        <View style={{height: 10}}>
+        <View style={{height: 13}}>
         </View>
         <View style={styles.sortableListWrap}>
           <SortableList
@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
   },
   sortableListTitle: {
     textAlign: 'center',
-    fontSize: 24
+    fontSize: 24,
+    fontWeight: 'bold'
   },
   doneWrap: {
     flex: 1
