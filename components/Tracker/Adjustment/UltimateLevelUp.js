@@ -10,6 +10,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 0.5,
     backgroundColor: 'white'
+  },
+  text: {
+    textAlign: 'center'
   }
 });
 
@@ -24,7 +27,7 @@ class UltimateLevelUp extends React.Component {
         onPress = {this.onPress.bind(this)}
         underlayColor='#e6e6e6'
       >
-        <Text> + {this.props.skill} Lvl {this.props.level}</Text>
+        <Text style = {styles.text}>+ {this.props.skill} Lvl {this.props.level}</Text>
       </TouchableHighlight>
     );
   }

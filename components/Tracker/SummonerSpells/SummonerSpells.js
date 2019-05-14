@@ -80,6 +80,7 @@ class SummonerSpells extends Component {
             summonersData = {this.props.summonersData}
             cooldownAdjust = {this.cooldownAdjust}
             changeSummoners = {this.changeSummoners}
+            version = {this.props.version}
           />
         </View>
       );

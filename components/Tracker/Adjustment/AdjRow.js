@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   View,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 
 import AdjBox from './AdjBox';
@@ -53,8 +54,15 @@ class AdjRow extends Component {
         />);
       }
     }
+
+    const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version +
+      '/img/champion/' + this.props.player.championIcon;
+
     return (
       <View style={styles.main}>
+        <View>
+          <Image style={{width: 50, height: 50}} source={{uri: iconUrl}}/>
+        </View>
         {adjBoxes}
         <UltimateAdjBox
           key = {i}

@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     borderBottomWidth: 0.5
+  },
+  text: {
+    textAlign: 'center'
   }
 });
 
@@ -26,7 +29,7 @@ class CdLevelUp extends React.Component {
         style = {styles.main}
         underlayColor='#e6e6e6'
       >
-        <Text> + {this.props.cooldown}% CD</Text>
+        <Text style = {styles.text}>+ {this.props.cooldown}% CD</Text>
       </TouchableHighlight>
     );
   }

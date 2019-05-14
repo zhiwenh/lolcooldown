@@ -93,13 +93,16 @@ class Tracker extends Component {
           spellLevelDown = {this.spellLevelDown}
           cooldownAdjust = {this.cooldownAdjust}
           ultimateCooldownAdjust = {this.ultimateCooldownAdjust}
+          version = {this.props.version}
         />
         <Spells
           players = {this.state.players}
+          version = {this.props.version}
         />
         <SummonerSpells
           players = {this.state.players}
           summonersData = {this.props.summonersData}
+          version = {this.props.version}
         />
       </Swiper>
     );

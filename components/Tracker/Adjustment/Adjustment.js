@@ -46,6 +46,8 @@ class Adjustment extends Component {
             spellLevelDown = {this.props.spellLevelDown}
             cooldownAdjust = {this.props.cooldownAdjust}
             ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
+            player = {this.props.players[i]}
+            version = {this.props.version}
           />
         </View>
       );

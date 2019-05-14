@@ -36,6 +36,7 @@ class App extends Component {
     state.region = 'NA1';
     state.error;
     state.spinner = true;
+    state.version = VERSION;
 
     this.state = state;
 
@@ -43,7 +44,6 @@ class App extends Component {
     this.champsData = null;
     this.loadingSummoner = true;
     this.loadingChampion = true;
-
 
     this.getChampionStaticData = this.getChampionStaticData.bind(this);
     this.getSummonerStaticData = this.getSummonerStaticData.bind(this);
@@ -152,6 +152,7 @@ class App extends Component {
       playerId: null,
       championName: null,
       championId: null,
+      championIcon: null,
       spells: {
         cooldown: 0,
         ultimateCooldown: 0,
@@ -253,6 +254,7 @@ class App extends Component {
             const playerSchema = this.generatePlayerSchema();
             playerSchema.playerName = participant.summonerName;
             playerSchema.championName = champs[participant.championId].name;
+            playerSchema.championIcon = champs[participant.championId].image.full;
 
             const summonerSpell1 = summoners[participant.spell1Id];
             playerSchema.summonerSpells.summonerSpell1.name = summonerSpell1.name;
@@ -280,7 +282,8 @@ class App extends Component {
 
         Actions.tracker({
           players: players,
-          summonersData: summoners
+          summonersData: summoners,
+          version: this.state.version
         });
 
       }).catch((err) => {

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 import ButtonWrap from './ButtonWrap';
 import UltimateButtonWrap from './UltimateButtonWrap';
@@ -40,10 +41,19 @@ class SpellRow extends Component {
       ultimateCooldown = {this.props.spells.ultimateCooldown}
       spellName = {this.props.spellNames.data1[3]}
     />
+
+    const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version +
+      '/img/champion/' + this.props.player.championIcon;
+
+    console.log('iconUrl', iconUrl);
+
     return (
       <View style={styles.main}>
         <View>
           <Text>{this.props.name}</Text>
+        </View>
+        <View>
+          <Image style={{width: 50, height: 50}} source={{uri: iconUrl}}/>
         </View>
         {buttonWraps}
         {ultimateButtonWrap}

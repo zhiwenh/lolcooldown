@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   View,
-  StyleSheet
+  StyleSheet,
+  Image
 } from 'react-native';
 
 import ButtonWrap from './ButtonWrap.js';
@@ -39,8 +40,14 @@ class SummonerRow extends Component {
         changeSummoners = {this.props.changeSummoners}
       />);
 
+    const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version +
+      '/img/champion/' + this.props.player.championIcon;
+
     return (
       <View style={styles.main}>
+        <View>
+          <Image style={{width: 50, height: 50}} source={{uri: iconUrl}}/>
+        </View>
         {buttonWrapBoxes}
         <CdBox
           row = {this.props.row}
