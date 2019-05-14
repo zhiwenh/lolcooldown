@@ -5,10 +5,13 @@ import {
   View,
   TextInput,
   Picker,
-  Dimensions
+  Dimensions,
+  ImageBackground
 } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Spinner from 'react-native-loading-spinner-overlay';
+
+const BACKGROUND_URL = 'http://www.lol-wallpapers.com/wp-content/uploads/2018/06/Hextech-Poppy-Splash-Art-HD-Wallpaper-Background-Official-Art-Artwork-League-of-Legends-lol.jpg'
 
 class InputSummoner extends Component {
   constructor(props) {
@@ -43,38 +46,43 @@ class InputSummoner extends Component {
 
     return (
       <View style = {styles.container}>
-        <Spinner
-           visible={this.state.spinner}
-           textContent={'Loading...'}
-           textStyle={styles.spinnerTextStyle}
-         />
-        <View style = {styles.topHolder}>
-          <Text style={styles.title}>
-            League of Legends Cooldown Tracker
-          </Text>
-        </View>
-        <TextInput
-          style = {styles.input}
-          placeholder = 'Input summoner currently in game'
-          onSubmitEditing = {this.onSubmitEditing.bind(this)}
-          clearButtonMode = "always"
-          autoCorrect = {false}
-        />
-        <View style={styles.errorWrap}>
-          <Text style={styles.error}>{this.props.error}</Text>
-        </View>
-        <View>
-          <Text style={{textAlign: 'center'}}>Select region:</Text>
-        </View>
-        <View style={styles.bottomHolder}>
-          <ModalSelector
-            onChange={this.onChange.bind(this)}
-            data={regions}
-            selectTextStyle={styles.selectorText}
-            selectStyle={styles.selectorSelect}
-            initValue={this.state.region}
+        <ImageBackground
+          source={{uri: BACKGROUND_URL}}
+          style={{width: '100%', height: '100%'}}
+        >
+          <Spinner
+             visible={this.state.spinner}
+             textContent={'Loading...'}
+             textStyle={styles.spinnerTextStyle}
+           />
+          <View style = {styles.topHolder}>
+            <Text style={styles.title}>
+              League of Legends Cooldown Tracker
+            </Text>
+          </View>
+          <TextInput
+            style = {styles.input}
+            placeholder = 'Input summoner currently in game'
+            onSubmitEditing = {this.onSubmitEditing.bind(this)}
+            clearButtonMode = "always"
+            autoCorrect = {false}
           />
-        </View>
+          <View style={styles.errorWrap}>
+            <Text style={styles.error}>{this.props.error}</Text>
+          </View>
+          <View>
+            <Text style={{textAlign: 'center', color: 'white'}}>Select region:</Text>
+          </View>
+          <View style={styles.bottomHolder}>
+            <ModalSelector
+              onChange={this.onChange.bind(this)}
+              data={regions}
+              selectTextStyle={styles.selectorText}
+              selectStyle={styles.selectorSelect}
+              initValue={this.state.region}
+            />
+          </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -85,16 +93,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
     fontFamily: 'Arail'
   },
   input: {
     textAlign: 'center',
     height: 40,
-    borderColor: '#b3b3b3',
+    borderColor: 'white',
     borderWidth: 1,
     borderStyle: 'solid',
-    width: Dimensions.get('window').width - 15
+    width: Dimensions.get('window').width,
+    backgroundColor: 'white'
   },
   topHolder: {
     flex: 2,
@@ -102,7 +111,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bottomHolder: {
-    flex: 1
+    flex: 1,
+    alignItems: 'center'
   },
   error: {
     color: 'red'
@@ -111,18 +121,21 @@ const styles = StyleSheet.create({
     height: 30
   },
   title: {
-    fontSize: 30,
+    fontSize: 34,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'white'
   },
   selectorText: {
     fontSize: 14,
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    color: 'black'
   },
   selectorSelect: {
     width: 65,
     alignItems:'center',
     justifyContent: 'center',
+    backgroundColor: 'white'
   },
   spinnerTextStyle: {
     color: '#FFF'

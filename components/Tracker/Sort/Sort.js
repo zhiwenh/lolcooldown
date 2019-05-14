@@ -78,8 +78,6 @@ class Sort extends Component {
   }
 }
 
-export default Sort
-
 const styles = StyleSheet.create({
   main: {
     flex: 1
@@ -90,10 +88,12 @@ const styles = StyleSheet.create({
   },
   sortableListTitle: {
     textAlign: 'center',
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold'
   },
   doneWrap: {
     flex: 1
   }
 });
+
+export default Sort;

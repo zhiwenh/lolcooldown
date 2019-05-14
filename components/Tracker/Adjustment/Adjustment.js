@@ -18,11 +18,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    backgroundColor: '#b3c6ff',
+    backgroundColor: '#999999',
   },
   championName: {
     fontWeight: 'bold',
-    color: 'black'
+    color: 'white'
   }
 });
 

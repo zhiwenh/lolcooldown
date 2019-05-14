@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 0.5,
-    backgroundColor: '#e6ecff'
+    backgroundColor: '#e6e6e6',
+    padding: 2
   },
   picker: {
     alignItems:'center',

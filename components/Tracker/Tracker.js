@@ -86,6 +86,7 @@ class Tracker extends Component {
         loop={false}
         index={1}
         activeDotColor='red'
+        activeDotStyle={{opacity: 0.2}}
       >
         <Adjustment
           players = {this.state.players}
