@@ -22,6 +22,7 @@ class UltimateLevelDown extends React.Component {
       <TouchableHighlight
         onPress = {this.onPress.bind(this)}
         style = {styles.main}
+        underlayColor='#e6e6e6'
       >
         <Text> -</Text>
       </TouchableHighlight>

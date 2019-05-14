@@ -35,11 +35,15 @@ class App extends Component {
     state.summonersData = null;
     state.region = 'NA1';
     state.error;
-    state.loadingSummoner = true;
-    state.loadingChampion = true;
     state.spinner = true;
 
     this.state = state;
+
+    this.summonersData = null;
+    this.champsData = null;
+    this.loadingSummoner = true;
+    this.loadingChampion = true;
+
 
     this.getChampionStaticData = this.getChampionStaticData.bind(this);
     this.getSummonerStaticData = this.getSummonerStaticData.bind(this);
@@ -65,12 +69,14 @@ class App extends Component {
           summonerObj[res.data[summoner].key] = res.data[summoner];
         }
 
-        this.state.summonersData = summonerObj;
-        this.state.loadingSummoner = false;
+        this.summonersData = summonerObj;
+        this.loadingSummoner = false;
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
           this.setState({
-            spinner: false
+            spinner: false,
+            champsData: this.champsData,
+            summonersData: this.summonersData
           });
         }
       })
@@ -124,12 +130,14 @@ class App extends Component {
           championDataObj[res.key] = res;
         });
 
-        this.state.champsData = championDataObj;
-        this.state.loadingChampion = false;
+        this.champsData = championDataObj;
+        this.loadingChampion = false;
 
-        if (this.state.loadingSummoner === false && this.state.loadingChampion === false) {
+        if (this.loadingSummoner === false && this.loadingChampion === false) {
           this.setState({
-            spinner: false
+            spinner: false,
+            champsData: this.champsData,
+            summonersData: this.summonersData
           });
         }
       })
@@ -214,7 +222,6 @@ class App extends Component {
             error: 'Summoner not found',
             region: region,
             spinner: false,
-            userSummonerName: summonerName
           });
           return;
         }
@@ -236,7 +243,6 @@ class App extends Component {
             error: 'Summoner not in game',
             region: region,
             spinner: false,
-            userSummonerName: summonerName
           });
           return;
         };
@@ -294,7 +300,6 @@ class App extends Component {
             error={this.state.error}
             region={this.state.region}
             spinner={this.state.spinner}
-            userSummonerName={this.state.userSummonerName}
           />
           <Scene key="tracker"
             component={Tracker}

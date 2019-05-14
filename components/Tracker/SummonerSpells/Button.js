@@ -94,6 +94,7 @@ class Button extends Component {
       <TouchableHighlight
         style = {this.state.isTicking ? styles.isTicking : styles.notTicking}
         onPress = {this.onPress}
+        underlayColor='#e6e6e6'
       >
         <Text>{this.state.current}</Text>
       </TouchableHighlight>

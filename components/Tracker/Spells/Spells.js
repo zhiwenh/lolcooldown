@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#99b3ff',
+    backgroundColor: '#b3c6ff',
   },
   championName: {
     fontWeight: 'bold',
@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
 class Spells extends Component {
   render() {
     const spellRows = [];
-    for (var i = 0; i < 5; i++) {
+    const keys = Object.keys(this.props.players);
+    for (var i = 0; i < keys.length; i++) {
       spellRows.push(
         <View style={styles.rowWrap} key={i}>
           <View style={styles.championNameWrap}>

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#99b3ff',
+    backgroundColor: '#b3c6ff',
   },
   championName: {
     fontWeight: 'bold',
@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
 class Adjustment extends Component {
   render() {
     const adjRows = [];
-    for (var i = 0; i < 5; i++) {
+    const keys = Object.keys(this.props.players);
+    for (var i = 0; i < keys.length; i++) {
       adjRows.push(
         <View style={styles.rowWrap} key={i}>
           <View style={styles.championNameWrap}>

@@ -22,6 +22,7 @@ class LevelUp extends React.Component {
       <TouchableHighlight
         style = {styles.main}
         onPress = {this.onPress.bind(this)}
+        underlayColor='#e6e6e6'
       >
         <Text> + {this.props.skill} Lvl {this.props.level}</Text>
       </TouchableHighlight>

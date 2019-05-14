@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#99b3ff',
+    backgroundColor: '#b3c6ff',
   },
   championName: {
     fontWeight: 'bold',
@@ -65,7 +65,8 @@ class SummonerSpells extends Component {
 
   render() {
     const summonerRows = [];
-    for (let i = 0; i < 5; i++) {
+    const keys = Object.keys(this.props.players);
+    for (let i = 0; i < keys.length; i++) {
       summonerRows.push(
         <View style={styles.rowWrap} key={i}>
           <View style={styles.championNameWrap}>
