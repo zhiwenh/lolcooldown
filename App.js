@@ -152,7 +152,7 @@ class App extends Component {
       playerId: null,
       championName: null,
       championId: null,
-      championIcon: null,
+      championIconUrl: null,
       spells: {
         cooldown: 0,
         ultimateCooldown: 0,
@@ -247,6 +247,10 @@ class App extends Component {
           });
           return;
         };
+
+        const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + VERSION +
+          '/img/champion/';
+
         let index = 0;
         for (let i = 0; i < res.participants.length; i++) {
           const participant = res.participants[i];
@@ -254,7 +258,8 @@ class App extends Component {
             const playerSchema = this.generatePlayerSchema();
             playerSchema.playerName = participant.summonerName;
             playerSchema.championName = champs[participant.championId].name;
-            playerSchema.championIcon = champs[participant.championId].image.full;
+            playerSchema.championIconUrl = iconUrl + champs[participant.championId].image.full;
+
 
             const summonerSpell1 = summoners[participant.spell1Id];
             playerSchema.summonerSpells.summonerSpell1.name = summonerSpell1.name;
@@ -283,7 +288,6 @@ class App extends Component {
         Actions.tracker({
           players: players,
           summonersData: summoners,
-          version: this.state.version
         });
 
       }).catch((err) => {

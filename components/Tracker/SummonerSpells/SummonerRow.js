@@ -40,13 +40,13 @@ class SummonerRow extends Component {
         changeSummoners = {this.props.changeSummoners}
       />);
 
-    const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version +
-      '/img/champion/' + this.props.player.championIcon;
-
     return (
       <View style={styles.main}>
         <View>
-          <Image style={{width: 50, height: 50}} source={{uri: iconUrl}}/>
+          <Image
+            style={{width: 50, height: 50}}
+            source={{uri: this.props.player.championIconUrl}}
+          />
         </View>
         {buttonWrapBoxes}
         <CdBox

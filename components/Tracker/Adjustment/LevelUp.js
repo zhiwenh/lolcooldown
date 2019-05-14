@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white'
   },
   text: {
-    textAlign: 'center'
+
   }
 });
 
@@ -27,7 +27,7 @@ class LevelUp extends React.Component {
         onPress = {this.onPress.bind(this)}
         underlayColor='#e6e6e6'
       >
-        <Text style = {styles.text}>+ {this.props.skill} Lvl {this.props.level}</Text>
+        <Text style = {styles.text}> + {this.props.skill} Lv {this.props.level}</Text>
       </TouchableHighlight>
     );
   }

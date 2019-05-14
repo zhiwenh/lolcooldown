@@ -47,7 +47,6 @@ class Adjustment extends Component {
             cooldownAdjust = {this.props.cooldownAdjust}
             ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
             player = {this.props.players[i]}
-            version = {this.props.version}
           />
         </View>
       );

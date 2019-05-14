@@ -49,7 +49,6 @@ class Spells extends Component {
             spells = {this.props.players[i].spells}
             spellNames = {this.props.players[i].spellNames}
             player = {this.props.players[i]}
-            version = {this.props.version}
           />
         </View>
       );

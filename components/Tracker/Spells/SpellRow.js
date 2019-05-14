@@ -42,18 +42,16 @@ class SpellRow extends Component {
       spellName = {this.props.spellNames.data1[3]}
     />
 
-    const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version +
-      '/img/champion/' + this.props.player.championIcon;
-
-    console.log('iconUrl', iconUrl);
-
     return (
       <View style={styles.main}>
         <View>
           <Text>{this.props.name}</Text>
         </View>
         <View>
-          <Image style={{width: 50, height: 50}} source={{uri: iconUrl}}/>
+        <Image
+          style={{width: 50, height: 50}}
+          source={{uri: this.props.player.championIconUrl}}
+        />
         </View>
         {buttonWraps}
         {ultimateButtonWrap}
