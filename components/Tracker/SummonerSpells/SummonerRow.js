@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    borderLeftWidth: 1
+  },
+  iconWrap: {
+    borderWidth: 1
   }
 });
 
@@ -42,7 +46,7 @@ class SummonerRow extends Component {
 
     return (
       <View style={styles.main}>
-        <View>
+        <View style={styles.iconWrap}>
           <Image
             style={{width: 50, height: 50}}
             source={{uri: this.props.player.championIconUrl}}

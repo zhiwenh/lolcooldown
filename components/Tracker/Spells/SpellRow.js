@@ -14,6 +14,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderLeftWidth: 1
+  },
+  iconWrap: {
+    borderWidth: 1
   }
 });
 
@@ -47,11 +51,11 @@ class SpellRow extends Component {
         <View>
           <Text>{this.props.name}</Text>
         </View>
-        <View>
-        <Image
-          style={{width: 50, height: 50}}
-          source={{uri: this.props.player.championIconUrl}}
-        />
+        <View style={styles.iconWrap}>
+          <Image
+            style={{width: 50, height: 50}}
+            source={{uri: this.props.player.championIconUrl}}
+          />
         </View>
         {buttonWraps}
         {ultimateButtonWrap}

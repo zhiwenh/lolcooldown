@@ -17,8 +17,7 @@ const styles = StyleSheet.create({
   championNameWrap: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
+    borderWidth: 1,
     backgroundColor: '#b3c6ff',
   },
   championName: {

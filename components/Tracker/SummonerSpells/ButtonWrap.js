@@ -9,7 +9,7 @@ import Button from './Button';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    borderWidth: 1,
+    borderLeftWidth: 1
   }
 });
 

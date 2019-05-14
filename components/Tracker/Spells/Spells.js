@@ -21,8 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     fontWeight: 'bold',
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
+    borderWidth: 1,
     backgroundColor: '#b3c6ff',
   },
   championName: {

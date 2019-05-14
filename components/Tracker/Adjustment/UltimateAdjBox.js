@@ -12,7 +12,7 @@ import UltimateCdDown from './UltimateCdDown';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    borderWidth: 1,
+    borderLeftWidth: 1,
     flexDirection: 'column',
     backgroundColor: 'white'
   },

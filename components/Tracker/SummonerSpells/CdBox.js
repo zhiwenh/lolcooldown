@@ -10,7 +10,8 @@ import CdLevelDown from './CdLevelDown';
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    borderWidth: 1,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
     backgroundColor: '#eef2f7',
   }
 });
