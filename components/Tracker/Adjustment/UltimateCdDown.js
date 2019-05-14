@@ -8,7 +8,7 @@ import {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: '#eef2f7'
+    backgroundColor: '#f9f9f9'
   }
 });
 

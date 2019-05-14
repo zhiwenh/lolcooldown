@@ -70,8 +70,8 @@ class InputSummoner extends Component {
           <View style={styles.errorWrap}>
             <Text style={styles.error}>{this.props.error}</Text>
           </View>
-          <View>
-            <Text style={{textAlign: 'center', color: 'white'}}>Select region:</Text>
+          <View style={styles.regionWrap}>
+            <Text style={styles.regionText}>Select region:</Text>
           </View>
           <View style={styles.bottomHolder}>
             <ModalSelector
@@ -96,6 +96,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     fontFamily: 'Arail'
   },
+  topHolder: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 34,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white'
+  },
   input: {
     textAlign: 'center',
     height: 40,
@@ -105,11 +116,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     backgroundColor: 'white'
   },
-  topHolder: {
-    flex: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   bottomHolder: {
     flex: 1,
     alignItems: 'center'
@@ -118,13 +124,17 @@ const styles = StyleSheet.create({
     color: 'red'
   },
   errorWrap: {
-    height: 30
+    height: 30,
+    alignItems:'center',
   },
-  title: {
-    fontSize: 34,
-    fontWeight: 'bold',
+  regionWrap: {
+    alignItems:'center',
+    justifyContent: 'center'
+  },
+  regionText: {
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    fontSize: 15
   },
   selectorText: {
     fontSize: 14,

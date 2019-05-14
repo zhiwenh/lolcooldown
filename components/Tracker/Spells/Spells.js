@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     fontWeight: 'bold',
     borderWidth: 1,
-    backgroundColor: '#999999',
+    backgroundColor: '#595959',
   },
   championName: {
     fontWeight: 'bold',

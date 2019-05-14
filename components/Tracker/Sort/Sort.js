@@ -68,10 +68,15 @@ class Sort extends Component {
         </View>
         <View style={{height: 10}}/>
         <View style={styles.sortableListWrap}>
-          <Button
-            onPress={this.props.finishSort.bind(this)}
-            title="Done"
-          />
+          <View style={styles.buttonWrap}>
+            <TouchableHighlight
+              onPress={this.props.finishSort.bind(this)}
+              style={styles.button}
+              underlayColor='#e6e6e6'
+            >
+              <Text style={styles.buttonText}>Done</Text>
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     )
@@ -80,7 +85,8 @@ class Sort extends Component {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#e6e6e6'
   },
   sortableListWrap: {
     flex: 1,
@@ -88,11 +94,21 @@ const styles = StyleSheet.create({
   },
   sortableListTitle: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold'
   },
-  doneWrap: {
+  buttonWrap: {
+    alignItems: 'center',
     flex: 1
+  },
+  button: {
+    width: 100,
+    height: 50,
+    alignItems: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontSize: 16
   }
 });
 

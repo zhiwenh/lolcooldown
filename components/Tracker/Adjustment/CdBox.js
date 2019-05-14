@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRightWidth: 1,
     borderLeftWidth: 1,
-    backgroundColor: '#eef2f7'
+    backgroundColor: '#f9f9f9'
   }
 });
 
