@@ -14,13 +14,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 0.5,
-    backgroundColor: '#e6f2ff'
+    backgroundColor: '#e6ecff'
   },
   picker: {
     alignItems:'center',
     justifyContent: 'center',
     fontSize: 14,
-    fontFamily: 'Arial'
+    fontFamily: 'Arial',
+    color: 'black'
   }
 });
 

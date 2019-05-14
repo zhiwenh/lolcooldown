@@ -267,7 +267,9 @@ class App extends Component {
         }
         console.log('players', players);
         this.setState({
-          spinner: false
+          spinner: false,
+          error: null,
+          region: region
         });
 
         Actions.tracker({

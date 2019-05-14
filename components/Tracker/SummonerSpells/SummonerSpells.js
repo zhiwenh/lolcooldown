@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     borderLeftWidth: 1,
     borderRightWidth: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#99b3ff',
   },
   championName: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'black'
   }
 });
 

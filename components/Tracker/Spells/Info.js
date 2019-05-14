@@ -11,10 +11,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 0.5,
-    backgroundColor: '#e6f2ff'
+    backgroundColor: '#e6ecff'
   },
   spellName: {
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'black'
   }
 });
 

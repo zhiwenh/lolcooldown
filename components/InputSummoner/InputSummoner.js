@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     height: 30
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center'
   },
