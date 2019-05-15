@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image} from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
@@ -251,7 +251,7 @@ class App extends Component {
             playerSchema.playerName = participant.summonerName;
             playerSchema.championName = champs[participant.championId].name;
             playerSchema.championIconUrl = iconUrl + champs[participant.championId].image.full;
-
+            Image.prefetch(playerSchema.championIconUrl);
 
             const summonerSpell1 = summoners[participant.spell1Id];
             playerSchema.summonerSpells.summonerSpell1.name = summonerSpell1.name;

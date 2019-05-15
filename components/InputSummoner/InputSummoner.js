@@ -11,8 +11,6 @@ import {
 import ModalSelector from 'react-native-modal-selector';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-const BACKGROUND_URL = 'http://www.lol-wallpapers.com/wp-content/uploads/2018/06/Hextech-Poppy-Splash-Art-HD-Wallpaper-Background-Official-Art-Artwork-League-of-Legends-lol.jpg'
-
 class InputSummoner extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +45,7 @@ class InputSummoner extends Component {
     return (
       <View style = {styles.container}>
         <ImageBackground
-          source={{uri: BACKGROUND_URL}}
+          source={require('./../../images/hextech_poppy.jpg')}
           style={{width: '100%', height: '100%'}}
         >
           <Spinner

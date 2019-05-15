@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  Button
+  Button,
+  Image
 } from 'react-native';
 import SortableListView from 'react-native-sortable-listview';
 
@@ -14,14 +15,20 @@ class Row extends Component {
       <TouchableHighlight
         underlayColor={'#eee'}
         style={{
-          padding: 18,
+          padding: 15,
           backgroundColor: '#F8F8F8',
           borderBottomWidth: 1,
           borderColor: '#eee',
         }}
         {...this.props.sortHandlers}
       >
-        <Text>{this.props.data.championName}</Text>
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <Image
+            style={{height: 25, width: 25}}
+            source={{uri: this.props.data.championIconUrl}}
+          />
+          <Text style={{paddingLeft: 10}}>{this.props.data.championName}</Text>
+        </View>
       </TouchableHighlight>
     )
   }
