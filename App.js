@@ -4,7 +4,6 @@ import Swiper from 'react-native-swiper';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
-import Loading from './components/Loading/Loading.js';
 import Tracker from './components/Tracker/Tracker.js';
 
 const API_KEY = require('./API_KEY.json').key;

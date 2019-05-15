@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import Adjustment from  './Adjustment/Adjustment.js';
 import Spells from './Spells/Spells.js';
 import SummonerSpells from './SummonerSpells/SummonerSpells.js';
 import Sort from './Sort/Sort.js';
+
+const styles = StyleSheet.create({
+  tabView: {
+    fontFamily: 'Arial',
+    paddingTop: 5
+  }
+});
 
 class Tracker extends Component {
   constructor(props) {
@@ -81,14 +90,12 @@ class Tracker extends Component {
     }
 
     return (
-      <Swiper
-        autoplay={false}
-        loop={false}
-        index={1}
-        activeDotColor='red'
-        activeDotStyle={{opacity: 0.2}}
+      <ScrollableTabView
+        style = {styles.tabView}
+        initialPage = {1}
       >
         <Adjustment
+          tabLabel = 'Levels and CD'
           players = {this.state.players}
           spellLevelUp = {this.spellLevelUp}
           spellLevelDown = {this.spellLevelDown}
@@ -96,16 +103,25 @@ class Tracker extends Component {
           ultimateCooldownAdjust = {this.ultimateCooldownAdjust}
         />
         <Spells
+          tabLabel = 'Spells'
           players = {this.state.players}
         />
         <SummonerSpells
+          tabLabel = 'Summoners'
           players = {this.state.players}
           summonersData = {this.props.summonersData}
         />
-      </Swiper>
+      </ScrollableTabView>
     );
   }
 
+  // <Swiper
+  //   autoplay={false}
+  //   loop={false}
+  //   index={1}
+  //   activeDotColor='red'
+  //   activeDotStyle={{opacity: 0.2}}
+  // >
 }
 
 export default Tracker;

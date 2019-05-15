@@ -15,16 +15,16 @@ class Row extends Component {
       <TouchableHighlight
         underlayColor={'#eee'}
         style={{
-          padding: 15,
+          padding: 13,
           backgroundColor: '#F8F8F8',
           borderBottomWidth: 1,
           borderColor: '#eee',
         }}
         {...this.props.sortHandlers}
       >
-        <View style={{flex: 1, flexDirection: 'row'}}>
+        <View style={{flex: 1, flexDirection: 'row', alignment: 'center'}}>
           <Image
-            style={{height: 25, width: 25}}
+            style={{height: 30, width: 30}}
             source={{uri: this.props.data.championIconUrl}}
           />
           <Text style={{paddingLeft: 10}}>{this.props.data.championName}</Text>
