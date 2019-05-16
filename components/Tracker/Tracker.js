@@ -11,7 +11,6 @@ import Sort from './Sort/Sort.js';
 const styles = StyleSheet.create({
   tabView: {
     fontFamily: 'Arial',
-    paddingTop: 5
   }
 });
 
@@ -93,6 +92,7 @@ class Tracker extends Component {
       <ScrollableTabView
         style = {styles.tabView}
         initialPage = {1}
+        tabBarBackgroundColor = '#e6e6e6'
       >
         <Adjustment
           tabLabel = 'Levels and CD'
