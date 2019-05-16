@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import Swiper from 'react-native-swiper';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
+import KeepAwake from 'react-native-keep-awake';
 
 import Adjustment from  './Adjustment/Adjustment.js';
 import Spells from './Spells/Spells.js';
@@ -22,6 +23,14 @@ class Tracker extends Component {
     this.ultimateCooldownAdjust = this.ultimateCooldownAdjust.bind(this);
     this.finishSort = this.finishSort.bind(this);
     this.changeRows = this.changeRows.bind(this);
+  }
+
+  componentDidMount() {
+    KeepAwake.activate();
+  }
+
+  componentWillUnmount() {
+    KeepAwake.deactivate();
   }
 
   finishSort() {

@@ -11,6 +11,7 @@
     "react-native": "0.59.5",
     "react-native-background-timer": "^2.1.1",
     "react-native-draggable-flatlist": "^1.1.7",
+    "react-native-keep-awake": "^4.0.0",
     "react-native-loading-spinner-overlay": "^1.0.1",
     "react-native-modal-selector": "^1.0.3",
     "react-native-picker-select": "^6.1.0",
