@@ -15,7 +15,7 @@ class Row extends Component {
       <TouchableHighlight
         underlayColor={'#eee'}
         style={{
-          padding: 13,
+          padding: 10,
           backgroundColor: '#F8F8F8',
           borderBottomWidth: 1,
           borderColor: '#eee',

@@ -25,7 +25,7 @@ class InputSummoner extends Component {
     console.log(event.nativeEvent.text);
   }
 
-  onChange(value) {
+  regionSelect(value) {
     value = value.value;
     this.setState({region: value});
   }
@@ -73,7 +73,7 @@ class InputSummoner extends Component {
           </View>
           <View style={styles.bottomHolder}>
             <ModalSelector
-              onChange={this.onChange.bind(this)}
+              onChange={this.regionSelect.bind(this)}
               data={regions}
               selectTextStyle={styles.selectorText}
               selectStyle={styles.selectorSelect}
