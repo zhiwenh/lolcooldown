@@ -103,7 +103,7 @@ class Tracker extends Component {
           ultimateCooldownAdjust = {this.ultimateCooldownAdjust}
         />
         <Spells
-          tabLabel = 'Spells'
+          tabLabel = 'Abilities'
           players = {this.state.players}
         />
         <SummonerSpells
