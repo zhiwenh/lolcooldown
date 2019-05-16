@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, Image, BackHandler} from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
@@ -46,6 +46,9 @@ class App extends Component {
   componentDidMount() {
     this.getChampionStaticData();
     this.getSummonerStaticData();
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      BackHandler.exitApp();
+    });
   }
 
   getSummonerStaticData() {
