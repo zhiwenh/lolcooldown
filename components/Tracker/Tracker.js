@@ -33,7 +33,7 @@ class Tracker extends Component {
       'Are you sure you want to go back?',
       [
         {text: 'CANCEL', style: 'cancel'},
-        {text: 'OK', onPress: () => Actions.inputSummoner({spinner: false})}
+        {text: 'OK', onPress: () => Actions.pop()}
       ]
     );
     return true;
