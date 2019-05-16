@@ -8,12 +8,6 @@ import Spells from './Spells/Spells.js';
 import SummonerSpells from './SummonerSpells/SummonerSpells.js';
 import Sort from './Sort/Sort.js';
 
-const styles = StyleSheet.create({
-  tabView: {
-    fontFamily: 'Arial',
-  }
-});
-
 class Tracker extends Component {
   constructor(props) {
     super(props);
@@ -90,7 +84,6 @@ class Tracker extends Component {
 
     return (
       <ScrollableTabView
-        style = {styles.tabView}
         initialPage = {1}
         tabBarBackgroundColor = '#e6e6e6'
       >
