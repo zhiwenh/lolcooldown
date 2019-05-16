@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { Alert, Platform, BackHandler } from 'react-native';
 import Swiper from 'react-native-swiper';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import KeepAwake from 'react-native-keep-awake';
+import { Actions } from 'react-native-router-flux';
 
 import Adjustment from  './Adjustment/Adjustment.js';
 import Spells from './Spells/Spells.js';
@@ -17,6 +18,7 @@ class Tracker extends Component {
       sort: true
     };
 
+    this.handleBackPress = this.handleBackPress.bind(this);
     this.spellLevelUp = this.spellLevelUp.bind(this);
     this.spellLevelDown = this.spellLevelDown.bind(this);
     this.cooldownAdjust = this.cooldownAdjust.bind(this);
@@ -25,12 +27,26 @@ class Tracker extends Component {
     this.changeRows = this.changeRows.bind(this);
   }
 
+  handleBackPress() {
+    Alert.alert(
+      'Confirm back',
+      'Are you sure you want to go back?',
+      [
+        {text: 'CANCEL', style: 'cancel'},
+        {text: 'OK', onPress: () => Actions.inputSummoner({spinner: false})}
+      ]
+    );
+    return true;
+  }
+
   componentDidMount() {
     KeepAwake.activate();
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
   componentWillUnmount() {
     KeepAwake.deactivate();
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
 
   finishSort() {
