@@ -41,13 +41,13 @@ class Tracker extends Component {
   }
 
   componentDidMount() {
-    if (Platform.OS = 'ios') BackgroundTimer.start();
+    if (Platform.OS === 'ios') BackgroundTimer.start();
     KeepAwake.activate();
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
   componentWillUnmount() {
-    if (Platform.OS = 'ios') BackgroundTimer.stop();
+    if (Platform.OS === 'ios') BackgroundTimer.stop();
     KeepAwake.deactivate();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
