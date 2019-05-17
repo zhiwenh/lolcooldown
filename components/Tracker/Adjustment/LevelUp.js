@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class LevelUp extends React.Component {
+class LevelUp extends Component {
   onPress() {
     this.props.spellLevelUp(this.props.row, this.props.col);
   }

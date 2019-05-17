@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class UltimateCdBox extends React.Component {
+class UltimateCdBox extends Component {
   render() {
     return (
       <View style={styles.main}>

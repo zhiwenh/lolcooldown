@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class LevelDown extends React.Component {
+class LevelDown extends Component {
   onPress() {
     this.props.spellLevelDown(this.props.row, this.props.col);
   }

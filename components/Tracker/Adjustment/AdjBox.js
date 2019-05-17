@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class AdjBox extends React.Component {
+class AdjBox extends Component {
   render() {
     return (
       <View style={styles.main}>

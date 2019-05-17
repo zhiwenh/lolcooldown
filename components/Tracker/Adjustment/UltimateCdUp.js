@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class CdLevelDown extends React.Component {
+class CdLevelDown extends Component {
   onPress() {
     if (this.props.spells.ultimateCooldown + 4 <= 25) {
       if (this.props.spells.ultimateCooldown === 0) {

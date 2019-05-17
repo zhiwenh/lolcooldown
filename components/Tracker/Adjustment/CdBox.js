@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class CdBox extends React.Component {
+class CdBox extends Component {
   render() {
     return (
       <View style={styles.main}>
