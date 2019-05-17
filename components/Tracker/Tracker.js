@@ -4,6 +4,7 @@ import Swiper from 'react-native-swiper';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import KeepAwake from 'react-native-keep-awake';
 import { Actions } from 'react-native-router-flux';
+import BackgroundTimer from 'react-native-background-timer'
 
 import Adjustment from  './Adjustment/Adjustment.js';
 import Spells from './Spells/Spells.js';
@@ -40,11 +41,13 @@ class Tracker extends Component {
   }
 
   componentDidMount() {
+    if (Platform.OS = 'ios') BackgroundTimer.start();
     KeepAwake.activate();
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   }
 
   componentWillUnmount() {
+    if (Platform.OS = 'ios') BackgroundTimer.stop();
     KeepAwake.deactivate();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
   }
