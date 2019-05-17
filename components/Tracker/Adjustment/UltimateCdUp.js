@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     borderBottomWidth: 0.5,
-    backgroundColor: '#f9f9f9'
+    backgroundColor: '#f9f9f9',
+    padding: 3
   },
   text: {
 
@@ -33,7 +34,7 @@ class CdLevelDown extends React.Component {
         style = {styles.main}
         underlayColor='#e6e6e6'
       >
-        <Text style = {styles.text}> + {this.props.spells.ultimateCooldown}% CD</Text>
+        <Text style = {styles.text}>+ {this.props.spells.ultimateCooldown}% Ult CD</Text>
       </TouchableHighlight>
     );
   }

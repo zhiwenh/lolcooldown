@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     borderBottomWidth: 0.5,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    padding: 3
   },
   text: {
 
@@ -27,7 +28,7 @@ class LevelUp extends React.Component {
         onPress = {this.onPress.bind(this)}
         underlayColor='#e6e6e6'
       >
-        <Text style = {styles.text}> + {this.props.skill} Lv {this.props.level}</Text>
+        <Text style = {styles.text}>+ {this.props.skill} {this.props.level}</Text>
       </TouchableHighlight>
     );
   }

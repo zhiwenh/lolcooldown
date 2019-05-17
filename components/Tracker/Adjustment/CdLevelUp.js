@@ -8,10 +8,8 @@ import {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    borderBottomWidth: 0.5
-  },
-  text: {
-    textAlign: 'center'
+    borderBottomWidth: 0.5,
+    padding: 3
   }
 });
 

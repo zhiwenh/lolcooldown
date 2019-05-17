@@ -8,7 +8,8 @@ import {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    padding: 3
   }
 });
 
@@ -23,7 +24,7 @@ class LevelDown extends React.Component {
         style = {styles.main}
         underlayColor='#e6e6e6'
       >
-        <Text> -</Text>
+        <Text>-</Text>
       </TouchableHighlight>
     );
   }

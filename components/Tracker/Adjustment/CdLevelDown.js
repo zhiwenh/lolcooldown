@@ -7,7 +7,8 @@ import {
 
 const styles = StyleSheet.create({
   main: {
-    flex: 1
+    flex: 1,
+    padding: 3
   }
 });
 
@@ -25,7 +26,7 @@ class CdLevelDown extends React.Component {
         style = {styles.main}
         underlayColor='#e6e6e6'
       >
-        <Text> -</Text>
+        <Text>-</Text>
       </TouchableHighlight>
     );
   }
