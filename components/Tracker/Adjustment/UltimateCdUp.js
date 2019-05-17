@@ -10,10 +10,8 @@ const styles = StyleSheet.create({
     flex: 1,
     borderBottomWidth: 0.5,
     backgroundColor: '#f9f9f9',
-    padding: 3
-  },
-  text: {
-
+    paddingLeft: 3,
+    paddingRight: 3
   }
 });
 

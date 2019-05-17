@@ -8,7 +8,8 @@ import {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    padding: 3
+    paddingLeft: 3,
+    paddingRight: 3
   }
 });
 
