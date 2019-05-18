@@ -6,10 +6,9 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
 
-const API_KEY = require('./API_KEY.json').key;
-const VERSION = '9.9.1';
-
 const VERSION_NUMBER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getVersionNumber';
+const SUMMONER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getSummoner';
+const GAME_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getCurrentGame';
 
 class App extends Component {
 
@@ -29,7 +28,6 @@ class App extends Component {
     state.region = 'NA1';
     state.error;
     state.spinner = true;
-    state.version = VERSION;
 
     this.state = state;
 
@@ -82,6 +80,8 @@ class App extends Component {
 
         this.summonersData = summonerObj;
         this.loadingSummoner = false;
+
+        console.log(summonerObj);
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
           this.setState({
@@ -140,6 +140,7 @@ class App extends Component {
         resArr.forEach(res => {
           championDataObj[res.key] = res;
         });
+        console.log(championDataObj);
 
         this.champsData = championDataObj;
         this.loadingChampion = false;
@@ -220,10 +221,7 @@ class App extends Component {
       spinner: true
     });
     summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
-    const key = '?api_key=' + API_KEY;
-    const idUrl = 'https://' + region +
-      '.api.riotgames.com/lol/summoner/v4/summoners/by-name/' +
-      summonerName + key;
+    const idUrl = SUMMONER_URL + '?summonerName=' + summonerName + '&' + 'region=' + region;
     console.log(idUrl);
     fetch(idUrl, {method: 'GET'})
       .then((res) => res.json())
@@ -238,9 +236,8 @@ class App extends Component {
           return;
         }
         const summonerId = res.id;
-        const currentGameUrl = 'https://' + region +
-          '.api.riotgames.com/lol/spectator/v4/' +
-          'active-games/by-summoner/' + summonerId + key;
+        const currentGameUrl = GAME_URL + '?id=' + summonerId + '&' + 'region=' + region;
+
         console.log(currentGameUrl);
         return fetch(currentGameUrl);
       })
@@ -259,7 +256,7 @@ class App extends Component {
           return;
         };
 
-        const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + VERSION +
+        const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version +
           '/img/champion/';
 
         let index = 0;
@@ -268,6 +265,8 @@ class App extends Component {
           if (participant.teamId === 200) {
             const playerSchema = this.generatePlayerSchema();
             playerSchema.playerName = participant.summonerName;
+            console.log(champs);
+            console.log(participant.championId);
             playerSchema.championName = champs[participant.championId].name;
             playerSchema.championIconUrl = iconUrl + champs[participant.championId].image.full;
             Image.prefetch(playerSchema.championIconUrl);
