@@ -9,6 +9,8 @@ import Tracker from './components/Tracker/Tracker.js';
 const API_KEY = require('./API_KEY.json').key;
 const VERSION = '9.9.1';
 
+const VERSION_NUMBER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getVersionNumber';
+
 class App extends Component {
 
   constructor(props) {
@@ -35,24 +37,39 @@ class App extends Component {
     this.champsData = null;
     this.loadingSummoner = true;
     this.loadingChampion = true;
+    this.version = null;
 
+    this.getStaticData = this.getStaticData.bind(this);
     this.getChampionStaticData = this.getChampionStaticData.bind(this);
     this.getSummonerStaticData = this.getSummonerStaticData.bind(this);
     this.generatePlayerSchema = this.generatePlayerSchema.bind(this);
     this.requestPlayerGame = this.requestPlayerGame.bind(this);
-
   }
 
   componentDidMount() {
-    this.getChampionStaticData();
-    this.getSummonerStaticData();
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });
+    this.getStaticData();
+  }
+
+  getStaticData() {
+    fetch(VERSION_NUMBER_URL, {method: 'GET'})
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        this.version = res;
+        this.getSummonerStaticData();
+        this.getChampionStaticData();
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   getSummonerStaticData() {
-    const summonerUrl = 'http://ddragon.leagueoflegends.com/cdn/' + VERSION +
+    const summonerUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version +
       '/data/en_US/summoner.json';
 
     fetch(summonerUrl, {method: 'GET'})
@@ -80,10 +97,10 @@ class App extends Component {
   }
 
   getChampionStaticData() {
-    const championUrl = 'http://ddragon.leagueoflegends.com/cdn/' + VERSION +
+    const championUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version +
       '/data/en_US/champion.json';
     const individualChampionUrlPrefix =
-      'http://ddragon.leagueoflegends.com/cdn/' + VERSION + '/data/en_US/champion/';
+      'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/data/en_US/champion/';
 
     fetch(championUrl, {method: 'GET'})
       .then(res => res.json())
