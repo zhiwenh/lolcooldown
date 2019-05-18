@@ -81,8 +81,6 @@ class App extends Component {
         this.summonersData = summonerObj;
         this.loadingSummoner = false;
 
-        console.log(summonerObj);
-
         if (this.loadingSummoner === false && this.loadingChampion === false) {
           this.setState({
             spinner: false,
@@ -140,7 +138,6 @@ class App extends Component {
         resArr.forEach(res => {
           championDataObj[res.key] = res;
         });
-        console.log(championDataObj);
 
         this.champsData = championDataObj;
         this.loadingChampion = false;
@@ -265,8 +262,6 @@ class App extends Component {
           if (participant.teamId === 200) {
             const playerSchema = this.generatePlayerSchema();
             playerSchema.playerName = participant.summonerName;
-            console.log(champs);
-            console.log(participant.championId);
             playerSchema.championName = champs[participant.championId].name;
             playerSchema.championIconUrl = iconUrl + champs[participant.championId].image.full;
             Image.prefetch(playerSchema.championIconUrl);
@@ -301,6 +296,11 @@ class App extends Component {
         });
 
       }).catch((err) => {
+        this.setState({
+          spinner: false,
+          error:  'Error',
+          region: region
+        });
         console.log(err);
       });
   }
