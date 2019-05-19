@@ -113,7 +113,9 @@ class Tracker extends Component {
     return (
       <ScrollableTabView
         initialPage = {1}
-        tabBarBackgroundColor = '#e6e6e6'
+        tabBarBackgroundColor = '#808080'
+        tabBarActiveTextColor = 'white'
+        tabBarInactiveTextColor = 'white'
       >
         <Adjustment
           tabLabel = 'Levels and CD'
