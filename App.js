@@ -9,6 +9,7 @@ import Tracker from './components/Tracker/Tracker.js';
 const VERSION_NUMBER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getVersionNumber';
 const SUMMONER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getSummoner';
 const GAME_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getCurrentGame';
+const FIREBASE_PASSWORD = 'lolcooldown';
 
 class App extends Component {
 
@@ -36,6 +37,7 @@ class App extends Component {
     this.loadingSummoner = true;
     this.loadingChampion = true;
     this.version = null;
+    this.gameRequestBreak = false;
 
     this.getStaticData = this.getStaticData.bind(this);
     this.getChampionStaticData = this.getChampionStaticData.bind(this);
@@ -52,7 +54,8 @@ class App extends Component {
   }
 
   getStaticData() {
-    fetch(VERSION_NUMBER_URL, {method: 'GET'})
+    let versionUrl = VERSION_NUMBER_URL + '?' + 'password=' + FIREBASE_PASSWORD;
+    fetch(versionUrl, {method: 'GET'})
       .then(res => {
         return res.json();
       })
@@ -218,13 +221,15 @@ class App extends Component {
       spinner: true
     });
     summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
-    const idUrl = SUMMONER_URL + '?summonerName=' + summonerName + '&' + 'region=' + region;
+    const idUrl = SUMMONER_URL + '?summonerName=' + summonerName + '&' +
+      'region=' + region + '&' + 'password=' + FIREBASE_PASSWORD;
     console.log(idUrl);
     fetch(idUrl, {method: 'GET'})
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
         if (res.id === undefined) {
+          this.gameRequestBreak = true;
           this.setState({
             error: 'Summoner not found',
             region: region,
@@ -233,7 +238,8 @@ class App extends Component {
           return;
         }
         const summonerId = res.id;
-        const currentGameUrl = GAME_URL + '?id=' + summonerId + '&' + 'region=' + region;
+        const currentGameUrl = GAME_URL + '?id=' + summonerId + '&'
+          + 'region=' + region + '&' + 'password=' + FIREBASE_PASSWORD;
 
         console.log(currentGameUrl);
         return fetch(currentGameUrl);
@@ -296,6 +302,10 @@ class App extends Component {
         });
 
       }).catch((err) => {
+        if (this.gameRequestBreak === true) {
+          this.gameRequestBreak = false;
+          return;
+        }
         this.setState({
           spinner: false,
           error:  'Error',
