@@ -289,7 +289,7 @@ class App extends Component {
               playerSchema.spellNames.data1[index2] = spell.name;
               playerSchema.spells.data1[index2] = spell.cooldown;
               playerSchema.spellIconUrls.data1[index2] = spellIconUrl + spell.image.full;
-              Image.prefetch(playerSchema.spellIconUrls.data1[index2]);
+              // Image.prefetch(playerSchema.spellIconUrls.data1[index2]);
             });
             players[index] = playerSchema;
             index++;

@@ -15,15 +15,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderWidth: 4,
   },
   isTicking: {
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffb3b3',
-    borderColor: 'red',
-    borderWidth: 4,
   },
   image: {
     width: '100%',
@@ -32,11 +29,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    color: 'white',
-    fontWeight: 'bold',
-    textShadowColor: 'black',
-    textShadowOffset: { width: 3, height: 3 },
-    textShadowRadius: 10
+    // color: 'white',
+    // fontWeight: 'bold',
+    // textShadowColor: 'black',
+    // textShadowOffset: { width: 3, height: 3 },
+    // textShadowRadius: 10
   }
 });
 
@@ -110,19 +107,13 @@ class Button extends Component {
   }
 
   render() {
-    console.log(this.props.spellIconUrl)
     return (
       <TouchableHighlight
         style = {this.state.isTicking ? styles.isTicking : styles.notTicking}
         onPress = {this.onPress}
         underlayColor='#e6e6e6'
       >
-        <ImageBackground
-          source = {{uri: this.props.spellIconUrl}}
-          style = {styles.image}
-        >
-          <Text style = {styles.text} textShadowColor='black'>{this.state.current}</Text>
-        </ImageBackground>
+        <Text style = {styles.text} textShadowColor='black'>{this.state.current}</Text>
       </TouchableHighlight>
     );
   }
