@@ -103,7 +103,10 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    textShadowColor: 'black',
+    textShadowOffset: {width: 2, height: 2},
+    textShadowRadius: 10
   },
   input: {
     textAlign: 'center',

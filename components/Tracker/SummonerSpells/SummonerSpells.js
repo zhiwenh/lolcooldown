@@ -47,17 +47,23 @@ class SummonerSpells extends Component {
   }
 
   changeSummoners(row, col, change) {
+    const summonerIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/spell/'
+
     const state = this.state;
     if (col === 0) {
       state.players[row].summonerSpells.summonerSpell1.name =
         this.props.summonersData[change].name;
       state.players[row].summonerSpells.summonerSpell1.cooldown =
         this.props.summonersData[change].cooldown;
+      state.players[row].summonerSpells.summonerSpell1.summonerIconUrl =
+        summonerIconUrl + this.props.summonersData[change].image.full;
     } else {
       state.players[row].summonerSpells.summonerSpell2.name =
         this.props.summonersData[change].name;
       state.players[row].summonerSpells.summonerSpell2.cooldown =
         this.props.summonersData[change].cooldown;
+      state.players[row].summonerSpells.summonerSpell2.summonerIconUrl =
+        summonerIconUrl + this.props.summonersData[change].image.full;
     }
     this.setState(state);
   }

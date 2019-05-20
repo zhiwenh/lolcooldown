@@ -55,7 +55,7 @@ class SpellRow extends Component {
         </View>
         <View style={styles.iconWrap}>
           <Image
-            style={{width: 50, height: 50}}
+            style={{width: 60, height: 60}}
             source={{uri: this.props.player.championIconUrl}}
           />
         </View>

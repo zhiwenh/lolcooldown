@@ -133,6 +133,7 @@ class Tracker extends Component {
           tabLabel = 'Summoners'
           players = {this.state.players}
           summonersData = {this.props.summonersData}
+          version = {this.props.version}
         />
       </ScrollableTabView>
     );

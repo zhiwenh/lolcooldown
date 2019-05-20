@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground
 } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 
@@ -11,15 +12,32 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderWidth: 4,
   },
   isTicking: {
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffb3b3'
+    backgroundColor: '#ffb3b3',
+    borderColor: 'red',
+    borderWidth: 4,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold',
+    textShadowColor: 'black',
+    textShadowOffset: { width: 3, height: 3 },
+    textShadowRadius: 10
   }
 });
+
 
 class Button extends Component {
   constructor(props) {
@@ -96,7 +114,12 @@ class Button extends Component {
         onPress = {this.onPress}
         underlayColor='#e6e6e6'
       >
-        <Text>{this.state.current}</Text>
+        <ImageBackground
+          source = {{uri: this.props.summonerIconUrl}}
+          style = {styles.image}
+        >
+          <Text style = {styles.text} textShadowColor='black'>{this.state.current}</Text>
+        </ImageBackground>
       </TouchableHighlight>
     );
   }

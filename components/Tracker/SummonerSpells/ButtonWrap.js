@@ -34,6 +34,7 @@ class ButtonWrap extends Component {
         <Button
           row = {this.props.row}
           col = {this.props.col}
+          summonerIconUrl = {this.props.summonerSpell.summonerIconUrl}
           summonerSpellCooldown = {summonerCd}
         />
       </View>

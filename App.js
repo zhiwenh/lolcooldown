@@ -278,12 +278,12 @@ class App extends Component {
             const summonerSpell1 = summoners[participant.spell1Id];
             playerSchema.summonerSpells.summonerSpell1.name = summonerSpell1.name;
             playerSchema.summonerSpells.summonerSpell1.cooldown = summonerSpell1.cooldown[0];
-            // playerSchema.summonerSpells.summonerSpell1.summonerIconUrl = summonerIconUrl + summonerSpell1.image.full;
+            playerSchema.summonerSpells.summonerSpell1.summonerIconUrl = summonerIconUrl + summonerSpell1.image.full;
 
             const summonerSpell2 = summoners[participant.spell2Id];
             playerSchema.summonerSpells.summonerSpell2.name = summonerSpell2.name;
             playerSchema.summonerSpells.summonerSpell2.cooldown = summonerSpell2.cooldown[0];
-            // playerSchema.summonerSpells.summonerSpell2.summonerIconUrl = summonerIconUrl + summonerSpell2.image.full;
+            playerSchema.summonerSpells.summonerSpell2.summonerIconUrl = summonerIconUrl + summonerSpell2.image.full;
 
             champs[participant.championId].spells.forEach((spell, index2) => {
               playerSchema.spellNames.data1[index2] = spell.name;
@@ -305,6 +305,7 @@ class App extends Component {
         Actions.tracker({
           players: players,
           summonersData: summoners,
+          version: this.version
         });
 
       }).catch((err) => {
