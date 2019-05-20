@@ -32,6 +32,7 @@ class UltimateButtonWrap extends Component {
           row = {this.props.row}
           col = {this.props.col}
           spellCd = {spellCd}
+          spellIconUrl = {this.props.spellIconUrl}
         />
       </View>
     );

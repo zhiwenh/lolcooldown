@@ -48,7 +48,7 @@ class SummonerRow extends Component {
       <View style={styles.main}>
         <View style={styles.iconWrap}>
           <Image
-            style={{width: 50, height: 50}}
+            style={{width: 55, height: 55}}
             source={{uri: this.props.player.championIconUrl}}
           />
         </View>

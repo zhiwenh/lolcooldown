@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground,
+  Image,
+  View
 } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 
@@ -11,13 +14,29 @@ const styles = StyleSheet.create({
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    borderWidth: 4,
   },
   isTicking: {
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#ffb3b3',
+    borderColor: 'red',
+    borderWidth: 4,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold',
+    textShadowColor: 'black',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 10
   }
 });
 
@@ -91,13 +110,19 @@ class Button extends Component {
   }
 
   render() {
+    console.log(this.props.spellIconUrl)
     return (
       <TouchableHighlight
         style = {this.state.isTicking ? styles.isTicking : styles.notTicking}
         onPress = {this.onPress}
         underlayColor='#e6e6e6'
       >
-        <Text>{this.state.current}</Text>
+        <ImageBackground
+          source = {{uri: this.props.spellIconUrl}}
+          style = {styles.image}
+        >
+          <Text style = {styles.text} textShadowColor='black'>{this.state.current}</Text>
+        </ImageBackground>
       </TouchableHighlight>
     );
   }

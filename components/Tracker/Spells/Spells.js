@@ -47,6 +47,7 @@ class Spells extends Component {
             name = {this.props.userSummonerName} // I dont think this is being used
             spells = {this.props.players[i].spells}
             spellNames = {this.props.players[i].spellNames}
+            spellIconUrls = {this.props.players[i].spellIconUrls}
             player = {this.props.players[i]}
           />
         </View>

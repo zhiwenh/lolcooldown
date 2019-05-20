@@ -33,6 +33,7 @@ class SpellRow extends Component {
         level = {this.props.spells.levels[i]}
         cooldown = {this.props.spells.cooldown}
         spellName = {this.props.spellNames.data1[i]}
+        spellIconUrl = {this.props.spellIconUrls.data1[i]}
       />);
     }
     const ultimateButtonWrap = <UltimateButtonWrap
@@ -44,6 +45,7 @@ class SpellRow extends Component {
       cooldown = {this.props.spells.cooldown}
       ultimateCooldown = {this.props.spells.ultimateCooldown}
       spellName = {this.props.spellNames.data1[3]}
+      spellIconUrl = {this.props.spellIconUrls.data1[3]}
     />
 
     return (
