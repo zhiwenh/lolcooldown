@@ -29,23 +29,23 @@ class SpellRow extends Component {
         key = {i}
         row = {this.props.row}
         col = {i}
-        spellCds = {this.props.spells.data1[i]}
+        spellCds = {this.props.spells.data[i]}
         level = {this.props.spells.levels[i]}
         cooldown = {this.props.spells.cooldown}
-        spellName = {this.props.spellNames.data1[i]}
-        spellIconUrl = {this.props.spellIconUrls.data1[i]}
+        spellName = {this.props.spellNames.data[i]}
+        spellIconUrl = {this.props.spellIconUrls.data[i]}
       />);
     }
     const ultimateButtonWrap = <UltimateButtonWrap
       key = {3}
       row = {this.props.row}
       col = {3}
-      spellCds = {this.props.spells.data1[3]}
+      spellCds = {this.props.spells.data[3]}
       level = {this.props.spells.levels[3]}
       cooldown = {this.props.spells.cooldown}
       ultimateCooldown = {this.props.spells.ultimateCooldown}
-      spellName = {this.props.spellNames.data1[3]}
-      spellIconUrl = {this.props.spellIconUrls.data1[3]}
+      spellName = {this.props.spellNames.data[3]}
+      spellIconUrl = {this.props.spellIconUrls.data[3]}
     />
 
     return (

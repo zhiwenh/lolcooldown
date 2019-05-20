@@ -59,7 +59,7 @@ class Tracker extends Component {
   }
 
   spellLevelUp(row, col) {
-    const data = this.state.players[row].spells.data1[col];
+    const data = this.state.players[row].spells.data[col];
     const level = this.state.players[row].spells.levels[col];
     if (level < data.length) {
       const state = this.state;
@@ -92,8 +92,6 @@ class Tracker extends Component {
   }
 
   changeRows(players) {
-    console.log('old players', this.state.players);
-    console.log('new players', players);
     const state = this.state;
     state.players = players;
     this.setState(state);

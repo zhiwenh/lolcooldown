@@ -161,9 +161,7 @@ class App extends Component {
   generatePlayerSchema() {
     const playerSchema = {
       playerName: null,
-      playerId: null,
       championName: null,
-      championId: null,
       championIconUrl: null,
       spells: {
         cooldown: 0,
@@ -173,21 +171,12 @@ class App extends Component {
           '0': 1, '1': 1, '2': 1, '3': 1, '4': 1
         },
         // all 0 as a work around for Spell.js not being able to read null
-        data1: {
+        data: {
           '0': 0, '1': 0, '2': 0, '3': 0, '4': 0
-        },
-        data2: {
-          '0': 0, '1': 0, '2': 0, '3': 0, '4': 0
-        },
-        // data1: [null, null, null, null, null],
-        // data2: [null, null, null, null, null],
-        data3: [null, null, null, null, null]
+        }
       },
       spellNames: {
-        data1: {
-          '0': null, '1': null, '2': null, '3': null, '4': null
-        },
-        data2: {
+        data: {
           '0': null, '1': null, '2': null, '3': null, '4': null
         }
       },
@@ -204,16 +193,11 @@ class App extends Component {
           summonerIconUrl: null
         }
       },
-      championIcon: null,
       spellIconUrls: {
-        data1: {
-          '0': null, '1': null, '2': null, '3': null, '4': null
-        },
-        data2: {
+        data: {
           '0': null, '1': null, '2': null, '3': null, '4': null
         }
-      },
-      level: 1,
+      }
     };
     return playerSchema;
   }
@@ -286,9 +270,9 @@ class App extends Component {
             playerSchema.summonerSpells.summonerSpell2.summonerIconUrl = summonerIconUrl + summonerSpell2.image.full;
 
             champs[participant.championId].spells.forEach((spell, index2) => {
-              playerSchema.spellNames.data1[index2] = spell.name;
-              playerSchema.spells.data1[index2] = spell.cooldown;
-              playerSchema.spellIconUrls.data1[index2] = spellIconUrl + spell.image.full;
+              playerSchema.spellNames.data[index2] = spell.name;
+              playerSchema.spells.data[index2] = spell.cooldown;
+              playerSchema.spellIconUrls.data[index2] = spellIconUrl + spell.image.full;
               // Image.prefetch(playerSchema.spellIconUrls.data1[index2]);
             });
             players[index] = playerSchema;
