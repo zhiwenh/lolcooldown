@@ -15,7 +15,7 @@ class Row extends Component {
       <TouchableHighlight
         underlayColor={'#eee'}
         style={{
-          padding: 11,
+          padding: 13,
           backgroundColor: '#F8F8F8',
           borderBottomWidth: 1,
           borderColor: '#eee',
@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#e6e6e6'
   },
   sortableListWrap: {
-    flex: 1,
-    height: 100
+    flex: 1.5
   },
   sortableListTitle: {
     textAlign: 'center',
