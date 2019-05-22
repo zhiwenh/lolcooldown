@@ -85,7 +85,7 @@ class InputSummoner extends Component {
               <TouchableOpacity
                 style={styles.continueButton}
                 onPress={this.props.noSummoner}
-                activeOpacity={0.7}
+                activeOpacity={0.8}
               >
                 <Text style={styles.continueText}>Continue without summoner name</Text>
               </TouchableOpacity>

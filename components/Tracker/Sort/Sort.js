@@ -80,7 +80,7 @@ class Sort extends Component {
             <TouchableOpacity
               onPress={this.props.finishSort.bind(this)}
               style={styles.button}
-              activeOpacity={0.7}
+              activeOpacity={0.8}
             >
               <Text style={styles.buttonText}>Done</Text>
             </TouchableOpacity>
