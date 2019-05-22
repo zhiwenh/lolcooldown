@@ -16,7 +16,22 @@ class Tracker extends Component {
     this.state = {
       players: this.props.players,
       selectedChampion: [false, false, false, false, false],
-      resetTimers: [false, false, false, false, false]
+      resetTimers: {
+        spells: [
+          [false, false, false, false],
+          [false, false, false, false],
+          [false, false, false, false],
+          [false, false, false, false],
+          [false, false, false, false]
+        ],
+        summoners: [
+          [false, false],
+          [false, false],
+          [false, false],
+          [false, false],
+          [false, false]
+        ]
+      }
     };
 
     this.handleBackPress = this.handleBackPress.bind(this);
@@ -120,9 +135,17 @@ class Tracker extends Component {
   selectChampion(row, championId) {
     const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/champion/';
     const champs = this.props.champsData;
-    const state = this.state;
+    const state = JSON.parse(JSON.stringify(this.state));
 
-    if (state.selectedChampion[row] !== false) state.resetTimers[row] = true;
+    if (state.selectedChampion[row] !== false) {
+      for (let i = 0; i < state.resetTimers.spells[row].length; i++) {
+        state.resetTimers.spells[row][i] = true;
+      }
+
+      for (let i = 0; i < state.resetTimers.summoners[row].length; i++) {
+        state.resetTimers.summoners[row][i] = true;
+      }
+    }
 
     state.selectedChampion[row] = true;
     state.players[row].championName = champs[championId].name;
@@ -146,9 +169,10 @@ class Tracker extends Component {
     this.setState(state);
   }
 
-  changeResetTimer(row) {
-    const state = this.state;
-    state.resetTimers[row] = false;
+  changeResetTimer(page, row, col) {
+    const state = JSON.parse(JSON.stringify(this.state));
+    state.resetTimers[page][row][col] = false;
+    this.setState(state);
   }
 
   render() {
@@ -176,8 +200,9 @@ class Tracker extends Component {
           selectChampion = {this.selectChampion}
           champsData = {this.props.champsData}
           selectedChampion = {this.state.selectedChampion}
-          resetTimers = {this.state.resetTimers}
+          resetTimers = {this.state.resetTimers.spells}
           changeResetTimer = {this.changeResetTimer}
+          page = 'spells'
         />
         <SummonerSpells
           tabLabel = 'Summoners'
@@ -189,8 +214,9 @@ class Tracker extends Component {
           selectedChampion = {this.state.selectedChampion}
           changeSummoners = {this.changeSummoners}
           summonerCooldownAdjust = {this.summonerCooldownAdjust}
-          resetTimers = {this.state.resetTimers}
+          resetTimers = {this.state.resetTimers.summoners}
           changeResetTimer = {this.changeResetTimer}
+          page = 'summoners'
         />
       </ScrollableTabView>
     );

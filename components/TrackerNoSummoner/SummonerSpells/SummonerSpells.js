@@ -42,6 +42,7 @@ class SummonerSpells extends Component {
           </View>
           <SummonerRow
             row = {i}
+            page = {this.props.page}
             player = {this.props.players[i]}
             summonersData = {this.props.summonersData}
             cooldownAdjust = {this.cooldownAdjust}
@@ -50,7 +51,7 @@ class SummonerSpells extends Component {
             selectChampion = {this.props.selectChampion}
             champsData = {this.props.champsData}
             selectedChampion = {this.props.selectedChampion[i]}
-            resetTimer = {this.props.resetTimers[i]}
+            resetTimers = {this.props.resetTimers[i]}
             changeResetTimer = {this.props.changeResetTimer}
           />
         </View>

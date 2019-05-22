@@ -64,7 +64,7 @@ class Button extends Component {
         current: initial,
         isTicking: false
       });
-      this.props.changeResetTimer(this.props.row);
+      this.props.changeResetTimer(this.props.page, this.props.row, this.props.col);
       return;
     }
 

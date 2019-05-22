@@ -43,6 +43,7 @@ class Spells extends Component {
           </View>
           <SpellRow
             row = {i}
+            page = {this.props.page}
             name = {this.props.userSummonerName} // I dont think this is being used
             spells = {this.props.players[i].spells}
             spellNames = {this.props.players[i].spellNames}
@@ -51,7 +52,7 @@ class Spells extends Component {
             selectChampion = {this.props.selectChampion}
             champsData = {this.props.champsData}
             selectedChampion = {this.props.selectedChampion[i]}
-            resetTimer = {this.props.resetTimers[i]}
+            resetTimers = {this.props.resetTimers[i]}
             changeResetTimer = {this.props.changeResetTimer}
           />
         </View>

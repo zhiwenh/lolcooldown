@@ -31,6 +31,7 @@ class UltimateButtonWrap extends Component {
         <Button
           row = {this.props.row}
           col = {this.props.col}
+          page = {this.props.page}
           spellCd = {spellCd}
           spellIconUrl = {this.props.spellIconUrl}
           resetTimer = {this.props.resetTimer}

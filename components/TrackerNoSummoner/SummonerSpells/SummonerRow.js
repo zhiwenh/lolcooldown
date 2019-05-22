@@ -3,9 +3,10 @@ import {
   View,
   StyleSheet,
   Image,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
-import ModalSelector from 'react-native-modal-selector';
+import ModalFilterPicker from 'react-native-modal-filter-picker';
 
 import ButtonWrap from './ButtonWrap.js';
 import CdBox from './CdBox.js';
@@ -29,8 +30,32 @@ const styles = StyleSheet.create({
 });
 
 class SummonerRow extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+    this.state.visible = false;
+
+    this.showPicker = this.showPicker.bind(this);
+    this.cancelPicker = this.cancelPicker.bind(this);
+  }
+
+  showPicker() {
+    this.setState({
+      visible: true
+    });
+  }
+
+  cancelPicker() {
+    this.setState({
+      visible: false
+    });
+  }
+
   selectChampion(value) {
-    value = value.value;
+    this.setState({
+      visible: false
+    });
+
     this.props.selectChampion(this.props.row, value);
   }
 
@@ -40,11 +65,12 @@ class SummonerRow extends Component {
       key = {0}
       col = {0}
       row = {this.props.row}
+      page = {this.props.page}
       cooldown = {this.props.player.summonerSpells.cooldown}
       summonerSpell = {this.props.player.summonerSpells.summonerSpell1}
       summonersData = {this.props.summonersData}
       changeSummoners = {this.props.changeSummoners}
-      resetTimer = {this.props.resetTimer}
+      resetTimer = {this.props.resetTimers[0]}
       changeResetTimer = {this.props.changeResetTimer}
     />);
 
@@ -52,11 +78,12 @@ class SummonerRow extends Component {
       key = {1}
       col = {1}
       row = {this.props.row}
+      page = {this.props.page}
       cooldown = {this.props.player.summonerSpells.cooldown}
       summonerSpell = {this.props.player.summonerSpells.summonerSpell2}
       summonersData = {this.props.summonersData}
       changeSummoners = {this.props.changeSummoners}
-      resetTimer = {this.props.resetTimer}
+      resetTimer = {this.props.resetTimers[1]}
       changeResetTimer = {this.props.changeResetTimer}
     />);
 
@@ -64,9 +91,8 @@ class SummonerRow extends Component {
     let index = 0;
     for (let key in this.props.champsData) {
       champions.push({
-        key: index,
+        key: key,
         label: this.props.champsData[key].name,
-        value: key
       });
       index++;
     }
@@ -84,13 +110,17 @@ class SummonerRow extends Component {
             <Text>{this.props.name}</Text>
           </View>
           <View style={styles.iconWrap}>
-            <ModalSelector
-              onChange={this.selectChampion.bind(this)}
-              data={champions}
-              touchableActiveOpacity={0.7}
+            <TouchableOpacity
+              onPress={this.showPicker.bind(this)}
             >
               <Text style={styles.iconText}>Select</Text>
-            </ModalSelector>
+            </TouchableOpacity>
+            <ModalFilterPicker
+              visible={this.state.visible}
+              onSelect={this.selectChampion.bind(this)}
+              onCancel={this.cancelPicker.bind(this)}
+              options={champions}
+            />
           </View>
           {buttonWrapBoxes}
           <CdBox
@@ -105,16 +135,20 @@ class SummonerRow extends Component {
     return (
       <View style={styles.main}>
         <View style={styles.iconWrap}>
-          <ModalSelector
-            onChange={this.selectChampion.bind(this)}
-            data={champions}
-            touchableActiveOpacity={0.7}
+          <TouchableOpacity
+            onPress={this.showPicker.bind(this)}
           >
             <Image
               style={{width: 60, height: 60}}
               source={{uri: this.props.player.championIconUrl}}
             />
-          </ModalSelector>
+          </TouchableOpacity>
+          <ModalFilterPicker
+            visible={this.state.visible}
+            onSelect={this.selectChampion.bind(this)}
+            onCancel={this.cancelPicker.bind(this)}
+            options={champions}
+          />
         </View>
         {buttonWrapBoxes}
         <CdBox

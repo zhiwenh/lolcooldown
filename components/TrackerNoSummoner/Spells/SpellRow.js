@@ -4,9 +4,9 @@ import {
   Text,
   View,
   Image,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
-import ModalSelector from 'react-native-modal-selector';
+import ModalFilterPicker from 'react-native-modal-filter-picker';
 
 import ButtonWrap from './ButtonWrap';
 import UltimateButtonWrap from './UltimateButtonWrap';
@@ -31,8 +31,32 @@ const styles = StyleSheet.create({
 });
 
 class SpellRow extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+    this.state.visible = false;
+
+    this.showPicker = this.showPicker.bind(this);
+    this.cancelPicker = this.cancelPicker.bind(this);
+  }
+
+  showPicker() {
+    this.setState({
+      visible: true
+    });
+  }
+
+  cancelPicker() {
+    this.setState({
+      visible: false
+    });
+  }
+
   selectChampion(value) {
-    value = value.value;
+    this.setState({
+      visible: false
+    });
+
     this.props.selectChampion(this.props.row, value);
   }
 
@@ -43,12 +67,13 @@ class SpellRow extends Component {
         key = {i}
         row = {this.props.row}
         col = {i}
+        page = {this.props.page}
         spellCds = {this.props.spells.data[i]}
         level = {this.props.spells.levels[i]}
         cooldown = {this.props.spells.cooldown}
         spellName = {this.props.spellNames.data[i]}
         spellIconUrl = {this.props.spellIconUrls.data[i]}
-        resetTimer = {this.props.resetTimer}
+        resetTimer = {this.props.resetTimers[i]}
         changeResetTimer = {this.props.changeResetTimer}
       />);
     }
@@ -56,13 +81,14 @@ class SpellRow extends Component {
       key = {3}
       row = {this.props.row}
       col = {3}
+      page = {this.props.page}
       spellCds = {this.props.spells.data[3]}
       level = {this.props.spells.levels[3]}
       cooldown = {this.props.spells.cooldown}
       ultimateCooldown = {this.props.spells.ultimateCooldown}
       spellName = {this.props.spellNames.data[3]}
       spellIconUrl = {this.props.spellIconUrls.data[3]}
-      resetTimer = {this.props.resetTimer}
+      resetTimer = {this.props.resetTimers[3]}
       changeResetTimer = {this.props.changeResetTimer}
     />
 
@@ -70,9 +96,8 @@ class SpellRow extends Component {
     let index = 0;
     for (let key in this.props.champsData) {
       champions.push({
-        key: index,
+        key: key,
         label: this.props.champsData[key].name,
-        value: key
       });
       index++;
     }
@@ -90,13 +115,17 @@ class SpellRow extends Component {
             <Text>{this.props.name}</Text>
           </View>
           <View style={styles.iconWrap}>
-            <ModalSelector
-              onChange={this.selectChampion.bind(this)}
-              data={champions}
-              touchableActiveOpacity={0.7}
+            <TouchableOpacity
+              onPress={this.showPicker.bind(this)}
             >
               <Text style={styles.iconText}>Select</Text>
-            </ModalSelector>
+            </TouchableOpacity>
+            <ModalFilterPicker
+              visible={this.state.visible}
+              onSelect={this.selectChampion.bind(this)}
+              onCancel={this.cancelPicker.bind(this)}
+              options={champions}
+            />
           </View>
           {buttonWraps}
           {ultimateButtonWrap}
@@ -109,16 +138,20 @@ class SpellRow extends Component {
           <Text>{this.props.name}</Text>
         </View>
         <View style={styles.iconWrap}>
-          <ModalSelector
-            onChange={this.selectChampion.bind(this)}
-            data={champions}
-            touchableActiveOpacity={0.7}
+          <TouchableOpacity
+            onPress={this.showPicker.bind(this)}
           >
             <Image
               style={{width: 60, height: 60}}
               source={{uri: this.props.player.championIconUrl}}
             />
-          </ModalSelector>
+          </TouchableOpacity>
+          <ModalFilterPicker
+            visible={this.state.visible}
+            onSelect={this.selectChampion.bind(this)}
+            onCancel={this.cancelPicker.bind(this)}
+            options={champions}
+          />
         </View>
         {buttonWraps}
         {ultimateButtonWrap}
