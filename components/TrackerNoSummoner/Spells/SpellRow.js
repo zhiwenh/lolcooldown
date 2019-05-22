@@ -22,7 +22,8 @@ const styles = StyleSheet.create({
   },
   iconWrap: {
     height: 60,
-    width: 60
+    width: 60,
+    justifyContent: 'center'
   },
   iconText: {
     textAlign: 'center'
@@ -92,6 +93,7 @@ class SpellRow extends Component {
             <ModalSelector
               onChange={this.selectChampion.bind(this)}
               data={champions}
+              touchableActiveOpacity={0.7}
             >
               <Text style={styles.iconText}>Select</Text>
             </ModalSelector>
@@ -110,6 +112,7 @@ class SpellRow extends Component {
           <ModalSelector
             onChange={this.selectChampion.bind(this)}
             data={champions}
+            touchableActiveOpacity={0.7}
           >
             <Image
               style={{width: 60, height: 60}}
