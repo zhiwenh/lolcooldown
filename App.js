@@ -5,6 +5,7 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
+import TrackerNoSummoner from './components/TrackerNoSummoner/TrackerNoSummoner.js'
 
 const VERSION_NUMBER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getVersionNumber';
 const SUMMONER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getSummoner';
@@ -44,6 +45,7 @@ class App extends Component {
     this.getSummonerStaticData = this.getSummonerStaticData.bind(this);
     this.generatePlayerSchema = this.generatePlayerSchema.bind(this);
     this.requestPlayerGame = this.requestPlayerGame.bind(this);
+    this.noSummoner = this.noSummoner.bind(this);
   }
 
   componentDidMount() {
@@ -306,6 +308,37 @@ class App extends Component {
       });
   }
 
+  noSummoner() {
+    const players = {};
+    for (let i = 0; i < 5; i++) {
+      const playerSchema = this.generatePlayerSchema();
+      playerSchema.playerName = undefined;
+      playerSchema.championName = '-';
+      playerSchema.championIconUrl = undefined;
+
+      playerSchema.summonerSpells.summonerSpell1.name = undefined;
+      playerSchema.summonerSpells.summonerSpell1.cooldown = 0;
+
+      playerSchema.summonerSpells.summonerSpell2.name = undefined;
+      playerSchema.summonerSpells.summonerSpell2.cooldown = 0;
+
+      for (let j = 0; j < 5; j++) {
+        playerSchema.spellNames.data[j] = undefined;
+        playerSchema.spells.data[j] = [null];
+        playerSchema.spellIconUrls.data[j] = undefined;
+      }
+
+      players[i] = playerSchema;
+    }
+
+    Actions.trackerNoSummoner({
+      players: players,
+      summonersData: this.state.summonersData,
+      champsData: this.state.champsData,
+      version: this.version
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -314,6 +347,7 @@ class App extends Component {
             key="inputSummoner"
             component={InputSummoner}
             requestPlayerGame={this.requestPlayerGame}
+            noSummoner={this.noSummoner}
             hideNavBar={true}
             error={this.state.error}
             region={this.state.region}
@@ -321,6 +355,12 @@ class App extends Component {
           />
           <Scene key="tracker"
             component={Tracker}
+            hideNavBar={Platform.OS === 'ios' ? false : true}
+            headerMode={false}
+            style={styles.tracker}
+          />
+          <Scene key="trackerNoSummoner"
+            component={TrackerNoSummoner}
             hideNavBar={Platform.OS === 'ios' ? false : true}
             headerMode={false}
             style={styles.tracker}

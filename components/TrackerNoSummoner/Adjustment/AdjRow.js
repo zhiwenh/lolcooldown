@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  Image
+  Image,
+  Text
 } from 'react-native';
+import ModalSelector from 'react-native-modal-selector';
 
 import AdjBox from './AdjBox';
 import CdBox from './CdBox';
@@ -18,11 +20,26 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1
   },
   iconWrap: {
-    
+    height: 60,
+    width: 60
+  },
+  iconText: {
+    textAlign: 'center'
   }
 });
 
 class AdjRow extends Component {
+  constructor(props) {
+    super(props);
+    this.selectedChampion = false;
+  }
+
+  selectChampion(value) {
+    this.selectedChampion = true;
+    value = value.value;
+    this.props.selectChampion(this.props.row, value);
+  }
+
   render() {
     const adjBoxes = [];
     for (var i = 0; i < 4; i++) {
@@ -69,13 +86,64 @@ class AdjRow extends Component {
       }
     }
 
+    let champions = [];
+    let index = 0;
+    for (let key in this.props.champsData) {
+      champions.push({
+        key: index,
+        label: this.props.champsData[key].name,
+        value: key
+      });
+      index++;
+    }
+
+    champions = champions.sort((a, b) => {
+      var textA = a.label.toUpperCase();
+      var textB = b.label.toUpperCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
+
+    if (this.props.selectedChampion === false) {
+      return (
+        <View style={styles.main}>
+          <View>
+            <Text>{this.props.name}</Text>
+          </View>
+          <View style={styles.iconWrap}>
+            <ModalSelector
+              onChange={this.selectChampion.bind(this)}
+              data={champions}
+            >
+              <Text style={styles.iconText}>Select</Text>
+            </ModalSelector>
+          </View>
+          {adjBoxes}
+          <UltimateCdBox
+            row = {this.props.row}
+            spells = {this.props.spells}
+            ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
+          />
+          <CdBox
+            row = {this.props.row}
+            cooldown = {this.props.spells.cooldown}
+            cooldownAdjust = {this.props.cooldownAdjust}
+          />
+        </View>
+      )
+    }
+
     return (
       <View style={styles.main}>
         <View style={styles.iconWrap}>
-          <Image
-            style={{width: 60, height: 60}}
-            source={{uri: this.props.player.championIconUrl}}
-          />
+          <ModalSelector
+            onChange={this.selectChampion.bind(this)}
+            data={champions}
+          >
+            <Image
+              style={{width: 60, height: 60}}
+              source={{uri: this.props.player.championIconUrl}}
+            />
+          </ModalSelector>
         </View>
         {adjBoxes}
         <UltimateCdBox

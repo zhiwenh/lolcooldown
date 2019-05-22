@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1
   },
   iconWrap: {
-    borderWidth: 1
+    
   }
 });
 

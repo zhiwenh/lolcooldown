@@ -6,7 +6,8 @@ import {
   TextInput,
   Picker,
   Dimensions,
-  ImageBackground
+  ImageBackground,
+  TouchableHighlight
 } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -79,6 +80,15 @@ class InputSummoner extends Component {
               selectStyle={styles.selectorSelect}
               initValue={this.state.region}
             />
+            <View style={{height: 20}}/>
+            <View style={styles.continueWrap}>
+              <TouchableHighlight
+                style={styles.continueButton}
+                onPress={this.props.noSummoner}
+              >
+                <Text style={styles.continueText}>Continue without summoner name</Text>
+              </TouchableHighlight>
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -93,6 +103,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
     fontFamily: 'Arail'
+  },
+  spinnerTextStyle: {
+    color: '#FFF'
   },
   topHolder: {
     flex: 2,
@@ -121,12 +134,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  error: {
-    color: 'red'
-  },
   errorWrap: {
     height: 30,
     alignItems:'center',
+  },
+  error: {
+    color: 'red'
   },
   regionWrap: {
     alignItems:'center',
@@ -148,9 +161,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white'
   },
-  spinnerTextStyle: {
-    color: '#FFF'
+  continueWrap: {
+
   },
+  continueButton: {
+
+  },
+  continueText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 14
+  }
 });
 
 export default InputSummoner;
