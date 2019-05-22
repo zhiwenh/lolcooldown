@@ -255,6 +255,11 @@ class App extends Component {
         for (let i = 0; i < res.participants.length; i++) {
           const participant = res.participants[i];
           if (participant.teamId === 200) {
+            try {
+              const championName = champs[participant.championId].name
+            } catch(err) {
+              continue;
+            }
             const playerSchema = this.generatePlayerSchema();
             playerSchema.playerName = participant.summonerName;
             playerSchema.championName = champs[participant.championId].name;

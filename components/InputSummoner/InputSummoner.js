@@ -61,7 +61,7 @@ class InputSummoner extends Component {
           </View>
           <TextInput
             style = {styles.input}
-            placeholder = 'Input summoner currently in game'
+            placeholder = 'Enter summoner currently in game'
             onSubmitEditing = {this.onSubmitEditing.bind(this)}
             clearButtonMode = "always"
             autoCorrect = {false}
@@ -87,7 +87,7 @@ class InputSummoner extends Component {
                 onPress={this.props.noSummoner}
                 activeOpacity={0.8}
               >
-                <Text style={styles.continueText}>Continue without summoner name</Text>
+                <Text style={styles.continueText}>Continue without summoner</Text>
               </TouchableOpacity>
             </View>
           </View>
