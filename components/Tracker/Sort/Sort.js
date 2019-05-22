@@ -5,7 +5,8 @@ import {
   Text,
   TouchableHighlight,
   Button,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
 import SortableListView from 'react-native-sortable-listview';
 
@@ -76,13 +77,13 @@ class Sort extends Component {
         <View style={{height: 10}}/>
         <View style={styles.sortableListWrap}>
           <View style={styles.buttonWrap}>
-            <TouchableHighlight
+            <TouchableOpacity
               onPress={this.props.finishSort.bind(this)}
               style={styles.button}
-              underlayColor='#e6e6e6'
+              activeOpacity={0.7}
             >
               <Text style={styles.buttonText}>Done</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

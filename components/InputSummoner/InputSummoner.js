@@ -7,7 +7,7 @@ import {
   Picker,
   Dimensions,
   ImageBackground,
-  TouchableHighlight
+  TouchableOpacity
 } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -82,12 +82,13 @@ class InputSummoner extends Component {
             />
             <View style={{height: 20}}/>
             <View style={styles.continueWrap}>
-              <TouchableHighlight
+              <TouchableOpacity
                 style={styles.continueButton}
                 onPress={this.props.noSummoner}
+                activeOpacity={0.7}
               >
                 <Text style={styles.continueText}>Continue without summoner name</Text>
-              </TouchableHighlight>
+              </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
