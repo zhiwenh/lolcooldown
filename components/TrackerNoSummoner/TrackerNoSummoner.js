@@ -149,6 +149,7 @@ class Tracker extends Component {
 
     state.selectedChampion[row] = true;
     state.players[row].championName = champs[championId].name;
+    state.players[row].championId = championId;
     state.players[row].championIconUrl = iconUrl + champs[championId].image.full;
     Image.prefetch(state.players[row].championIconUrl);
 

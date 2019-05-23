@@ -165,6 +165,7 @@ class App extends Component {
       playerName: null,
       championName: null,
       championIconUrl: null,
+      championId: null,
       spells: {
         cooldown: 0,
         ultimateCooldown: 0,
@@ -320,6 +321,7 @@ class App extends Component {
       playerSchema.playerName = undefined;
       playerSchema.championName = '-';
       playerSchema.championIconUrl = undefined;
+      playerSchema.championId = undefined;
 
       playerSchema.summonerSpells.summonerSpell1.name = undefined;
       playerSchema.summonerSpells.summonerSpell1.cooldown = 0;

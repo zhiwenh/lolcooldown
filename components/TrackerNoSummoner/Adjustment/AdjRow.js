@@ -57,6 +57,7 @@ class AdjRow extends Component {
       visible: false
     });
 
+    if (this.props.player.championId === value) return;
     this.props.selectChampion(this.props.row, value);
   }
 
