@@ -7,10 +7,8 @@ import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
 import TrackerNoSummoner from './components/TrackerNoSummoner/TrackerNoSummoner.js'
 
-const VERSION_NUMBER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getVersionNumber';
-const SUMMONER_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getSummoner';
-const GAME_URL = 'https://us-central1-league-cooldown.cloudfunctions.net/getCurrentGame';
-const FIREBASE_PASSWORD = 'lolcooldown';
+const VERSION_NUMBER_URL = 'https://league-cooldown.herokuapp.com/version';
+const REQUEST_GAME_URL = 'https://league-cooldown.herokuapp.com/requestPlayerGame';
 
 class App extends Component {
 
@@ -56,7 +54,8 @@ class App extends Component {
   }
 
   getStaticData() {
-    let versionUrl = VERSION_NUMBER_URL + '?' + 'password=' + FIREBASE_PASSWORD;
+    let versionUrl = VERSION_NUMBER_URL;
+    console.log(versionUrl);
     fetch(versionUrl, {method: 'GET'})
       .then(res => {
         return res.json();
@@ -210,14 +209,14 @@ class App extends Component {
       spinner: true
     });
     summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
-    const idUrl = SUMMONER_URL + '?summonerName=' + summonerName + '&' +
-      'region=' + region + '&' + 'password=' + FIREBASE_PASSWORD;
-    console.log(idUrl);
-    fetch(idUrl, {method: 'GET'})
+    const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + summonerName + '&' +
+      'region=' + region;
+    console.log(requestGameUrl);
+    fetch(requestGameUrl, {method: 'GET'})
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        if (res.id === undefined) {
+        if (res.status && res.status.message.match('Exception decrypting undefined')) {
           this.gameRequestBreak = true;
           this.setState({
             error: 'Summoner not found',
@@ -225,28 +224,27 @@ class App extends Component {
             spinner: false,
           });
           return;
-        }
-        const summonerId = res.id;
-        const currentGameUrl = GAME_URL + '?id=' + summonerId + '&'
-          + 'region=' + region + '&' + 'password=' + FIREBASE_PASSWORD;
-
-        console.log(currentGameUrl);
-        return fetch(currentGameUrl);
-      })
-      .then(res => res.json())
-      .then(res => {
-        const champs = this.state.champsData;
-        const summoners = this.state.summonersData;
-        const players = {};
-        console.log(res);
-        if (res.gameId === undefined) {
+        } else if (res.status && res.status.message.match('Data not found')) {
+          this.gameRequestBreak = true;
           this.setState({
             error: 'Summoner not in game',
             region: region,
             spinner: false,
           });
           return;
-        };
+        } else if (res.status && res.status.message) {
+          this.gameRequestBreak = true;
+          this.setState({
+            error: 'Error',
+            region: region,
+            spinner: false,
+          });
+          return;
+        }
+
+        const champs = this.state.champsData;
+        const summoners = this.state.summonersData;
+        const players = {};
 
         const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/champion/';
         const spellIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
