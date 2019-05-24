@@ -206,6 +206,7 @@ class App extends Component {
 
   requestPlayerGame(summonerName, region) {
     this.setState({
+      region: region,
       spinner: true
     });
     summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
@@ -250,10 +251,12 @@ class App extends Component {
         const spellIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
         const summonerIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
 
+        const opponentId = (res.mapId === 10) ? 100 : 200;
+
         let index = 0;
         for (let i = 0; i < res.participants.length; i++) {
           const participant = res.participants[i];
-          if (participant.teamId === 200) {
+          if (participant.teamId === opponentId) {
             try {
               const championName = champs[participant.championId].name
             } catch(err) {
