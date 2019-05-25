@@ -5,10 +5,12 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
-import TrackerNoSummoner from './components/TrackerNoSummoner/TrackerNoSummoner.js'
+import TrackerNoSummoner from './components/TrackerNoSummoner/TrackerNoSummoner.js';
+import ManualLoadUpPage from './components/ManualLoadUpPage/ManualLoadUpPage.js';
 
 const VERSION_NUMBER_URL = 'https://league-cooldown.herokuapp.com/version';
 const REQUEST_GAME_URL = 'https://league-cooldown.herokuapp.com/requestPlayerGame';
+const MANUAL = true;
 
 class App extends Component {
 
@@ -348,6 +350,28 @@ class App extends Component {
   }
 
   render() {
+    if (MANUAL === true) {
+      return (
+        <Router>
+          <Scene key="root">
+            <Scene
+              key="manualLoadUpPage"
+              component={ManualLoadUpPage}
+              noSummoner={this.noSummoner}
+              hideNavBar={true}
+              spinner={this.state.spinner}
+            />
+            <Scene key="trackerNoSummoner"
+              component={TrackerNoSummoner}
+              hideNavBar={Platform.OS === 'ios' ? false : true}
+              headerMode={false}
+              style={styles.tracker}
+            />
+          </Scene>
+        </Router>
+      )
+    }
+
     return (
       <Router>
         <Scene key="root">
