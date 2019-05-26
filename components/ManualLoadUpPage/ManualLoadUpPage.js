@@ -32,15 +32,6 @@ class ManualLoadUpPage extends Component {
             </Text>
           </View>
           <View style={styles.bottomHolder}>
-            <View style={{height: 20}}/>
-            <View style={styles.continueWrap}>
-              <TouchableOpacity
-                style={styles.continueButton}
-                onPress={this.props.noSummoner}
-                activeOpacity={0.8}
-              >
-              </TouchableOpacity>
-            </View>
           </View>
         </ImageBackground>
       </View>

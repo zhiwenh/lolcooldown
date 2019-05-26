@@ -421,7 +421,6 @@ class App extends Component {
             <Scene
               key="notConnected"
               component={NotConnected}
-              noSummoner={this.noSummoner}
               hideNavBar={true}
               spinner={this.state.spinner}
               retryConnection={this.retryConnection}
@@ -438,7 +437,6 @@ class App extends Component {
             <Scene
               key="manualLoadUpPage"
               component={ManualLoadUpPage}
-              noSummoner={this.noSummoner}
               hideNavBar={true}
               spinner={this.state.spinner}
             />
