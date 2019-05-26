@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Alert, Platform, BackHandler } from 'react-native';
-import Swiper from 'react-native-swiper';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import KeepAwake from 'react-native-keep-awake';
 import { Actions } from 'react-native-router-flux';

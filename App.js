@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, BackHandler} from 'react-native';
-import Swiper from 'react-native-swiper';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
@@ -73,7 +72,7 @@ class App extends Component {
   }
 
   getSummonerStaticData() {
-    const summonerUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version +
+    const summonerUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version +
       '/data/en_US/summoner.json';
 
     fetch(summonerUrl, {method: 'GET'})
@@ -96,15 +95,23 @@ class App extends Component {
         }
       })
       .catch(err => {
+        this.loadingSummoner = false;
+        if (this.loadingSummoner === false && this.loadingChampion === false) {
+          this.setState({
+            spinner: false,
+            champsData: this.champsData,
+            summonersData: this.summonersData
+          });
+        }
         console.log(err);
       });
   }
 
   getChampionStaticData() {
-    const championUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version +
+    const championUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version +
       '/data/en_US/champion.json';
     const individualChampionUrlPrefix =
-      'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/data/en_US/champion/';
+      'https://ddragon.leagueoflegends.com/cdn/' + this.version + '/data/en_US/champion/';
 
     fetch(championUrl, {method: 'GET'})
       .then(res => res.json())
@@ -157,6 +164,14 @@ class App extends Component {
         }
       })
       .catch(err => {
+        this.loadingChampion = false;
+        if (this.loadingSummoner === false && this.loadingChampion === false) {
+          this.setState({
+            spinner: false,
+            champsData: this.champsData,
+            summonersData: this.summonersData,
+          });
+        }
         console.log(err);
       })
   }
@@ -249,9 +264,9 @@ class App extends Component {
         const summoners = this.state.summonersData;
         const players = {};
 
-        const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/champion/';
-        const spellIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
-        const summonerIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
+        const iconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/champion/';
+        const spellIconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
+        const summonerIconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
 
         const opponentId = (res.mapId === 10) ? 100 : 200;
 
@@ -360,6 +375,7 @@ class App extends Component {
               noSummoner={this.noSummoner}
               hideNavBar={true}
               spinner={this.state.spinner}
+              error={this.state.error}
             />
             <Scene key="trackerNoSummoner"
               component={TrackerNoSummoner}

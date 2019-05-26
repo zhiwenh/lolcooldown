@@ -5,7 +5,6 @@ import {
   View
 } from 'react-native';
 import SummonerRow from './SummonerRow';
-import SortableList from 'react-native-sortable-list';
 
 const styles = StyleSheet.create({
   main: {

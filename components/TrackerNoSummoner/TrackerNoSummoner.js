@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Alert, Platform, BackHandler, Image } from 'react-native';
-import Swiper from 'react-native-swiper';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 import KeepAwake from 'react-native-keep-awake';
 import { Actions } from 'react-native-router-flux';
@@ -111,7 +110,7 @@ class Tracker extends Component {
   }
 
   changeSummoners(row, col, change) {
-    const summonerIconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/spell/'
+    const summonerIconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/spell/'
 
     const state = this.state;
     if (col === 0) {
@@ -133,7 +132,7 @@ class Tracker extends Component {
   }
 
   selectChampion(row, championId) {
-    const iconUrl = 'http://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/champion/';
+    const iconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/champion/';
     const champs = this.props.champsData;
     const state = JSON.parse(JSON.stringify(this.state));
 
