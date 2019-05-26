@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, BackHandler} from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
+import NetInfo from "@react-native-community/netinfo";
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
 import TrackerNoSummoner from './components/TrackerNoSummoner/TrackerNoSummoner.js';
 import ManualLoadUpPage from './components/ManualLoadUpPage/ManualLoadUpPage.js';
+import NotConnected from './components/NotConnected/NotConnected.js';
 
 const VERSION_NUMBER_URL = 'https://league-cooldown.herokuapp.com/version';
 const REQUEST_GAME_URL = 'https://league-cooldown.herokuapp.com/requestPlayerGame';
@@ -29,6 +31,7 @@ class App extends Component {
     state.region = 'NA1';
     state.error;
     state.spinner = true;
+    state.connected;
 
     this.state = state;
 
@@ -45,13 +48,23 @@ class App extends Component {
     this.generatePlayerSchema = this.generatePlayerSchema.bind(this);
     this.requestPlayerGame = this.requestPlayerGame.bind(this);
     this.noSummoner = this.noSummoner.bind(this);
+    this.retryConnection = this.retryConnection.bind(this);
   }
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });
-    this.getStaticData();
+
+    NetInfo.fetch().then(state => {
+      if (state.isConnected) this.getStaticData();
+      else {
+        this.setState({
+          connected: false,
+          spinner: false
+        })
+      }
+    });
   }
 
   getStaticData() {
@@ -92,6 +105,10 @@ class App extends Component {
             champsData: this.champsData,
             summonersData: this.summonersData
           });
+
+          if (MANUAL === true) {
+            this.noSummoner();
+          }
         }
       })
       .catch(err => {
@@ -161,6 +178,10 @@ class App extends Component {
             champsData: this.champsData,
             summonersData: this.summonersData
           });
+
+          if (MANUAL === true) {
+            this.noSummoner();
+          }
         }
       })
       .catch(err => {
@@ -221,7 +242,15 @@ class App extends Component {
     return playerSchema;
   }
 
-  requestPlayerGame(summonerName, region) {
+  async requestPlayerGame(summonerName, region) {
+    const connection = await NetInfo.fetch();
+    if (connection.isConnected === false) {
+      this.setState({
+        connected: false
+      });
+      return;
+    }
+
     this.setState({
       region: region,
       spinner: true
@@ -364,24 +393,62 @@ class App extends Component {
     });
   }
 
+  retryConnection() {
+    this.setState({
+      spinner: true
+    });
+
+    NetInfo.fetch().then(state => {
+      if (state.isConnected) {
+        this.setState({
+          connected: true
+        });
+        this.getStaticData();
+      } else {
+        this.setState({
+          connected: false,
+          spinner: false
+        })
+      }
+    });
+  }
+
   render() {
+    if (this.state.connected === false) {
+      return (
+        <Router>
+          <Scene key="root" panHandlers={null}>
+            <Scene
+              key="notConnected"
+              component={NotConnected}
+              noSummoner={this.noSummoner}
+              hideNavBar={true}
+              spinner={this.state.spinner}
+              retryConnection={this.retryConnection}
+            />
+          </Scene>
+        </Router>
+      )
+    }
+
     if (MANUAL === true) {
       return (
         <Router>
-          <Scene key="root">
+          <Scene key="root" panHandlers={null}>
             <Scene
               key="manualLoadUpPage"
               component={ManualLoadUpPage}
               noSummoner={this.noSummoner}
               hideNavBar={true}
               spinner={this.state.spinner}
-              error={this.state.error}
             />
             <Scene key="trackerNoSummoner"
               component={TrackerNoSummoner}
               hideNavBar={Platform.OS === 'ios' ? false : true}
               headerMode={false}
               style={styles.tracker}
+              renderLeftButton={()=>(null)}
+              manual={MANUAL}
             />
           </Scene>
         </Router>

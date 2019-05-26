@@ -45,14 +45,26 @@ class Tracker extends Component {
   }
 
   handleBackPress() {
-    Alert.alert(
-      'Confirm back',
-      'Are you sure you want to go back?',
-      [
-        {text: 'CANCEL', style: 'cancel'},
-        {text: 'OK', onPress: () => Actions.pop()}
-      ]
-    );
+    if (this.props.manual === true) {
+      Alert.alert(
+        'Confirm exit',
+        'Are you sure you want to exit?',
+        [
+          {text: 'CANCEL', style: 'cancel'},
+          {text: 'OK', onPress: () => BackHandler.exitApp()}
+        ]
+      );
+    } else {
+      Alert.alert(
+        'Confirm back',
+        'Are you sure you want to go back?',
+        [
+          {text: 'CANCEL', style: 'cancel'},
+          {text: 'OK', onPress: () => Actions.pop()}
+        ]
+      );
+    }
+
     return true;
   }
 

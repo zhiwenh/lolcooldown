@@ -9,10 +9,9 @@ import {
   ImageBackground,
   TouchableOpacity
 } from 'react-native';
-import ModalSelector from 'react-native-modal-selector';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-class ManualLoadUpPage extends Component {
+class NotConnected extends Component {
 
   render() {
     return (
@@ -34,11 +33,13 @@ class ManualLoadUpPage extends Component {
           <View style={styles.bottomHolder}>
             <View style={{height: 20}}/>
             <View style={styles.continueWrap}>
+              <Text style={styles.notConnectedText}>Not connected to the internet</Text>
               <TouchableOpacity
                 style={styles.continueButton}
-                onPress={this.props.noSummoner}
+                onPress={this.props.retryConnection}
                 activeOpacity={0.8}
               >
+                <Text style={styles.retryText}>Retry?</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -117,7 +118,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18
+  },
+  notConnectedText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 16
+  },
+  retryText: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: 16
   }
 });
 
-export default ManualLoadUpPage;
+export default NotConnected;
