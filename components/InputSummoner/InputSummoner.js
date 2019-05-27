@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     color: '#FFF'
   },
   topHolder: {
-    flex: 2,
+    flex: 2.7,
     justifyContent: 'center',
     alignItems: 'center',
   },

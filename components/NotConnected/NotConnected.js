@@ -122,12 +122,12 @@ const styles = StyleSheet.create({
   notConnectedText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 16
+    fontSize: 15
   },
   retryText: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 16
+    fontSize: 15
   }
 });
 
