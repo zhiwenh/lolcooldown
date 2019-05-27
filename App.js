@@ -11,7 +11,7 @@ import NotConnected from './components/NotConnected/NotConnected.js';
 
 const VERSION_NUMBER_URL = 'https://league-cooldown.herokuapp.com/version';
 const REQUEST_GAME_URL = 'https://league-cooldown.herokuapp.com/requestPlayerGame';
-const MANUAL = true;
+const MANUAL = false;
 
 class App extends Component {
 
@@ -255,8 +255,9 @@ class App extends Component {
       region: region,
       spinner: true
     });
-    summonerName = summonerName.toLowerCase().replace(/ /g,'%20');
-    const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + summonerName + '&' +
+
+    const urlSummonerName = summonerName.toLowerCase().replace(/ /g,'%20');
+    const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + urlSummonerName + '&' +
       'region=' + region;
     console.log(requestGameUrl);
     fetch(requestGameUrl, {method: 'GET'})
@@ -297,7 +298,13 @@ class App extends Component {
         const spellIconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
         const summonerIconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.version + '/img/spell/'
 
-        const opponentId = (res.mapId === 10) ? 100 : 200;
+        let opponentId;
+        for (let i = 0; i < res.participants.length; i++) {
+          if (res.participants[i].summonerName.toLowerCase() === summonerName.toLowerCase()) {
+            opponentId = (res.participants[i].teamId === 100) ? 200 : 100;
+            break;
+          }
+        }
 
         let index = 0;
         for (let i = 0; i < res.participants.length; i++) {
