@@ -41,6 +41,7 @@ class App extends Component {
     this.loadingChampion = true;
     this.version = null;
     this.gameRequestBreak = false;
+    this.loadedStaticData = false;
 
     this.getStaticData = this.getStaticData.bind(this);
     this.getChampionStaticData = this.getChampionStaticData.bind(this);
@@ -100,6 +101,8 @@ class App extends Component {
         this.loadingSummoner = false;
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
+          this.loadedStaticData = true;
+
           this.setState({
             spinner: false,
             champsData: this.champsData,
@@ -173,6 +176,8 @@ class App extends Component {
         this.loadingChampion = false;
 
         if (this.loadingSummoner === false && this.loadingChampion === false) {
+          this.loadedStaticData = true;
+
           this.setState({
             spinner: false,
             champsData: this.champsData,
@@ -410,7 +415,14 @@ class App extends Component {
         this.setState({
           connected: true
         });
-        this.getStaticData();
+
+        if (this.loadedStaticData === true) {
+          this.setState({
+            spinner: false
+          });
+        } else {
+          this.getStaticData();
+        }
       } else {
         this.setState({
           connected: false,
