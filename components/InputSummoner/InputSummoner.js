@@ -11,37 +11,47 @@ import {
 } from 'react-native';
 import ModalSelector from 'react-native-modal-selector';
 import Spinner from 'react-native-loading-spinner-overlay';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class InputSummoner extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.state.region = this.props.region;
+    this.state.regionLabel = this.props.regionLabel;
+    this.state.regionValue = this.props.regionValue;
     this.state.error = this.props.error;
     this.state.spinner = this.props.spinner;
   }
 
   onSubmitEditing(event) {
-    this.props.requestPlayerGame(event.nativeEvent.text, this.state.region);
+    this.props.requestPlayerGame(
+      event.nativeEvent.text,
+      this.state.regionLabel,
+      this.state.regionValue
+    );
     console.log(event.nativeEvent.text);
   }
 
   regionSelect(value) {
-    value = value.value;
-    this.setState({region: value});
+    AsyncStorage.setItem('regionLabel', value.label);
+    AsyncStorage.setItem('regionValue', value.value);
+    this.setState({regionValue: value.value, regionLabel: value.label});
   }
 
   render() {
-    let regions = ['NA1', 'EUW1', 'EUN1', 'BR1',
-      'JP1', 'KR', 'LA1', 'LA2', 'RU', 'TR1', 'OC1'];
-
-    regions = regions.map((region, index) => {
-      return {
-        key: index,
-        label: region,
-        value: region
-      }
-    });
+    let regions = [
+      {key: 0, label: 'NA', value: 'NA1'},
+      {key: 1, label: 'EUW', value: 'EUW1'},
+      {key: 2, label: 'EUN', value: 'EUN1'},
+      {key: 3, label: 'BR', value: 'BR1'},
+      {key: 4, label: 'JP', value: 'JP1'},
+      {key: 5, label: 'KR', value: 'KR'},
+      {key: 6, label: 'LAN', value: 'LA1'},
+      {key: 7, label: 'LAS', value: 'LA2'},
+      {key: 8, label: 'RU', value: 'RU'},
+      {key: 9, label: 'TR', value: 'TR1'},
+      {key: 10, label: 'OC', value: 'OC1'}
+    ];
 
     return (
       <View style = {styles.container}>
@@ -78,7 +88,7 @@ class InputSummoner extends Component {
               data={regions}
               selectTextStyle={styles.selectorText}
               selectStyle={styles.selectorSelect}
-              initValue={this.state.region}
+              initValue={this.state.regionLabel}
             />
             <View style={{height: 20}}/>
             <View style={styles.continueWrap}>

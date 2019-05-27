@@ -3,6 +3,7 @@ package com.lolcooldown;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.corbt.keepawake.KCKeepAwakePackage;
 import com.ocetnik.timer.BackgroundTimerPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AsyncStoragePackage(),
             new NetInfoPackage(),
             new KCKeepAwakePackage(),
             new BackgroundTimerPackage()

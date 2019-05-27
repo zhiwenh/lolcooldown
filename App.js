@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Image, BackHandler} from 'react-native';
 import { Router, Scene, Actions } from 'react-native-router-flux';
 import NetInfo from "@react-native-community/netinfo";
+import AsyncStorage from '@react-native-community/async-storage';
 
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
@@ -28,7 +29,8 @@ class App extends Component {
     state.champsData = null;
     state.runesData = null;
     state.summonersData = null;
-    state.region = 'NA1';
+    state.regionLabel = 'NA';
+    state.regionValue = 'NA1';
     state.error;
     state.spinner = true;
     state.connected;
@@ -56,6 +58,24 @@ class App extends Component {
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });
+
+    AsyncStorage.getItem('regionValue')
+      .then(value => {
+        if (value) {
+          this.setState({regionValue: value})
+        } else {
+          this.setState({regionValue: 'NA1'})
+        }
+      });
+
+    AsyncStorage.getItem('regionLabel')
+      .then(value => {
+        if (value) {
+          this.setState({regionLabel: value})
+        } else {
+          this.setState({regionLabel: 'NA'})
+        }
+      });
 
     NetInfo.fetch().then(state => {
       if (state.isConnected) this.getStaticData();
@@ -247,23 +267,26 @@ class App extends Component {
     return playerSchema;
   }
 
-  async requestPlayerGame(summonerName, region) {
+  async requestPlayerGame(summonerName, regionLabel, regionValue) {
     const connection = await NetInfo.fetch();
     if (connection.isConnected === false) {
       this.setState({
-        connected: false
+        connected: false,
+        regionValue: regionValue,
+        regionLabel: regionLabel
       });
       return;
     }
 
     this.setState({
-      region: region,
-      spinner: true
+      spinner: true,
+      regionValue: regionValue,
+      regionLabel: regionLabel,
     });
 
     const urlSummonerName = summonerName.toLowerCase().replace(/ /g,'%20');
     const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + urlSummonerName + '&' +
-      'region=' + region;
+      'region=' + regionValue;
     console.log(requestGameUrl);
     fetch(requestGameUrl, {method: 'GET'})
       .then((res) => res.json())
@@ -273,7 +296,8 @@ class App extends Component {
           this.gameRequestBreak = true;
           this.setState({
             error: 'Summoner not found',
-            region: region,
+            regionValue: regionValue,
+            regionLabel: regionLabel,
             spinner: false,
           });
           return;
@@ -281,7 +305,8 @@ class App extends Component {
           this.gameRequestBreak = true;
           this.setState({
             error: 'Summoner not in game',
-            region: region,
+            regionValue: regionValue,
+            regionLabel: regionLabel,
             spinner: false,
           });
           return;
@@ -289,7 +314,8 @@ class App extends Component {
           this.gameRequestBreak = true;
           this.setState({
             error: 'Error',
-            region: region,
+            regionValue: regionValue,
+            regionLabel: regionLabel,
             spinner: false,
           });
           return;
@@ -311,6 +337,7 @@ class App extends Component {
           }
         }
 
+        console.log(opponentId);
         let index = 0;
         for (let i = 0; i < res.participants.length; i++) {
           const participant = res.participants[i];
@@ -349,8 +376,9 @@ class App extends Component {
         console.log('players', players);
         this.setState({
           spinner: false,
+          regionValue: regionValue,
+          regionLabel: regionLabel,
           error: null,
-          region: region
         });
 
         Actions.tracker({
@@ -366,8 +394,9 @@ class App extends Component {
         }
         this.setState({
           spinner: false,
+          regionValue: regionValue,
+          regionLabel: regionLabel,
           error:  'Error',
-          region: region
         });
         console.log(err);
       });
@@ -482,7 +511,8 @@ class App extends Component {
             noSummoner={this.noSummoner}
             hideNavBar={true}
             error={this.state.error}
-            region={this.state.region}
+            regionLabel={this.state.regionLabel}
+            regionValue={this.state.regionValue}
             spinner={this.state.spinner}
           />
           <Scene key="tracker"

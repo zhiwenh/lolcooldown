@@ -710,6 +710,10 @@
     "@types/istanbul-lib-coverage" "^2.0.0"
     "@types/yargs" "^12.0.9"
 
+"@react-native-community/async-storage@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.4.2.tgz#b29d2fa1b294fec8526f69b852a3deda248c8d81"
+
 "@react-native-community/cli@^1.2.1":
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli/-/cli-1.9.2.tgz#d033ab141df3a476e628aecd9c99534b5cb0d63e"
@@ -748,6 +752,10 @@
     ws "^1.1.0"
     xcode "^2.0.0"
     xmldoc "^0.4.0"
+
+"@react-native-community/netinfo@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-3.2.0.tgz#e50d1446bd3bc00f87ae5628b85b44e1d641b835"
 
 "@types/babel__core@^7.1.0":
   version "7.1.1"
@@ -3208,7 +3216,7 @@ locate-path@^3.0.0:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
 
-lodash.isequal@4.5.0, lodash.isequal@^4.5.0:
+lodash.isequal@4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
@@ -4424,12 +4432,6 @@ react-native-modal-selector@^1.0.3:
   dependencies:
     prop-types "^15.5.10"
 
-react-native-picker-select@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-picker-select/-/react-native-picker-select-6.1.0.tgz#0ae6ba1578e3edc8b89660b81fdd85eef2226a35"
-  dependencies:
-    lodash.isequal "^4.5.0"
-
 react-native-router-flux@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-4.0.6.tgz#e4723f5ce89cb5822e0c9bb6d0a8d4de6179eb58"
@@ -4458,21 +4460,9 @@ react-native-scrollable-tab-view@^0.10.0:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.3"
 
-react-native-sortable-list@0.0.23:
-  version "0.0.23"
-  resolved "https://registry.yarnpkg.com/react-native-sortable-list/-/react-native-sortable-list-0.0.23.tgz#9a63d0fffb5442ea686aa0576c1ee9113714fdbf"
-  dependencies:
-    prop-types "^15.5.10"
-
 react-native-sortable-listview@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/react-native-sortable-listview/-/react-native-sortable-listview-0.2.8.tgz#0d514fa73eb406a46baea96aa38a71e40257af90"
-
-react-native-swiper@^1.5.14:
-  version "1.5.14"
-  resolved "https://registry.yarnpkg.com/react-native-swiper/-/react-native-swiper-1.5.14.tgz#1c6f949ca377186300f972bb0f30d24062c899aa"
-  dependencies:
-    prop-types "^15.5.10"
 
 react-native-tab-view@^0.0.77:
   version "0.0.77"
