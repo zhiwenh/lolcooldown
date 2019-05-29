@@ -42,7 +42,7 @@ class InputSummoner extends Component {
     let regions = [
       {key: 0, label: 'NA', value: 'NA1'},
       {key: 1, label: 'EUW', value: 'EUW1'},
-      {key: 2, label: 'EUN', value: 'EUN1'},
+      {key: 2, label: 'EUNE', value: 'EUN1'},
       {key: 3, label: 'BR', value: 'BR1'},
       {key: 4, label: 'JP', value: 'JP1'},
       {key: 5, label: 'KR', value: 'KR'},
