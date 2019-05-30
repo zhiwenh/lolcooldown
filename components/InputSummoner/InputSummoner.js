@@ -24,6 +24,7 @@ class InputSummoner extends Component {
   }
 
   onSubmitEditing(event) {
+    if (event.nativeEvent.text === '') return;
     this.props.requestPlayerGame(
       event.nativeEvent.text,
       this.state.regionLabel,
