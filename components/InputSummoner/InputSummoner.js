@@ -33,6 +33,14 @@ class InputSummoner extends Component {
     console.log(event.nativeEvent.text);
   }
 
+  lastSummoner() {
+    this.props.requestPlayerGame(
+      this.props.lastSummoner,
+      this.state.regionLabel,
+      this.state.regionValue
+    );
+  }
+
   regionSelect(value) {
     AsyncStorage.setItem('regionLabel', value.label);
     AsyncStorage.setItem('regionValue', value.value);
@@ -79,6 +87,21 @@ class InputSummoner extends Component {
           />
           <View style={styles.errorWrap}>
             <Text style={styles.error}>{this.props.error}</Text>
+          </View>
+          <View style={styles.lastSummonerWrap}>
+            <TouchableOpacity
+              style={styles.lastSummonerButton}
+              activeOpacity={0.8}
+              onPress={this.lastSummoner.bind(this)}
+            >
+              <Text style={styles.lastSummonerText}>
+                {(() => {
+                  if (this.props.lastSummoner) {
+                    return 'Use last summoner: ' + this.props.lastSummoner
+                  }
+                })()}
+              </Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.regionWrap}>
             <Text style={styles.regionText}>Select region:</Text>
@@ -152,6 +175,16 @@ const styles = StyleSheet.create({
   },
   error: {
     color: 'red'
+  },
+  lastSummonerWrap: {
+    height: 30
+  },
+  lastSummonerButton: {
+
+  },
+  lastSummonerText: {
+    textAlign: 'center',
+    color: 'white'
   },
   regionWrap: {
     alignItems:'center',

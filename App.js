@@ -12,6 +12,7 @@ import NotConnected from './components/NotConnected/NotConnected.js';
 
 const VERSION_NUMBER_URL = 'https://league-cooldown.herokuapp.com/version';
 const REQUEST_GAME_URL = 'https://league-cooldown.herokuapp.com/requestPlayerGame';
+const REQUEST_PASSWORD = 'lolcooldown';
 const MANUAL = false;
 
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
     state.error;
     state.spinner = true;
     state.connected;
+    state.lastSummoner;
 
     this.state = state;
 
@@ -58,6 +60,13 @@ class App extends Component {
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });
+
+    AsyncStorage.getItem('lastSummoner')
+      .then(value => {
+        if (value) {
+          this.setState({lastSummoner: value})
+        }
+      });
 
     AsyncStorage.getItem('regionValue')
       .then(value => {
@@ -93,9 +102,11 @@ class App extends Component {
     console.log(versionUrl);
     fetch(versionUrl, {method: 'GET'})
       .then(res => {
+        console.log(res);
         return res.json();
       })
       .then(res => {
+        console.log(res);
         this.version = res;
         this.getSummonerStaticData();
         this.getChampionStaticData();
@@ -286,7 +297,7 @@ class App extends Component {
 
     const urlSummonerName = summonerName.toLowerCase().replace(/ /g,'%20');
     const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + urlSummonerName + '&' +
-      'region=' + regionValue;
+      'region=' + regionValue + '&' + 'password=' + REQUEST_PASSWORD;
     console.log(requestGameUrl);
     fetch(requestGameUrl, {method: 'GET'})
       .then((res) => res.json())
@@ -379,6 +390,7 @@ class App extends Component {
           regionValue: regionValue,
           regionLabel: regionLabel,
           error: null,
+          lastSummoner: summonerName
         });
 
         Actions.tracker({
@@ -386,6 +398,8 @@ class App extends Component {
           summonersData: summoners,
           version: this.version
         });
+
+        AsyncStorage.setItem('lastSummoner', summonerName);
 
       }).catch((err) => {
         if (this.gameRequestBreak === true) {
@@ -514,6 +528,7 @@ class App extends Component {
             regionLabel={this.state.regionLabel}
             regionValue={this.state.regionValue}
             spinner={this.state.spinner}
+            lastSummoner={this.state.lastSummoner}
           />
           <Scene key="tracker"
             component={Tracker}
