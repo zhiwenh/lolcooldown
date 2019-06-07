@@ -36,11 +36,16 @@ class App extends Component {
     state.spinner = true;
     state.connected;
     state.lastSummoner;
+    state.inputValue;
 
     this.state = state;
 
     this.summonersData = null;
     this.champsData = null;
+    this.lastSummoner = null;
+    this.regionValue = null;
+    this.regionLabel = null;
+
     this.loadingSummoner = true;
     this.loadingChampion = true;
     this.version = null;
@@ -56,35 +61,14 @@ class App extends Component {
     this.retryConnection = this.retryConnection.bind(this);
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', () => {
       BackHandler.exitApp();
     });
 
-    AsyncStorage.getItem('lastSummoner')
-      .then(value => {
-        if (value) {
-          this.setState({lastSummoner: value})
-        }
-      });
-
-    AsyncStorage.getItem('regionValue')
-      .then(value => {
-        if (value) {
-          this.setState({regionValue: value})
-        } else {
-          this.setState({regionValue: 'NA1'})
-        }
-      });
-
-    AsyncStorage.getItem('regionLabel')
-      .then(value => {
-        if (value) {
-          this.setState({regionLabel: value})
-        } else {
-          this.setState({regionLabel: 'NA'})
-        }
-      });
+    this.lastSummoner = await AsyncStorage.getItem('lastSummoner');
+    this.regionValue = await AsyncStorage.getItem('regionValue');
+    this.regionLabel = await AsyncStorage.getItem('regionLabel');
 
     NetInfo.fetch().then(state => {
       if (state.isConnected) this.getStaticData();
@@ -137,7 +121,10 @@ class App extends Component {
           this.setState({
             spinner: false,
             champsData: this.champsData,
-            summonersData: this.summonersData
+            summonersData: this.summonersData,
+            lastSummoner: this.lastSummoner,
+            regionValue: this.regionValue,
+            regionLabel: this.regionLabel
           });
 
           if (MANUAL === true) {
@@ -151,7 +138,10 @@ class App extends Component {
           this.setState({
             spinner: false,
             champsData: this.champsData,
-            summonersData: this.summonersData
+            summonersData: this.summonersData,
+            lastSummoner: this.lastSummoner,
+            regionValue: this.regionValue,
+            regionLabel: this.regionLabel
           });
         }
         console.log(err);
@@ -212,7 +202,10 @@ class App extends Component {
           this.setState({
             spinner: false,
             champsData: this.champsData,
-            summonersData: this.summonersData
+            summonersData: this.summonersData,
+            lastSummoner: this.lastSummoner,
+            regionValue: this.regionValue,
+            regionLabel: this.regionLabel
           });
 
           if (MANUAL === true) {
@@ -227,6 +220,9 @@ class App extends Component {
             spinner: false,
             champsData: this.champsData,
             summonersData: this.summonersData,
+            lastSummoner: this.lastSummoner,
+            regionValue: this.regionValue,
+            regionLabel: this.regionLabel
           });
         }
         console.log(err);
@@ -278,7 +274,12 @@ class App extends Component {
     return playerSchema;
   }
 
-  async requestPlayerGame(summonerName, regionLabel, regionValue) {
+  async requestPlayerGame(summonerName, regionLabel, regionValue, lastSummoner) {
+    if (lastSummoner !== true) {
+      this.setState({
+        inputValue: summonerName
+      })
+    }
     const connection = await NetInfo.fetch();
     if (connection.isConnected === false) {
       this.setState({
@@ -292,16 +293,17 @@ class App extends Component {
     this.setState({
       spinner: true,
       regionValue: regionValue,
-      regionLabel: regionLabel,
+      regionLabel: regionLabel
     });
 
-    const urlSummonerName = summonerName.toLowerCase().replace(/ /g,'%20');
+    const urlSummonerName = encodeURI(summonerName);
+    console.log(urlSummonerName);
     const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + urlSummonerName + '&' +
       'region=' + regionValue + '&' + 'password=' + REQUEST_PASSWORD;
     console.log(requestGameUrl);
     fetch(requestGameUrl, {method: 'GET'})
-      .then((res) => res.json())
-      .then((res) => {
+      .then(res => res.json())
+      .then(res => {
         console.log(res);
         if (res.status && res.status.message.match('Exception decrypting undefined')) {
           this.gameRequestBreak = true;
@@ -342,13 +344,26 @@ class App extends Component {
 
         let opponentId;
         for (let i = 0; i < res.participants.length; i++) {
-          if (res.participants[i].summonerName.toLowerCase() === summonerName.toLowerCase()) {
+          const participant = encodeURI(res.participants[i].summonerName.toLowerCase().replace(/  +/g, ' ').trim());
+          // console.log(participant);
+          // console.log(encodeURI(summonerName.replace(/  +/g, ' ').toLowerCase().trim()));
+          if (participant === encodeURI(summonerName.replace(/  +/g, ' ').toLowerCase().trim())) {
             opponentId = (res.participants[i].teamId === 100) ? 200 : 100;
             break;
           }
         }
 
         console.log(opponentId);
+        if (opponentId === undefined) {
+          this.gameRequestBreak = true;
+          this.setState({
+            error: 'Summoner not found',
+            regionValue: regionValue,
+            regionLabel: regionLabel,
+            spinner: false,
+          });
+          return;
+        }
         let index = 0;
         for (let i = 0; i < res.participants.length; i++) {
           const participant = res.participants[i];
@@ -390,7 +405,8 @@ class App extends Component {
           regionValue: regionValue,
           regionLabel: regionLabel,
           error: null,
-          lastSummoner: summonerName
+          lastSummoner: summonerName,
+          inputValue: ''
         });
 
         Actions.tracker({
@@ -529,6 +545,7 @@ class App extends Component {
             regionValue={this.state.regionValue}
             spinner={this.state.spinner}
             lastSummoner={this.state.lastSummoner}
+            inputValue = {this.state.inputValue}
           />
           <Scene key="tracker"
             component={Tracker}

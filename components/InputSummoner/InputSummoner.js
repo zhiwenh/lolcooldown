@@ -21,6 +21,7 @@ class InputSummoner extends Component {
     this.state.regionValue = this.props.regionValue;
     this.state.error = this.props.error;
     this.state.spinner = this.props.spinner;
+    this.state.inputValue = this.props.inputValue;
   }
 
   onSubmitEditing(event) {
@@ -30,14 +31,23 @@ class InputSummoner extends Component {
       this.state.regionLabel,
       this.state.regionValue
     );
+
     console.log(event.nativeEvent.text);
+  }
+
+  onChange(event) {
+    console.log(event.nativeEvent.text);
+    this.setState({
+      inputValue: event.nativeEvent.text
+    });
   }
 
   lastSummoner() {
     this.props.requestPlayerGame(
       this.props.lastSummoner,
       this.state.regionLabel,
-      this.state.regionValue
+      this.state.regionValue,
+      true
     );
   }
 
@@ -82,8 +92,10 @@ class InputSummoner extends Component {
             style = {styles.input}
             placeholder = 'Enter summoner currently in game'
             onSubmitEditing = {this.onSubmitEditing.bind(this)}
+            onChange = {this.onChange.bind(this)}
             clearButtonMode = "always"
             autoCorrect = {false}
+            value = {this.state.inputValue}
           />
           <View style={styles.errorWrap}>
             <Text style={styles.error}>{this.props.error}</Text>
