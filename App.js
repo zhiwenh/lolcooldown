@@ -84,20 +84,16 @@ class App extends Component {
 
   getStaticData() {
     let versionUrl = VERSION_NUMBER_URL;
-    console.log(versionUrl);
     fetch(versionUrl, {method: 'GET'})
       .then(res => {
-        console.log(res);
         return res.json();
       })
       .then(res => {
-        console.log(res);
         this.version = res;
         this.getSummonerStaticData();
         this.getChampionStaticData();
       })
       .catch(err => {
-        console.log(err);
       })
   }
 
@@ -141,7 +137,6 @@ class App extends Component {
             regionLabel: this.regionLabel
           });
         }
-        console.log(err);
       });
   }
 
@@ -166,7 +161,6 @@ class App extends Component {
           promises.push(fetch(individualChampionUrl, {method: 'GET'}));
           individualChampionUrls.push(individualChampionUrl);
         });
-        // console.log(individualChampionUrls)
         return Promise.all(promises);
       })
       .then(resArr => {
@@ -218,7 +212,6 @@ class App extends Component {
             regionLabel: this.regionLabel
           });
         }
-        console.log(err);
       })
   }
 
@@ -289,14 +282,11 @@ class App extends Component {
     });
 
     const urlSummonerName = encodeURI(summonerName);
-    console.log(urlSummonerName);
     const requestGameUrl = REQUEST_GAME_URL + '?summonerName=' + urlSummonerName + '&' +
       'region=' + regionValue + '&' + 'password=' + REQUEST_PASSWORD;
-    console.log(requestGameUrl);
     fetch(requestGameUrl, {method: 'GET'})
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.status && res.status.message.match('Exception decrypting undefined')) {
           this.gameRequestBreak = true;
           this.setState({
@@ -337,15 +327,12 @@ class App extends Component {
         let opponentId;
         for (let i = 0; i < res.participants.length; i++) {
           const participant = encodeURI(res.participants[i].summonerName.toLowerCase().replace(/  +/g, ' ').trim());
-          // console.log(participant);
-          // console.log(encodeURI(summonerName.replace(/  +/g, ' ').toLowerCase().trim()));
           if (participant === encodeURI(summonerName.replace(/  +/g, ' ').toLowerCase().trim())) {
             opponentId = (res.participants[i].teamId === 100) ? 200 : 100;
             break;
           }
         }
 
-        console.log(opponentId);
         if (opponentId === undefined) {
           this.gameRequestBreak = true;
           this.setState({
@@ -391,7 +378,7 @@ class App extends Component {
             index++;
           }
         }
-        console.log('players', players);
+
         this.setState({
           spinner: false,
           regionValue: regionValue,
@@ -420,7 +407,6 @@ class App extends Component {
           regionLabel: regionLabel,
           error:  'Error',
         });
-        console.log(err);
       });
   }
 

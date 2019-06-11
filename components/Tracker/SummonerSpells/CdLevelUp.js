@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
 class CdLevelUp extends Component {
   onPress() {
     if (this.props.player.summonerSpells.cooldown + 5 <= 5) {
-      console.log(this.props.row);
       this.props.cooldownAdjust(this.props.row, 5);
     }
   }

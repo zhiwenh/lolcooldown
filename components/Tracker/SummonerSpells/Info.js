@@ -34,7 +34,6 @@ class Info extends Component {
       let summonerKey;
       for (let key in summonersData) {
         if (summonersData[key].name === value) {
-          console.log('here')
           summonerKey = key
         }
       }
