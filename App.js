@@ -70,6 +70,9 @@ class App extends Component {
     this.regionValue = await AsyncStorage.getItem('regionValue');
     this.regionLabel = await AsyncStorage.getItem('regionLabel');
 
+    if (!this.regionValue) this.regionValue = 'NA1';
+    if (!this.regionLabel) this.regionLabel = 'NA';
+
     NetInfo.fetch().then(state => {
       if (state.isConnected) this.getStaticData();
       else {
