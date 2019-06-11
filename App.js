@@ -7,13 +7,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import InputSummoner from './components/InputSummoner/InputSummoner.js';
 import Tracker from './components/Tracker/Tracker.js';
 import TrackerNoSummoner from './components/TrackerNoSummoner/TrackerNoSummoner.js';
-import ManualLoadUpPage from './components/ManualLoadUpPage/ManualLoadUpPage.js';
 import NotConnected from './components/NotConnected/NotConnected.js';
 
 const VERSION_NUMBER_URL = 'https://league-cooldown.herokuapp.com/version';
 const REQUEST_GAME_URL = 'https://league-cooldown.herokuapp.com/requestPlayerGame';
 const REQUEST_PASSWORD = 'lolcooldown';
-const MANUAL = false;
 
 class App extends Component {
 
@@ -129,10 +127,6 @@ class App extends Component {
             regionValue: this.regionValue,
             regionLabel: this.regionLabel
           });
-
-          if (MANUAL === true) {
-            this.noSummoner();
-          }
         }
       })
       .catch(err => {
@@ -210,10 +204,6 @@ class App extends Component {
             regionValue: this.regionValue,
             regionLabel: this.regionLabel
           });
-
-          if (MANUAL === true) {
-            this.noSummoner();
-          }
         }
       })
       .catch(err => {
@@ -277,12 +267,11 @@ class App extends Component {
     return playerSchema;
   }
 
-  async requestPlayerGame(summonerName, regionLabel, regionValue, lastSummoner) {
-    if (lastSummoner !== true) {
-      this.setState({
-        inputValue: summonerName
-      })
-    }
+  async requestPlayerGame(summonerName, regionLabel, regionValue) {
+    this.setState({
+      inputValue: summonerName
+    });
+
     const connection = await NetInfo.fetch();
     if (connection.isConnected === false) {
       this.setState({
@@ -505,29 +494,6 @@ class App extends Component {
               hideNavBar={true}
               spinner={this.state.spinner}
               retryConnection={this.retryConnection}
-            />
-          </Scene>
-        </Router>
-      )
-    }
-
-    if (MANUAL === true) {
-      return (
-        <Router>
-          <Scene key="root" panHandlers={null}>
-            <Scene
-              key="manualLoadUpPage"
-              component={ManualLoadUpPage}
-              hideNavBar={true}
-              spinner={this.state.spinner}
-            />
-            <Scene key="trackerNoSummoner"
-              component={TrackerNoSummoner}
-              hideNavBar={Platform.OS === 'ios' ? false : true}
-              headerMode={false}
-              style={styles.tracker}
-              renderLeftButton={()=>(null)}
-              manual={MANUAL}
             />
           </Scene>
         </Router>

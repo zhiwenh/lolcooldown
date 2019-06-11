@@ -29,14 +29,11 @@ class InputSummoner extends Component {
     this.props.requestPlayerGame(
       event.nativeEvent.text,
       this.state.regionLabel,
-      this.state.regionValue
+      this.state.regionValue,
     );
-
-    console.log(event.nativeEvent.text);
   }
 
   onChange(event) {
-    console.log(event.nativeEvent.text);
     this.setState({
       inputValue: event.nativeEvent.text
     });
@@ -46,8 +43,7 @@ class InputSummoner extends Component {
     this.props.requestPlayerGame(
       this.props.lastSummoner,
       this.state.regionLabel,
-      this.state.regionValue,
-      true
+      this.state.regionValue
     );
   }
 
