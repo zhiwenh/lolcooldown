@@ -81,7 +81,7 @@ class InputSummoner extends Component {
            />
           <View style = {styles.topHolder}>
             <Text style={styles.title}>
-              League Cooldown
+              League of Legends Cooldown Tracker
             </Text>
           </View>
           <TextInput
