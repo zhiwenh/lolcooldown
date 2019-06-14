@@ -104,46 +104,26 @@ class SummonerRow extends Component {
       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     });
 
-    if (this.props.selectedChampion === false) {
-      return (
-        <View style={styles.main}>
-          <View>
-            <Text>{this.props.name}</Text>
-          </View>
-          <View style={styles.iconWrap}>
-            <TouchableOpacity
-              onPress={this.showPicker.bind(this)}
-            >
-              <Text style={styles.iconText}>Select</Text>
-            </TouchableOpacity>
-            <ModalFilterPicker
-              visible={this.state.visible}
-              onSelect={this.selectChampion.bind(this)}
-              onCancel={this.cancelPicker.bind(this)}
-              options={champions}
-              keyboardShouldPersistTaps='handled'
-            />
-          </View>
-          {buttonWrapBoxes}
-          <CdBox
-            row = {this.props.row}
-            player = {this.props.player}
-            summonerCooldownAdjust = {this.props.summonerCooldownAdjust}
-          />
-        </View>
-      )
-    }
-
     return (
       <View style={styles.main}>
         <View style={styles.iconWrap}>
           <TouchableOpacity
             onPress={this.showPicker.bind(this)}
           >
-            <Image
-              style={{width: 60, height: 60}}
-              source={{uri: this.props.player.championIconUrl}}
-            />
+            {(() => {
+              if (this.props.selectedChampion === false) {
+                return (
+                  <Text style={styles.iconText}>Select</Text>
+                )
+              } else {
+                return (
+                  <Image
+                    style={{width: 60, height: 60}}
+                    source={{uri: this.props.player.championIconUrl}}
+                  />
+                )
+              }
+            })()}
           </TouchableOpacity>
           <ModalFilterPicker
             visible={this.state.visible}
