@@ -176,6 +176,7 @@ class AdjRow extends Component {
             onSelect={this.selectChampion.bind(this)}
             onCancel={this.cancelPicker.bind(this)}
             options={champions}
+            keyboardShouldPersistTaps='handled'
           />
         </View>
         {adjBoxes}
