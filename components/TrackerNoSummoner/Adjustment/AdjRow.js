@@ -4,7 +4,8 @@ import {
   StyleSheet,
   Image,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Keyboard
 } from 'react-native';
 import ModalFilterPicker from 'react-native-modal-filter-picker';
 
@@ -139,7 +140,9 @@ class AdjRow extends Component {
               visible={this.state.visible}
               onSelect={this.selectChampion.bind(this)}
               onCancel={this.cancelPicker.bind(this)}
+              onFocus={() => Keyboard.dimiss()}
               options={champions}
+              keyboardShouldPersistTaps='handled'
             />
           </View>
           {adjBoxes}

@@ -121,6 +121,7 @@ class SummonerRow extends Component {
               onSelect={this.selectChampion.bind(this)}
               onCancel={this.cancelPicker.bind(this)}
               options={champions}
+              keyboardShouldPersistTaps='handled'
             />
           </View>
           {buttonWrapBoxes}
