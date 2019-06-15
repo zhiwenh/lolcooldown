@@ -104,7 +104,6 @@ class Button extends Component {
 
   tick() {
     if (this.state.current <= 0) {
-      this.state.isTicking = false;
       BackgroundTimer.clearInterval(this.timer);
       this.setState({
         current: this.state.initial,
