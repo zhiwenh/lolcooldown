@@ -135,14 +135,6 @@ class Tracker extends Component {
       </ScrollableTabView>
     );
   }
-
-  // <Swiper
-  //   autoplay={false}
-  //   loop={false}
-  //   index={1}
-  //   activeDotColor='red'
-  //   activeDotStyle={{opacity: 0.2}}
-  // >
 }
 
 export default Tracker;
