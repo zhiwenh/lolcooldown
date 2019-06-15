@@ -6,9 +6,6 @@ import {
 } from 'react-native';
 import SpellRow from './SpellRow';
 
-// props: players
-// prop methods: startSpellTimer, stopSpellTimer
-
 const styles = StyleSheet.create({
   main: {
     flex: 1,
