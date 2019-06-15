@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     color: '#FFF'
   },
   topHolder: {
-    flex: 2.7,
+    flex: 3.5,
     justifyContent: 'center',
     alignItems: 'center',
   },
