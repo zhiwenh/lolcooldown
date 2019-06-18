@@ -16,11 +16,15 @@ const styles = StyleSheet.create({
 class ButtonWrap extends Component {
   render() {
     const summonerName = this.props.summonerSpell.name;
-    let summonerCd = this.props.summonerSpell.cooldown;
+    
+    let summonerCd;
+    if (this.props.summonerSpell.cooldown !== undefined) {
+      summonerCd = this.props.summonerSpell.cooldown;
+      cooldown = this.props.cooldown;
+      summonerCd = summonerCd - summonerCd * cooldown / 100;
+      summonerCd = summonerCd.toFixed(1);
+    }
 
-    const cooldown = this.props.cooldown;
-    summonerCd = summonerCd - summonerCd * cooldown / 100;
-    summonerCd = summonerCd.toFixed(1);
     return (
       <View style={styles.main}>
         <Info

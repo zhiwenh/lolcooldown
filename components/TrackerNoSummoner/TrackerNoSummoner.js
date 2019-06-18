@@ -132,6 +132,7 @@ class Tracker extends Component {
         this.props.summonersData[change].cooldown;
       state.players[row].summonerSpells.summonerSpell1.summonerIconUrl =
         summonerIconUrl + this.props.summonersData[change].image.full;
+      state.resetTimers.summoners[row][col] = true;
     } else {
       state.players[row].summonerSpells.summonerSpell2.name =
         this.props.summonersData[change].name;
@@ -139,12 +140,15 @@ class Tracker extends Component {
         this.props.summonersData[change].cooldown;
       state.players[row].summonerSpells.summonerSpell2.summonerIconUrl =
         summonerIconUrl + this.props.summonersData[change].image.full;
+      state.resetTimers.summoners[row][col] = true;
     }
     this.setState(state);
   }
 
   selectChampion(row, championId) {
     const iconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/champion/';
+    const spellIconUrl = 'https://ddragon.leagueoflegends.com/cdn/' + this.props.version + '/img/spell/'
+
     const champs = this.props.champsData;
     const state = JSON.parse(JSON.stringify(this.state));
 
@@ -169,6 +173,7 @@ class Tracker extends Component {
     champs[championId].spells.forEach((spell, index) => {
       state.players[row].spellNames.data[index] = spell.name;
       state.players[row].spells.data[index] = spell.cooldown;
+      state.players[row].spellIconUrls.data[index] = spellIconUrl + spell.image.full;
     });
 
     state.players[row].spells.cooldown = 0;

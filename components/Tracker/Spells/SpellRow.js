@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1
   },
   iconWrap: {
-    
+    height: '100%',
+    justifyContent: 'center',
+    borderRightWidth: 1
   }
 });
 

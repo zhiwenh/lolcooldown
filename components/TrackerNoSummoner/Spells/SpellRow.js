@@ -21,9 +21,10 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1
   },
   iconWrap: {
-    height: 60,
+    height: '100%',
     width: 60,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderRightWidth: 1
   },
   iconText: {
     textAlign: 'center'

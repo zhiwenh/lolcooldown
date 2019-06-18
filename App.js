@@ -372,7 +372,7 @@ class App extends Component {
               playerSchema.spellNames.data[index2] = spell.name;
               playerSchema.spells.data[index2] = spell.cooldown;
               playerSchema.spellIconUrls.data[index2] = spellIconUrl + spell.image.full;
-              // Image.prefetch(playerSchema.spellIconUrls.data1[index2]);
+              Image.prefetch(playerSchema.spellIconUrls.data[index2]);
             });
             players[index] = playerSchema;
             index++;
@@ -420,10 +420,10 @@ class App extends Component {
       playerSchema.championId = undefined;
 
       playerSchema.summonerSpells.summonerSpell1.name = undefined;
-      playerSchema.summonerSpells.summonerSpell1.cooldown = 0;
+      playerSchema.summonerSpells.summonerSpell1.cooldown = undefined;
 
       playerSchema.summonerSpells.summonerSpell2.name = undefined;
-      playerSchema.summonerSpells.summonerSpell2.cooldown = 0;
+      playerSchema.summonerSpells.summonerSpell2.cooldown = undefined;
 
       for (let j = 0; j < 5; j++) {
         playerSchema.spellNames.data[j] = undefined;

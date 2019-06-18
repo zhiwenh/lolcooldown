@@ -15,9 +15,13 @@ const styles = StyleSheet.create({
 
 class ButtonWrap extends Component {
   render() {
-    var spellCd = this.props.spellCds[this.props.level - 1];
-    spellCd = spellCd - spellCd * this.props.cooldown/100;
-    spellCd = spellCd.toFixed(1);
+    let spellCd;
+    if (this.props.spellCds[this.props.level - 1] !== null) {
+      spellCd = this.props.spellCds[this.props.level - 1];
+      spellCd = spellCd - spellCd * this.props.cooldown/100;
+      spellCd = spellCd.toFixed(1);
+    }
+
     return (
       <View style={styles.main}>
         <Info

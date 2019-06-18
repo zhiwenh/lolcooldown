@@ -8,29 +8,44 @@ import {
 import BackgroundTimer from 'react-native-background-timer';
 
 const styles = StyleSheet.create({
-  notTicking: {
+  touchableNotTicking: {
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2
   },
-  isTicking: {
+  touchableIsTicking: {
     flex: 1.5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ffb3b3',
+    backgroundColor: 'black',
+    borderWidth: 2,
+    borderColor: 'red',
   },
-  image: {
+  imageNotTicking: {
     width: '100%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  imageNotTicking: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageIsTicking: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.7
+  },
   text: {
-    // color: 'white',
-    // fontWeight: 'bold',
-    // textShadowColor: 'black',
-    // textShadowOffset: { width: 3, height: 3 },
-    // textShadowRadius: 10
+    color: 'white',
+    fontWeight: 'bold',
+    textShadowColor: 'black',
+    textShadowRadius: 10
   }
 });
 
@@ -106,11 +121,17 @@ class Button extends Component {
   render() {
     return (
       <TouchableHighlight
-        style = {this.state.isTicking ? styles.isTicking : styles.notTicking}
+        style = {this.state.isTicking ? styles.touchableIsTicking : styles.touchableNotTicking}
         onPress = {this.onPress}
         underlayColor='#e6e6e6'
       >
-        <Text style = {styles.text} textShadowColor='black'>{this.state.current}</Text>
+        <ImageBackground
+          source = {{uri: this.props.summonerIconUrl}}
+          style = {this.state.isTicking ? styles.imageIsTicking : styles.imageNotTicking}
+          imageStyle = {this.state.isTicking ? {opacity: 0.7} : null}
+        >
+          <Text style = {styles.text} textShadowColor='black'>{this.state.current}</Text>
+        </ImageBackground>
       </TouchableHighlight>
     );
   }
