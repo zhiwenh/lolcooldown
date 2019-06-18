@@ -23,11 +23,13 @@ class UltimateCdBox extends Component {
           row = {this.props.row}
           spells = {this.props.spells}
           ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
+          selectedChampion = {this.props.selectedChampion}
         />
         <UltimateCdDown
           row = {this.props.row}
           spells = {this.props.spells}
           ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
+          selectedChampion = {this.props.selectedChampion}
         />
       </View>
     );

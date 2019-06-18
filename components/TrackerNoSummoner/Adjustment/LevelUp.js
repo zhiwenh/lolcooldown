@@ -26,10 +26,16 @@ class LevelUp extends Component {
     return (
       <TouchableHighlight
         style = {styles.main}
-        onPress = {this.onPress.bind(this)}
+        onPress = {this.props.selectedChampion ? this.onPress.bind(this) : null}
         underlayColor='#e6e6e6'
       >
-        <Text style = {styles.text}>+ {this.props.skill} {this.props.level}</Text>
+        <Text style = {styles.text}>
+          {(() => {
+            if (this.props.selectedChampion === true) {
+              return '+ ' + this.props.skill + ' ' + this.props.level
+            }
+          })()}
+        </Text>
       </TouchableHighlight>
     );
   }

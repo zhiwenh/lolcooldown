@@ -23,11 +23,17 @@ class CdLevelUp extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress = {this.onPress.bind(this)}
+        onPress = {this.props.selectedChampion ? this.onPress.bind(this) : null}
         style = {styles.main}
         underlayColor='#e6e6e6'
       >
-        <Text style = {styles.text}>+ {this.props.cooldown}% CD</Text>
+        <Text style = {styles.text}>
+          {(() => {
+            if (this.props.selectedChampion === true) {
+              return '+ ' + this.props.cooldown + '% CD';
+            }
+          })()}
+        </Text>
       </TouchableHighlight>
     );
   }

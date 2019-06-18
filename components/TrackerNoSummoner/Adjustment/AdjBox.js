@@ -25,11 +25,13 @@ class AdjBox extends Component {
           skill = {this.props.skill}
           level = {this.props.level}
           spellLevelUp = {this.props.spellLevelUp}
+          selectedChampion = {this.props.selectedChampion}
         />
         <LevelDown
           row = {this.props.row}
           col = {this.props.col}
           spellLevelDown = {this.props.spellLevelDown}
+          selectedChampion = {this.props.selectedChampion}
         />
       </View>
     );

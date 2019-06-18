@@ -27,11 +27,17 @@ class CdLevelDown extends Component {
   render() {
     return (
       <TouchableHighlight
-        onPress = {this.onPress.bind(this)}
+        onPress = {this.props.selectedChampion ? this.onPress.bind(this) : null}
         style = {styles.main}
         underlayColor='#e6e6e6'
       >
-        <Text>-</Text>
+        <Text>
+          {(() => {
+            if (this.props.selectedChampion === true) {
+              return '-';
+            }
+          })()}
+        </Text>
       </TouchableHighlight>
     );
   }

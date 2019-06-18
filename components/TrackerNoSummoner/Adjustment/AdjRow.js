@@ -75,6 +75,7 @@ class AdjRow extends Component {
           level = {this.props.spells.levels[i]}
           spellLevelUp = {this.props.spellLevelUp}
           spellLevelDown = {this.props.spellLevelDown}
+          selectedChampion = {this.props.selectedChampion}
         />);
       } else if (i === 1) {
         adjBoxes.push(<AdjBox
@@ -85,6 +86,7 @@ class AdjRow extends Component {
           level = {this.props.spells.levels[i]}
           spellLevelUp = {this.props.spellLevelUp}
           spellLevelDown = {this.props.spellLevelDown}
+          selectedChampion = {this.props.selectedChampion}
         />);
       } else if (i === 2) {
         adjBoxes.push(<AdjBox
@@ -95,6 +97,7 @@ class AdjRow extends Component {
           level = {this.props.spells.levels[i]}
           spellLevelUp = {this.props.spellLevelUp}
           spellLevelDown = {this.props.spellLevelDown}
+          selectedChampion = {this.props.selectedChampion}
         />);
       } else if (i === 3) {
         adjBoxes.push(<AdjBox
@@ -105,6 +108,7 @@ class AdjRow extends Component {
           level = {this.props.spells.levels[i]}
           spellLevelUp = {this.props.spellLevelUp}
           spellLevelDown = {this.props.spellLevelDown}
+          selectedChampion = {this.props.selectedChampion}
         />);
       }
     }
@@ -159,11 +163,13 @@ class AdjRow extends Component {
           row = {this.props.row}
           spells = {this.props.spells}
           ultimateCooldownAdjust = {this.props.ultimateCooldownAdjust}
+          selectedChampion = {this.props.selectedChampion}
         />
         <CdBox
           row = {this.props.row}
           cooldown = {this.props.spells.cooldown}
           cooldownAdjust = {this.props.cooldownAdjust}
+          selectedChampion = {this.props.selectedChampion}
         />
       </View>
     );

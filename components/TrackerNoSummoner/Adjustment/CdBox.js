@@ -24,11 +24,13 @@ class CdBox extends Component {
           row = {this.props.row}
           cooldown = {this.props.cooldown}
           cooldownAdjust = {this.props.cooldownAdjust}
+          selectedChampion = {this.props.selectedChampion}
         />
         <CdLevelDown
           row = {this.props.row}
           cooldown = {this.props.cooldown}
           cooldownAdjust = {this.props.cooldownAdjust}
+          selectedChampion = {this.props.selectedChampion}
         />
       </View>
     );
