@@ -32,11 +32,19 @@ class SummonerSpells extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      players: this.props.players
+      players: this.props.players,
+      resetTimers: [
+        [false, false],
+        [false, false],
+        [false, false],
+        [false, false],
+        [false, false]
+      ]
     };
 
     this.cooldownAdjust = this.cooldownAdjust.bind(this);
     this.changeSummoners = this.changeSummoners.bind(this);
+    this.changeResetTimer = this.changeResetTimer.bind(this);
   }
 
   cooldownAdjust(row, change) {
@@ -56,6 +64,7 @@ class SummonerSpells extends Component {
         this.props.summonersData[change].cooldown;
       state.players[row].summonerSpells.summonerSpell1.summonerIconUrl =
         summonerIconUrl + this.props.summonersData[change].image.full;
+      state.resetTimers[row][col] = true;
     } else {
       state.players[row].summonerSpells.summonerSpell2.name =
         this.props.summonersData[change].name;
@@ -63,8 +72,13 @@ class SummonerSpells extends Component {
         this.props.summonersData[change].cooldown;
       state.players[row].summonerSpells.summonerSpell2.summonerIconUrl =
         summonerIconUrl + this.props.summonersData[change].image.full;
+      state.resetTimers[row][col] = true;
     }
     this.setState(state);
+  }
+
+  changeResetTimer(row, col) {
+    this.state.resetTimers[row][col] = false;
   }
 
   render() {
@@ -84,6 +98,8 @@ class SummonerSpells extends Component {
             summonersData = {this.props.summonersData}
             cooldownAdjust = {this.cooldownAdjust}
             changeSummoners = {this.changeSummoners}
+            resetTimers = {this.state.resetTimers[i]}
+            changeResetTimer = {this.changeResetTimer}
           />
         </View>
       );

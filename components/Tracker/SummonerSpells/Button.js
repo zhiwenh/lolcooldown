@@ -69,6 +69,18 @@ class Button extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.resetTimer === true) {
+      BackgroundTimer.clearInterval(this.timer);
+      const initial = nextProps.summonerSpellCooldown;
+      this.setState({
+        initial: initial,
+        current: initial,
+        isTicking: false
+      });
+      this.props.changeResetTimer(this.props.row, this.props.col);
+      return;
+    }
+
     const initial = nextProps.summonerSpellCooldown;
     if (this.state.isTicking === false) {
       this.setState({

@@ -34,6 +34,8 @@ class SummonerRow extends Component {
         summonerSpell = {this.props.player.summonerSpells.summonerSpell1}
         summonersData = {this.props.summonersData}
         changeSummoners = {this.props.changeSummoners}
+        resetTimer = {this.props.resetTimers[0]}
+        changeResetTimer = {this.props.changeResetTimer}
       />);
 
       buttonWrapBoxes.push(<ButtonWrap
@@ -44,6 +46,8 @@ class SummonerRow extends Component {
         summonerSpell = {this.props.player.summonerSpells.summonerSpell2}
         summonersData = {this.props.summonersData}
         changeSummoners = {this.props.changeSummoners}
+        resetTimer = {this.props.resetTimers[1]}
+        changeResetTimer = {this.props.changeResetTimer}
       />);
 
     return (
