@@ -151,7 +151,7 @@ class Button extends Component {
         underlayColor='#e6e6e6'
       >
         <ImageBackground
-          source = {{uri: this.props.summonerIconUrl}}
+          source = {this.props.summonerIconUrl ? {uri: this.props.summonerIconUrl} : null}
           style = {this.state.isTicking ? styles.imageIsTicking : styles.imageNotTicking}
           imageStyle = {this.state.isTicking ? {opacity: 0.7} : null}
         >
